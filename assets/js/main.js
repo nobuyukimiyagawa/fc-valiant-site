@@ -149,6 +149,73 @@
     }
   });
 
+  // Esc closes the drawer and returns focus to the toggle
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && nav.classList.contains("is-open")) {
+      closeMenu();
+      burger.focus();
+    }
+  });
+
+  /* ============================================================
+     4b. SCHEDULE: next-match highlight / past dimming / season record
+     - <time datetime="YYYY-MM-DD"> から自動判定（HTML側の手動クラス不要）
+     - シーズン成績は結果バッジ（--win/--draw/--lose）から自動集計
+     ============================================================ */
+  (function initSchedule() {
+    const fixtures = document.querySelectorAll("#fixtures .fixture");
+    if (!fixtures.length) return;
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    let next = null;
+
+    fixtures.forEach((f) => {
+      const t = f.querySelector("time[datetime]");
+      if (!t) return;
+      const d = new Date(t.getAttribute("datetime") + "T00:00:00");
+      if (isNaN(d)) return;
+      if (d < today) {
+        f.classList.add("is-past");
+      } else if (!next) {
+        next = f;
+        f.classList.add("is-next");
+        f.setAttribute("aria-label", "次の試合");
+      }
+    });
+
+    const box = document.getElementById("seasonSummary");
+    if (box) {
+      const count = (cls) =>
+        document.querySelectorAll("#fixtures .fixture__status--" + cls).length;
+      const fill = (key, n) => {
+        const el = box.querySelector('[data-season="' + key + '"]');
+        if (!el) return;
+        el.setAttribute("data-count", String(n)); // 既存カウントアップ演出に乗せる
+        el.textContent = String(n);
+      };
+      fill("win", count("win"));
+      fill("draw", count("draw"));
+      fill("lose", count("lose"));
+      box.hidden = false;
+    }
+  })();
+
+  /* ============================================================
+     4c. CTA → CONTACT 連携
+     data-topic 付きリンク（体験参加/スポンサー）クリックで
+     フォームの「お問い合わせ種別」を自動選択
+     ============================================================ */
+  document.querySelectorAll("[data-topic]").forEach((link) => {
+    link.addEventListener("click", () => {
+      const v = link.getAttribute("data-topic");
+      const radio = document.querySelector(
+        '.cform input[name="topic"][value="' + v + '"]'
+      );
+      if (radio) radio.checked = true;
+    });
+  });
+
   /* ============================================================
      5. SCROLL-DRIVEN UI (header, totop, parallax, velocity)
      ============================================================ */
@@ -267,9 +334,12 @@
           entries.forEach((entry) => {
             if (!entry.isIntersecting) return;
             const id = entry.target.getAttribute("id");
-            navLinks.forEach((l) =>
-              l.classList.toggle("is-active", l.getAttribute("href") === "#" + id)
-            );
+            navLinks.forEach((l) => {
+              const match = l.getAttribute("href") === "#" + id;
+              l.classList.toggle("is-active", match);
+              if (match) l.setAttribute("aria-current", "true");
+              else l.removeAttribute("aria-current");
+            });
           });
         },
         { threshold: 0.4 }

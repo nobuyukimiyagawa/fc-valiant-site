@@ -17,6 +17,8 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main">本文へスキップ</a>
+
 <!-- ===== Preloader ===== -->
 <div class="preloader" id="preloader">
   <div class="preloader__inner">
@@ -31,20 +33,24 @@
     <img src="assets/img/logo.webp" alt="FC VALIANT" class="header__logo" />
     <span class="header__name">FC VALIANT</span>
   </a>
-  <nav class="nav" id="nav">
+  <nav class="nav" id="nav" aria-label="メインナビゲーション">
     <a href="#about" data-scroll>ABOUT</a>
     <a href="#team" data-scroll>TEAM</a>
     <a href="#activity" data-scroll>ACTIVITY</a>
+    <a href="#schedule" data-scroll>SCHEDULE</a>
+    <a href="#recruit" data-scroll>RECRUIT</a>
     <a href="#vision" data-scroll>VISION</a>
     <a href="#sponsor" data-scroll>SPONSOR</a>
     <a href="#staff" data-scroll>STAFF</a>
     <a href="#contact" data-scroll>CONTACT</a>
     <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="nav__cta magnetic">INSTAGRAM</a>
   </nav>
-  <button class="burger" id="burger" aria-label="メニュー" aria-expanded="false">
+  <button class="burger" id="burger" aria-label="メニューを開閉" aria-expanded="false" aria-controls="nav">
     <span></span><span></span><span></span>
   </button>
 </header>
+
+<main id="main" tabindex="-1">
 
 <!-- ===== Hero ===== -->
 <section class="hero" id="top">
@@ -155,6 +161,190 @@
   </div>
 </section>
 
+<!-- ===== Schedule =====
+     ▼▼▼ プレースホルダー：日程・対戦相手・会場・結果（スコア）はすべて仮データです。実データに差し替えてください。
+     ・各試合の <time datetime="YYYY-MM-DD"> を正しい日付にすると、「NEXT MATCH」ハイライトと
+       過去試合のグレーアウトは JS が自動判定します（手動でのクラス付けは不要）。
+     ・結果バッジは fixture__status--win / --draw / --lose / --scheduled を使い分けてください。
+       下のシーズン成績（WIN/DRAW/LOSE）はバッジから自動集計されます。 ▼▼▼ -->
+<section class="schedule" id="schedule">
+  <div class="sec-head sec-head--center sec-head--light">
+    <span class="sec-head__no" data-reveal>04</span>
+    <h2 class="sec-head__en" data-anim="chars">SCHEDULE</h2>
+    <p class="sec-head__ja" data-anim="wave">2026 年間試合スケジュール</p>
+  </div>
+  <p class="schedule__lead" data-anim="lines">公式戦・カップ戦・練習試合の年間スケジュール。<br>応援・観戦はどなたでも大歓迎です。会場でお待ちしています。</p>
+
+  <!-- シーズン成績サマリ（JSが結果バッジから自動集計。JS無効時は非表示） -->
+  <div class="season" id="seasonSummary" hidden data-reveal>
+    <p class="season__title">2026 SEASON<span>シーズン成績</span></p>
+    <dl class="season__stats">
+      <div class="season__stat season__stat--win"><dt>WIN<i>勝</i></dt><dd data-season="win">0</dd></div>
+      <div class="season__stat"><dt>DRAW<i>分</i></dt><dd data-season="draw">0</dd></div>
+      <div class="season__stat"><dt>LOSE<i>敗</i></dt><dd data-season="lose">0</dd></div>
+    </dl>
+  </div>
+
+  <div class="fixtures" id="fixtures">
+    <div class="fixture" data-reveal>
+      <time class="fixture__date" datetime="2026-03-15"><b>03.15</b><span>SAT</span></time>
+      <div class="fixture__body">
+        <span class="fixture__comp">PRACTICE MATCH</span>
+        <span class="fixture__match">FC VALIANT vs ○○○○ FC</span>
+        <span class="fixture__venue">📍 フットボールパーク御代志</span>
+      </div>
+      <span class="fixture__status fixture__status--win">3 - 1 <b>WIN</b></span>
+    </div>
+
+    <div class="fixture" data-reveal>
+      <time class="fixture__date" datetime="2026-04-19"><b>04.19</b><span>SUN</span></time>
+      <div class="fixture__body">
+        <span class="fixture__comp">熊本県クラブリーグ 第1節</span>
+        <span class="fixture__match">FC VALIANT vs ○○○○ クラブ</span>
+        <span class="fixture__venue">📍 熊本県民総合運動公園</span>
+      </div>
+      <span class="fixture__status fixture__status--lose">1 - 2 <b>LOSE</b></span>
+    </div>
+
+    <div class="fixture" data-reveal>
+      <time class="fixture__date" datetime="2026-05-24"><b>05.24</b><span>SAT</span></time>
+      <div class="fixture__body">
+        <span class="fixture__comp">熊本県クラブリーグ 第2節</span>
+        <span class="fixture__match">FC VALIANT vs ○○○○ SC</span>
+        <span class="fixture__venue">📍 KKWING 補助競技場</span>
+      </div>
+      <span class="fixture__status fixture__status--win">2 - 0 <b>WIN</b></span>
+    </div>
+
+    <div class="fixture" data-reveal>
+      <time class="fixture__date" datetime="2026-06-21"><b>06.21</b><span>SUN</span></time>
+      <div class="fixture__body">
+        <span class="fixture__comp">熊本県クラブリーグ 第3節</span>
+        <span class="fixture__match">FC VALIANT vs ○○○○ FC</span>
+        <span class="fixture__venue">📍 フットボールパーク御代志</span>
+      </div>
+      <span class="fixture__status fixture__status--scheduled">SCHEDULED</span>
+    </div>
+
+    <div class="fixture" data-reveal>
+      <time class="fixture__date" datetime="2026-07-19"><b>07.19</b><span>SAT</span></time>
+      <div class="fixture__body">
+        <span class="fixture__comp">熊本県クラブリーグ 第4節</span>
+        <span class="fixture__match">FC VALIANT vs ○○○○ クラブ</span>
+        <span class="fixture__venue">📍 会場調整中</span>
+      </div>
+      <span class="fixture__status fixture__status--scheduled">SCHEDULED</span>
+    </div>
+
+    <div class="fixture" data-reveal>
+      <time class="fixture__date" datetime="2026-09-13"><b>09.13</b><span>SUN</span></time>
+      <div class="fixture__body">
+        <span class="fixture__comp">熊本県クラブカップ 1回戦</span>
+        <span class="fixture__match">FC VALIANT vs 未定</span>
+        <span class="fixture__venue">📍 会場調整中</span>
+      </div>
+      <span class="fixture__status fixture__status--scheduled">SCHEDULED</span>
+    </div>
+
+    <div class="fixture" data-reveal>
+      <time class="fixture__date" datetime="2026-11-08"><b>11.08</b><span>SUN</span></time>
+      <div class="fixture__body">
+        <span class="fixture__comp">熊本県クラブリーグ 最終節</span>
+        <span class="fixture__match">FC VALIANT vs ○○○○ FC</span>
+        <span class="fixture__venue">📍 会場調整中</span>
+      </div>
+      <span class="fixture__status fixture__status--scheduled">SCHEDULED</span>
+    </div>
+  </div>
+  <p class="schedule__note" data-reveal>※ 日程・対戦相手・会場は変更となる場合があります。最新情報は公式 Instagram でご確認ください。</p>
+</section>
+
+<!-- ===== Recruit =====
+     ▼▼▼ プレースホルダー：募集対象・ポジション・練習日時・会費（月額◯,◯◯◯円）・持ち物・FAQの回答は
+     仮の内容です。実際の運用に合わせて差し替えてください。 ▼▼▼ -->
+<section class="recruit" id="recruit">
+  <div class="sec-head sec-head--center">
+    <span class="sec-head__no" data-reveal>05</span>
+    <h2 class="sec-head__en" data-anim="chars">RECRUIT</h2>
+    <p class="sec-head__ja" data-anim="wave">メンバー募集要項</p>
+  </div>
+  <p class="recruit__lead" data-anim="lines">FC VALIANT は、共に勝利を目指し、熊本を盛り上げる仲間を募集しています。<br>経験者はもちろん、ブランクのある方・マネージャー志望の方も大歓迎。まずは体験参加から。</p>
+
+  <ul class="recruit__badges" data-reveal aria-label="参加しやすいポイント">
+    <li>体験参加 無料</li>
+    <li>見学だけでもOK</li>
+    <li>初心者・ブランク歓迎</li>
+    <li>仕事・家庭と両立できる週1ペース</li>
+  </ul>
+
+  <div class="recruit__grid">
+    <dl class="recruit__spec">
+      <div data-reveal>
+        <dt>募集対象<small>WHO</small></dt>
+        <dd>高校卒業以上（18歳以上）の男女。<br>初心者〜経験者まで、本気でサッカーを楽しみたい方。</dd>
+      </div>
+      <div data-reveal>
+        <dt>募集ポジション<small>POSITION</small></dt>
+        <dd>全ポジション募集中。
+          <span class="recruit__pos">
+            <span>GK</span><span>DF</span><span>MF</span><span>FW</span><span>MANAGER</span>
+          </span>
+        </dd>
+      </div>
+      <div data-reveal>
+        <dt>活動エリア<small>AREA</small></dt>
+        <dd>熊本県内（熊本市・合志市 周辺グラウンド）</dd>
+      </div>
+      <div data-reveal>
+        <dt>練習日<small>SCHEDULE</small></dt>
+        <dd>毎週 日曜 18:00〜20:00（不定期で平日ナイター練習あり）<br>※ 仕事・家庭と両立できる無理のない活動を大切にしています。</dd>
+      </div>
+      <div data-reveal>
+        <dt>会費<small>FEE</small></dt>
+        <dd>月額 ◯,◯◯◯円（グラウンド代・リーグ登録費・備品費に充当）<br>体験参加は無料です。</dd>
+      </div>
+      <div data-reveal>
+        <dt>持ち物<small>ITEMS</small></dt>
+        <dd>運動できる服装・サッカーシューズ・すね当て・飲み物</dd>
+      </div>
+    </dl>
+
+    <aside class="recruit__aside" data-reveal>
+      <h3>体験参加までの流れ</h3>
+      <ol class="recruit__steps">
+        <li>下のボタン、または公式 Instagram の DM からご連絡</li>
+        <li>担当より練習日程・集合場所をご案内</li>
+        <li>当日、手ぶら感覚で体験参加（見学だけでもOK）</li>
+        <li>雰囲気が合えば、正式メンバーとして加入！</li>
+      </ol>
+      <a href="#contact" class="btn btn--gold btn--block magnetic" data-scroll data-topic="体験参加・入団">体験参加を申し込む（無料） <i>→</i></a>
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="btn btn--ghost btn--block recruit__dm">Instagram DM で気軽に質問 <i>→</i></a>
+      <p class="recruit__assure">無理な勧誘は一切ありません。<br>まずは雰囲気だけ、見にきてください。</p>
+    </aside>
+  </div>
+
+  <!-- ▼ FAQ：回答内容はプレースホルダーです。実際の運用（用具貸出の有無など）に合わせて差し替えてください ▼ -->
+  <div class="recruit__faq">
+    <h3 class="recruit__faq-title" data-reveal>よくある質問 <span>FAQ</span></h3>
+    <details class="faq" data-reveal>
+      <summary><span class="faq__q" aria-hidden="true">Q</span>初心者・ブランクがあっても大丈夫ですか？</summary>
+      <div class="faq__a"><p>大歓迎です。経験年数やレベルは問いません。練習はレベルに合わせて参加できるので、まずは体験で雰囲気を確かめてください。</p></div>
+    </details>
+    <details class="faq" data-reveal>
+      <summary><span class="faq__q" aria-hidden="true">Q</span>見学だけの参加もできますか？</summary>
+      <div class="faq__a"><p>もちろん可能です。プレーせずにグラウンドの空気を見るだけでもOK。日程はお問い合わせいただければご案内します。</p></div>
+    </details>
+    <details class="faq" data-reveal>
+      <summary><span class="faq__q" aria-hidden="true">Q</span>仕事の都合で毎週は参加できません。</summary>
+      <div class="faq__a"><p>問題ありません。メンバーの多くが仕事や家庭と両立しながら活動しています。参加できるときに参加するスタイルで大丈夫です。</p></div>
+    </details>
+    <details class="faq" data-reveal>
+      <summary><span class="faq__q" aria-hidden="true">Q</span>体験当日は何を持っていけばいいですか？</summary>
+      <div class="faq__a"><p>運動できる服装・シューズ・飲み物があれば十分です。すね当て等の貸し出しについては事前にご相談ください。</p></div>
+    </details>
+  </div>
+</section>
+
 <!-- ===== Vision ===== -->
 <section class="vision" id="vision">
   <div class="vision__big" aria-hidden="true">
@@ -163,7 +353,7 @@
     </div>
   </div>
   <div class="vision__head sec-head--center">
-    <span class="sec-head__no" data-reveal>04</span>
+    <span class="sec-head__no" data-reveal>06</span>
     <h2 class="sec-head__en" data-anim="chars">VISION</h2>
     <p class="sec-head__ja" data-anim="wave">大切にしていること</p>
   </div>
@@ -184,7 +374,7 @@
 <!-- ===== Sponsor ===== -->
 <section class="sponsor" id="sponsor">
   <div class="sec-head sec-head--center sec-head--light">
-    <span class="sec-head__no" data-reveal>05</span>
+    <span class="sec-head__no" data-reveal>07</span>
     <h2 class="sec-head__en" data-anim="chars">SPONSOR</h2>
     <p class="sec-head__ja" data-anim="wave">スポンサー様向け</p>
   </div>
@@ -244,14 +434,14 @@
     </article>
   </div>
   <div class="sponsor__cta" data-reveal>
-    <a href="#contact" class="btn btn--gold magnetic" data-scroll>スポンサーのお問い合わせ <i>→</i></a>
+    <a href="#contact" class="btn btn--gold magnetic" data-scroll data-topic="スポンサー">スポンサーのお問い合わせ <i>→</i></a>
   </div>
 </section>
 
 <!-- ===== Staff ===== -->
 <section class="staff" id="staff">
   <div class="staff__head sec-head--center">
-    <span class="sec-head__no" data-reveal>06</span>
+    <span class="sec-head__no" data-reveal>08</span>
     <h2 class="sec-head__en" data-anim="chars">STAFF</h2>
     <p class="sec-head__ja" data-anim="wave">運営</p>
   </div>
@@ -271,7 +461,7 @@
 <!-- ===== Contact ===== -->
 <section class="contact" id="contact">
   <div class="contact__head sec-head--center">
-    <span class="sec-head__no" data-reveal>07</span>
+    <span class="sec-head__no" data-reveal>09</span>
     <h2 class="sec-head__en" data-anim="chars">CONTACT</h2>
     <p class="sec-head__ja" data-anim="wave">お問い合わせ</p>
   </div>
@@ -282,26 +472,37 @@
   </a>
 
   <form class="cform" id="cform" data-reveal novalidate>
+    <fieldset class="cform__row cform__fieldset">
+      <legend>お問い合わせ種別 <b>必須</b></legend>
+      <div class="cform__topics">
+        <label class="topic"><input type="radio" name="topic" value="体験参加・入団" required /><span>体験参加・入団</span></label>
+        <label class="topic"><input type="radio" name="topic" value="スポンサー" /><span>スポンサー</span></label>
+        <label class="topic"><input type="radio" name="topic" value="取材・メディア" /><span>取材・メディア</span></label>
+        <label class="topic"><input type="radio" name="topic" value="対戦・その他" /><span>対戦・その他</span></label>
+      </div>
+    </fieldset>
     <div class="cform__row">
-      <label>お名前 <b>必須</b></label>
-      <input type="text" name="name" placeholder="例）熊本 太郎" required />
+      <label for="cf-name">お名前 <b>必須</b></label>
+      <input type="text" id="cf-name" name="name" placeholder="例）熊本 太郎" autocomplete="name" required />
     </div>
     <div class="cform__row">
-      <label>連絡用メールアドレス <b>必須</b></label>
-      <input type="email" name="email" placeholder="例）valiant@example.com" required />
+      <label for="cf-email">連絡用メールアドレス <b>必須</b></label>
+      <input type="email" id="cf-email" name="email" placeholder="例）valiant@example.com" autocomplete="email" required />
     </div>
     <div class="cform__row">
-      <label>お問い合わせ内容 <b>必須</b></label>
-      <textarea name="message" rows="5" placeholder="具体的なお問い合わせ内容を入力してください。" required></textarea>
+      <label for="cf-message">お問い合わせ内容 <b>必須</b></label>
+      <textarea id="cf-message" name="message" rows="5" placeholder="具体的なお問い合わせ内容を入力してください。" required></textarea>
     </div>
     <label class="cform__agree">
       <input type="checkbox" name="agree" required />
       <span>プライバシーポリシーに同意する</span>
     </label>
     <button type="submit" class="btn btn--gold btn--block magnetic">送信する <i>→</i></button>
-    <p class="cform__note" id="cformNote" hidden>※デモサイトのため、実際には送信されません。公式 Instagram の DM よりご連絡ください。</p>
+    <p class="cform__note" id="cformNote" role="status" hidden>※デモサイトのため、実際には送信されません。公式 Instagram の DM よりご連絡ください。</p>
   </form>
 </section>
+
+</main>
 
 <!-- ===== Footer ===== -->
 <footer class="footer">
@@ -315,6 +516,8 @@
       <a href="#about" data-scroll>ABOUT</a>
       <a href="#team" data-scroll>TEAM</a>
       <a href="#activity" data-scroll>ACTIVITY</a>
+      <a href="#schedule" data-scroll>SCHEDULE</a>
+      <a href="#recruit" data-scroll>RECRUIT</a>
       <a href="#vision" data-scroll>VISION</a>
       <a href="#sponsor" data-scroll>SPONSOR</a>
       <a href="#staff" data-scroll>STAFF</a>
