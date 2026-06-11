@@ -137,11 +137,28 @@ main:focus{outline:none}
 .hero__scroll i::after{content:"";position:absolute;top:-100%;left:0;width:100%;height:100%;
   background:var(--gold);animation:scrolldot 1.8s var(--ease) infinite}
 @keyframes scrolldot{0%{top:-100%}60%,100%{top:100%}}
-.hero__ticker{position:absolute;left:0;bottom:0;width:100%;z-index:3;
-  background:var(--gold);overflow:hidden;padding:.55rem 0}
-.ticker__track{display:flex;white-space:nowrap;width:max-content;animation:marquee 22s linear infinite}
-.ticker__track span{font-family:var(--font-en);font-weight:700;letter-spacing:.1em;
-  color:var(--navy);font-size:.95rem;padding-right:1rem}
+/* Hero foot bar — broadcast-style status strip (replaces the old gold ★ ticker) */
+.hero__bar{position:absolute;left:0;bottom:0;width:100%;z-index:3;display:flex;align-items:stretch;
+  background:linear-gradient(0deg,rgba(8,16,33,.94),rgba(8,16,33,.62));
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  border-top:1px solid rgba(230,193,92,.45)}
+.hero__bar-tag{flex:none;display:inline-flex;align-items:center;gap:.6rem;
+  font-family:var(--font-en);font-weight:600;letter-spacing:.2em;font-size:.78rem;color:var(--gold);
+  background:rgba(230,193,92,.10);padding:.75rem clamp(1rem,3vw,1.9rem);
+  border-right:1px solid rgba(230,193,92,.28)}
+.hero__bar-tag>i{width:7px;height:7px;border-radius:50%;background:var(--gold);
+  animation:pulse 2.4s var(--ease) infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(230,193,92,.55)}
+  70%{box-shadow:0 0 0 7px rgba(230,193,92,0)}100%{box-shadow:0 0 0 0 rgba(230,193,92,0)}}
+.hero__bar-ticker{flex:1;min-width:0;overflow:hidden;display:flex;align-items:center;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.hero__bar-track{display:flex;white-space:nowrap;width:max-content;animation:marquee 34s linear infinite}
+.hero__bar-track span{display:inline-flex;align-items:center;
+  font-family:var(--font-en);font-weight:500;letter-spacing:.16em;
+  color:rgba(255,255,255,.86);font-size:.8rem}
+.hero__bar-track i{display:inline-block;width:6px;height:6px;margin:0 1.5rem;
+  background:var(--gold);transform:rotate(45deg);opacity:.85;flex:none}
 @keyframes marquee{to{transform:translateX(-50%)}}
 
 /* ---------- Section heads ---------- */
@@ -207,7 +224,8 @@ main:focus{outline:none}
   padding:.35em .9em;border-radius:999px;z-index:2}
 .act-card--insta{display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:.8rem;background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;text-align:center}
-.act-card--insta .ig-mark{font-size:2.2rem}
+.act-card--insta .ig-mark{display:inline-flex;color:var(--gold)}
+.act-card--insta .ig-mark svg{width:38px;height:38px}
 .act-card__follow{font-family:var(--font-en);letter-spacing:.1em;line-height:1.8;font-size:.95rem}
 .act-card__follow b{color:var(--gold)}
 .activity__more{text-align:center;margin-top:2.6rem}
@@ -228,6 +246,12 @@ main:focus{outline:none}
   color:var(--gold-deep);display:block;margin-bottom:.3rem}
 .fixture__match{font-weight:700;font-size:1.05rem;line-height:1.4;display:block}
 .fixture__venue{font-size:.82rem;color:var(--grey);margin-top:.25rem;display:block}
+/* location pin (CSS-drawn, replaces the 📍 emoji) */
+.fixture__venue,.is-venue{position:relative;padding-left:1.45em}
+.fixture__venue::before,.is-venue::before{content:"";position:absolute;left:0;top:.16em;
+  width:.95em;height:.95em;background:var(--gold-deep);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z'/%3E%3C/svg%3E") center/contain no-repeat}
 .fixture__status{font-family:var(--font-en);letter-spacing:.06em;font-size:.78rem;font-weight:600;
   padding:.5em 1.1em;border-radius:999px;border:1px solid var(--line);color:#e2e5ec;
   white-space:nowrap;justify-self:end;min-width:104px;text-align:center}
