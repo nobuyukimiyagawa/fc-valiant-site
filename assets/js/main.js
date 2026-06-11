@@ -216,6 +216,19 @@
     });
   });
 
+  // 別ページの CTA から ?topic=... 付きで来た場合に種別を自動選択
+  try {
+    const topic = new URLSearchParams(location.search).get("topic");
+    if (topic) {
+      const radio = document.querySelector(
+        '.cform input[name="topic"][value="' + topic + '"]'
+      );
+      if (radio) radio.checked = true;
+    }
+  } catch (e) {
+    /* URLSearchParams 非対応環境は黙ってスキップ */
+  }
+
   /* ============================================================
      5. SCROLL-DRIVEN UI (header, totop, parallax, velocity)
      ============================================================ */

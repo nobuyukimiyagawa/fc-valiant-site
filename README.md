@@ -6,28 +6,36 @@ FC VALIANT のブランドカラー（ネイビー × ゴールド）に落と�
 
 ## 構成
 
+トップを短く保ち、情報量の多いブロックは専用ページへ分離した**ハイブリッド構成**（トップ=感情で惹く／詳細=各ページで深掘り）。
+
 ```
 fc-valiant-site/
-├── index.html            # 本体（1ページ構成）
+├── index.html            # トップ（Hero / ABOUT / TEAM / ACTIVITY / 3ティザー / CONTACT）
+├── schedule.html         # 年間試合スケジュール（全日程・成績）
+├── recruit.html          # メンバー募集要項（VISION・募集要項・FAQ・代表）
+├── sponsor.html          # スポンサープラン（4段階）
 ├── assets/
-│   ├── css/style.css     # スタイル
-│   ├── js/main.js        # JSアクション
-│   └── img/              # 画像素材（既存サイトから取得）
-│       ├── hero.webp         # ヒーロー（夜・ボール・シールド）
-│       ├── team-group.webp   # チーム集合写真
-│       ├── logo.webp / logo.png
-│       └── favicon-64.png
+│   ├── css/style.css     # スタイル（全ページ共通）
+│   ├── js/main.js        # JSアクション（全ページ共通）
+│   └── img/              # 画像素材
+│       ├── hero.webp / team-group.webp / logo.webp / logo.png / favicon-64.png
 └── README.md
 ```
 
-## セクション
-ABOUT（マニフェスト）/ TEAM / ACTIVITY（活動内容）/ SCHEDULE（年間試合スケジュール）/
-RECRUIT（メンバー募集要項）/ VISION（大切にしていること）/
-SPONSOR（料金プラン4段階）/ STAFF（代表）/ CONTACT（フォーム）
+## ページ構成
+- **トップ（index.html）**: ABOUT（マニフェスト）/ TEAM / ACTIVITY / SCHEDULE・RECRUIT・SPONSOR の3ティザー / CONTACT（フォーム）
+- **schedule.html**: 年間試合スケジュール（NEXT MATCH 自動判定・シーズン成績自動集計）
+- **recruit.html**: VISION（大切にしていること）/ 募集要項 / 体験参加の流れ / FAQ / 代表
+- **sponsor.html**: スポンサー4プラン（PLATINUM / GOLD / SILVER / PERSONAL）
 
-> **要差し替え（プレースホルダー）**: SCHEDULE の日程・対戦相手・会場・結果、
-> RECRUIT の会費・練習日時・募集ポジションは仮データ。HTMLの該当 `<!-- ▼ -->`
-> コメント箇所を実情報に更新してください。
+ナビ・フッターは全ページ共通。トップ内アンカー（ABOUT/TEAM/ACTIVITY/CONTACT）と
+専用ページリンク（SCHEDULE/RECRUIT/SPONSOR）が相互に行き来できます。
+詳細ページのCTAは `index.html?topic=...#contact` でフォームの種別を自動選択した状態で着地します。
+
+> **要差し替え（プレースホルダー）**: 試合日程・対戦相手・会場・スコア（schedule.html）、
+> 会費・練習日時・募集ポジション・FAQ回答（recruit.html）、金額・返礼内容（sponsor.html）は仮データ。
+> 各HTMLの `<!-- ▼ -->` コメント箇所を実情報に更新してください。
+> トップの「NEXT MATCH」ティザーは自動同期ではないので schedule.html の直近試合に手動で合わせてください。
 
 ## 実装したJSアクション
 - プリローダー

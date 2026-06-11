@@ -37,11 +37,9 @@
     <a href="#about" data-scroll>ABOUT</a>
     <a href="#team" data-scroll>TEAM</a>
     <a href="#activity" data-scroll>ACTIVITY</a>
-    <a href="#schedule" data-scroll>SCHEDULE</a>
-    <a href="#recruit" data-scroll>RECRUIT</a>
-    <a href="#vision" data-scroll>VISION</a>
-    <a href="#sponsor" data-scroll>SPONSOR</a>
-    <a href="#staff" data-scroll>STAFF</a>
+    <a href="schedule.html">SCHEDULE</a>
+    <a href="recruit.html">RECRUIT</a>
+    <a href="sponsor.html">SPONSOR</a>
     <a href="#contact" data-scroll>CONTACT</a>
     <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="nav__cta magnetic">INSTAGRAM</a>
   </nav>
@@ -83,8 +81,7 @@
   <div class="manifesto__index" data-reveal>01 — ABOUT</div>
   <div class="manifesto__body">
     <p data-anim="lines">大人になって、本気になれるものがあるか。</p>
-    <p data-anim="lines">仕事も、家庭も、地域も。背負うものが増えるほど、<br>「いつか」を言い訳にして、夢から遠ざかっていく。</p>
-    <p data-anim="lines">それでも、ピッチに立てば話は別だ。<br>勝ちたい。うまくなりたい。仲間と笑いたい。<br>その衝動は、何歳になっても色褪せない。</p>
+    <p data-anim="lines">背負うものが増えるほど「いつか」を言い訳にしてしまう。<br>それでも、ピッチに立てば話は別だ。<br>勝ちたい。うまくなりたい。仲間と笑いたい。<br>その衝動は、何歳になっても色褪せない。</p>
     <p data-anim="lines">FC VALIANT は、熊本のまちと共に走るフットボールクラブ。<br>サッカーを軸に、人と地域をつなぎ、未来をつくる。</p>
     <p class="manifesto__punch" data-anim="lines">勇敢であれ。<br><em>Be VALIANT.</em></p>
   </div>
@@ -161,307 +158,67 @@
   </div>
 </section>
 
-<!-- ===== Schedule =====
-     ▼▼▼ プレースホルダー：日程・対戦相手・会場・結果（スコア）はすべて仮データです。実データに差し替えてください。
-     ・各試合の <time datetime="YYYY-MM-DD"> を正しい日付にすると、「NEXT MATCH」ハイライトと
-       過去試合のグレーアウトは JS が自動判定します（手動でのクラス付けは不要）。
-     ・結果バッジは fixture__status--win / --draw / --lose / --scheduled を使い分けてください。
-       下のシーズン成績（WIN/DRAW/LOSE）はバッジから自動集計されます。 ▼▼▼ -->
-<section class="schedule" id="schedule">
-  <div class="sec-head sec-head--center sec-head--light">
-    <span class="sec-head__no" data-reveal>04</span>
-    <h2 class="sec-head__en" data-anim="chars">SCHEDULE</h2>
-    <p class="sec-head__ja" data-anim="wave">2026 年間試合スケジュール</p>
-  </div>
-  <p class="schedule__lead" data-anim="lines">公式戦・カップ戦・練習試合の年間スケジュール。<br>応援・観戦はどなたでも大歓迎です。会場でお待ちしています。</p>
+<!-- ===== Section teasers（詳細は各専用ページ：schedule.html / recruit.html / sponsor.html）===== -->
 
-  <!-- シーズン成績サマリ（JSが結果バッジから自動集計。JS無効時は非表示） -->
-  <div class="season" id="seasonSummary" hidden data-reveal>
-    <p class="season__title">2026 SEASON<span>シーズン成績</span></p>
-    <dl class="season__stats">
-      <div class="season__stat season__stat--win"><dt>WIN<i>勝</i></dt><dd data-season="win">0</dd></div>
-      <div class="season__stat"><dt>DRAW<i>分</i></dt><dd data-season="draw">0</dd></div>
-      <div class="season__stat"><dt>LOSE<i>敗</i></dt><dd data-season="lose">0</dd></div>
-    </dl>
-  </div>
-
-  <div class="fixtures" id="fixtures">
-    <div class="fixture" data-reveal>
-      <time class="fixture__date" datetime="2026-03-15"><b>03.15</b><span>SAT</span></time>
-      <div class="fixture__body">
-        <span class="fixture__comp">PRACTICE MATCH</span>
-        <span class="fixture__match">FC VALIANT vs ○○○○ FC</span>
-        <span class="fixture__venue">📍 フットボールパーク御代志</span>
-      </div>
-      <span class="fixture__status fixture__status--win">3 - 1 <b>WIN</b></span>
+<!-- SCHEDULE teaser -->
+<section class="teaser teaser--dark" id="schedule">
+  <div class="teaser__grid">
+    <div class="teaser__intro">
+      <span class="teaser__no" data-reveal>04</span>
+      <h2 class="teaser__en" data-anim="chars">SCHEDULE</h2>
+      <p class="teaser__ja" data-anim="wave">年間試合スケジュール</p>
     </div>
-
-    <div class="fixture" data-reveal>
-      <time class="fixture__date" datetime="2026-04-19"><b>04.19</b><span>SUN</span></time>
-      <div class="fixture__body">
-        <span class="fixture__comp">熊本県クラブリーグ 第1節</span>
-        <span class="fixture__match">FC VALIANT vs ○○○○ クラブ</span>
-        <span class="fixture__venue">📍 熊本県民総合運動公園</span>
-      </div>
-      <span class="fixture__status fixture__status--lose">1 - 2 <b>LOSE</b></span>
+    <div class="teaser__main">
+      <!-- ▼ 次節：schedule.html の直近の試合と内容を揃えてください（ここは自動同期ではありません）▼ -->
+      <p class="teaser__kicker" data-reveal>NEXT MATCH</p>
+      <p class="teaser__lead" data-reveal>6/21 (日)　熊本県クラブリーグ 第3節<br><b>FC VALIANT</b> vs ○○○○ FC</p>
+      <p class="teaser__sub" data-reveal>📍 フットボールパーク御代志</p>
+      <a href="schedule.html" class="btn btn--gold magnetic" data-reveal>全日程・結果を見る <i>→</i></a>
     </div>
-
-    <div class="fixture" data-reveal>
-      <time class="fixture__date" datetime="2026-05-24"><b>05.24</b><span>SAT</span></time>
-      <div class="fixture__body">
-        <span class="fixture__comp">熊本県クラブリーグ 第2節</span>
-        <span class="fixture__match">FC VALIANT vs ○○○○ SC</span>
-        <span class="fixture__venue">📍 KKWING 補助競技場</span>
-      </div>
-      <span class="fixture__status fixture__status--win">2 - 0 <b>WIN</b></span>
-    </div>
-
-    <div class="fixture" data-reveal>
-      <time class="fixture__date" datetime="2026-06-21"><b>06.21</b><span>SUN</span></time>
-      <div class="fixture__body">
-        <span class="fixture__comp">熊本県クラブリーグ 第3節</span>
-        <span class="fixture__match">FC VALIANT vs ○○○○ FC</span>
-        <span class="fixture__venue">📍 フットボールパーク御代志</span>
-      </div>
-      <span class="fixture__status fixture__status--scheduled">SCHEDULED</span>
-    </div>
-
-    <div class="fixture" data-reveal>
-      <time class="fixture__date" datetime="2026-07-19"><b>07.19</b><span>SAT</span></time>
-      <div class="fixture__body">
-        <span class="fixture__comp">熊本県クラブリーグ 第4節</span>
-        <span class="fixture__match">FC VALIANT vs ○○○○ クラブ</span>
-        <span class="fixture__venue">📍 会場調整中</span>
-      </div>
-      <span class="fixture__status fixture__status--scheduled">SCHEDULED</span>
-    </div>
-
-    <div class="fixture" data-reveal>
-      <time class="fixture__date" datetime="2026-09-13"><b>09.13</b><span>SUN</span></time>
-      <div class="fixture__body">
-        <span class="fixture__comp">熊本県クラブカップ 1回戦</span>
-        <span class="fixture__match">FC VALIANT vs 未定</span>
-        <span class="fixture__venue">📍 会場調整中</span>
-      </div>
-      <span class="fixture__status fixture__status--scheduled">SCHEDULED</span>
-    </div>
-
-    <div class="fixture" data-reveal>
-      <time class="fixture__date" datetime="2026-11-08"><b>11.08</b><span>SUN</span></time>
-      <div class="fixture__body">
-        <span class="fixture__comp">熊本県クラブリーグ 最終節</span>
-        <span class="fixture__match">FC VALIANT vs ○○○○ FC</span>
-        <span class="fixture__venue">📍 会場調整中</span>
-      </div>
-      <span class="fixture__status fixture__status--scheduled">SCHEDULED</span>
-    </div>
-  </div>
-  <p class="schedule__note" data-reveal>※ 日程・対戦相手・会場は変更となる場合があります。最新情報は公式 Instagram でご確認ください。</p>
-</section>
-
-<!-- ===== Recruit =====
-     ▼▼▼ プレースホルダー：募集対象・ポジション・練習日時・会費（月額◯,◯◯◯円）・持ち物・FAQの回答は
-     仮の内容です。実際の運用に合わせて差し替えてください。 ▼▼▼ -->
-<section class="recruit" id="recruit">
-  <div class="sec-head sec-head--center">
-    <span class="sec-head__no" data-reveal>05</span>
-    <h2 class="sec-head__en" data-anim="chars">RECRUIT</h2>
-    <p class="sec-head__ja" data-anim="wave">メンバー募集要項</p>
-  </div>
-  <p class="recruit__lead" data-anim="lines">FC VALIANT は、共に勝利を目指し、熊本を盛り上げる仲間を募集しています。<br>経験者はもちろん、ブランクのある方・マネージャー志望の方も大歓迎。まずは体験参加から。</p>
-
-  <ul class="recruit__badges" data-reveal aria-label="参加しやすいポイント">
-    <li>体験参加 無料</li>
-    <li>見学だけでもOK</li>
-    <li>初心者・ブランク歓迎</li>
-    <li>仕事・家庭と両立できる週1ペース</li>
-  </ul>
-
-  <div class="recruit__grid">
-    <dl class="recruit__spec">
-      <div data-reveal>
-        <dt>募集対象<small>WHO</small></dt>
-        <dd>高校卒業以上（18歳以上）の男女。<br>初心者〜経験者まで、本気でサッカーを楽しみたい方。</dd>
-      </div>
-      <div data-reveal>
-        <dt>募集ポジション<small>POSITION</small></dt>
-        <dd>全ポジション募集中。
-          <span class="recruit__pos">
-            <span>GK</span><span>DF</span><span>MF</span><span>FW</span><span>MANAGER</span>
-          </span>
-        </dd>
-      </div>
-      <div data-reveal>
-        <dt>活動エリア<small>AREA</small></dt>
-        <dd>熊本県内（熊本市・合志市 周辺グラウンド）</dd>
-      </div>
-      <div data-reveal>
-        <dt>練習日<small>SCHEDULE</small></dt>
-        <dd>毎週 日曜 18:00〜20:00（不定期で平日ナイター練習あり）<br>※ 仕事・家庭と両立できる無理のない活動を大切にしています。</dd>
-      </div>
-      <div data-reveal>
-        <dt>会費<small>FEE</small></dt>
-        <dd>月額 ◯,◯◯◯円（グラウンド代・リーグ登録費・備品費に充当）<br>体験参加は無料です。</dd>
-      </div>
-      <div data-reveal>
-        <dt>持ち物<small>ITEMS</small></dt>
-        <dd>運動できる服装・サッカーシューズ・すね当て・飲み物</dd>
-      </div>
-    </dl>
-
-    <aside class="recruit__aside" data-reveal>
-      <h3>体験参加までの流れ</h3>
-      <ol class="recruit__steps">
-        <li>下のボタン、または公式 Instagram の DM からご連絡</li>
-        <li>担当より練習日程・集合場所をご案内</li>
-        <li>当日、手ぶら感覚で体験参加（見学だけでもOK）</li>
-        <li>雰囲気が合えば、正式メンバーとして加入！</li>
-      </ol>
-      <a href="#contact" class="btn btn--gold btn--block magnetic" data-scroll data-topic="体験参加・入団">体験参加を申し込む（無料） <i>→</i></a>
-      <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="btn btn--ghost btn--block recruit__dm">Instagram DM で気軽に質問 <i>→</i></a>
-      <p class="recruit__assure">無理な勧誘は一切ありません。<br>まずは雰囲気だけ、見にきてください。</p>
-    </aside>
-  </div>
-
-  <!-- ▼ FAQ：回答内容はプレースホルダーです。実際の運用（用具貸出の有無など）に合わせて差し替えてください ▼ -->
-  <div class="recruit__faq">
-    <h3 class="recruit__faq-title" data-reveal>よくある質問 <span>FAQ</span></h3>
-    <details class="faq" data-reveal>
-      <summary><span class="faq__q" aria-hidden="true">Q</span>初心者・ブランクがあっても大丈夫ですか？</summary>
-      <div class="faq__a"><p>大歓迎です。経験年数やレベルは問いません。練習はレベルに合わせて参加できるので、まずは体験で雰囲気を確かめてください。</p></div>
-    </details>
-    <details class="faq" data-reveal>
-      <summary><span class="faq__q" aria-hidden="true">Q</span>見学だけの参加もできますか？</summary>
-      <div class="faq__a"><p>もちろん可能です。プレーせずにグラウンドの空気を見るだけでもOK。日程はお問い合わせいただければご案内します。</p></div>
-    </details>
-    <details class="faq" data-reveal>
-      <summary><span class="faq__q" aria-hidden="true">Q</span>仕事の都合で毎週は参加できません。</summary>
-      <div class="faq__a"><p>問題ありません。メンバーの多くが仕事や家庭と両立しながら活動しています。参加できるときに参加するスタイルで大丈夫です。</p></div>
-    </details>
-    <details class="faq" data-reveal>
-      <summary><span class="faq__q" aria-hidden="true">Q</span>体験当日は何を持っていけばいいですか？</summary>
-      <div class="faq__a"><p>運動できる服装・シューズ・飲み物があれば十分です。すね当て等の貸し出しについては事前にご相談ください。</p></div>
-    </details>
   </div>
 </section>
 
-<!-- ===== Vision ===== -->
-<section class="vision" id="vision">
-  <div class="vision__big" aria-hidden="true">
-    <div class="vision__track" data-marquee>
-      <span>FCV</span><span>FCV</span>
+<!-- RECRUIT teaser -->
+<section class="teaser teaser--light" id="recruit">
+  <div class="teaser__grid">
+    <div class="teaser__intro">
+      <span class="teaser__no" data-reveal>05</span>
+      <h2 class="teaser__en" data-anim="chars">RECRUIT</h2>
+      <p class="teaser__ja" data-anim="wave">メンバー募集</p>
+    </div>
+    <div class="teaser__main">
+      <p class="teaser__lead" data-reveal>熊本を一緒に盛り上げる<b>仲間を募集中</b>。<br>初心者・ブランク・マネージャー志望も大歓迎です。</p>
+      <ul class="teaser__chips" data-reveal>
+        <li>体験無料</li><li>全ポジション</li><li>見学OK</li><li>週1ペース</li>
+      </ul>
+      <div class="teaser__actions" data-reveal>
+        <a href="recruit.html" class="btn btn--gold magnetic">募集要項を見る <i>→</i></a>
+        <a href="#contact" class="btn btn--ghost magnetic" data-scroll data-topic="体験参加・入団">体験参加を申し込む <i>→</i></a>
+      </div>
     </div>
   </div>
-  <div class="vision__head sec-head--center">
-    <span class="sec-head__no" data-reveal>06</span>
-    <h2 class="sec-head__en" data-anim="chars">VISION</h2>
-    <p class="sec-head__ja" data-anim="wave">大切にしていること</p>
-  </div>
-  <div class="vision__cards">
-    <article class="vcard" data-reveal>
-      <span class="vcard__no">01</span>
-      <h3 data-anim="lines">熊本への創生・<br>復興の貢献</h3>
-      <p>私たちは熊本で生まれ育ったクラブとして、地域行事への参加や情報発信を通じて、人と地域のつながりを取り戻す活動を続けます。サッカーを入口に、まちに活気を。被災地に勇気を。クラブの挑戦が、熊本の力になることを信じて走ります。</p>
-    </article>
-    <article class="vcard" data-reveal>
-      <span class="vcard__no">02</span>
-      <h3 data-anim="lines">メンバーの<br>キャリア形成サポート</h3>
-      <p>クラブはピッチの上だけの場所じゃない。多様な仕事と背景を持つメンバーが集まる場だからこそ、つながりが新たな挑戦を生む。スキルの共有、事業づくり、次の一歩。VALIANT は仲間のキャリアと人生を本気で後押しします。</p>
-    </article>
-  </div>
 </section>
 
-<!-- ===== Sponsor ===== -->
-<section class="sponsor" id="sponsor">
-  <div class="sec-head sec-head--center sec-head--light">
-    <span class="sec-head__no" data-reveal>07</span>
-    <h2 class="sec-head__en" data-anim="chars">SPONSOR</h2>
-    <p class="sec-head__ja" data-anim="wave">スポンサー様向け</p>
-  </div>
-  <p class="sponsor__lead" data-anim="lines">FC VALIANT を一緒に育てていただけるパートナーを募集しています。<br>1年間のご支援に対し、以下の返礼をご用意しています。</p>
-
-  <div class="plans">
-    <article class="plan plan--platinum" data-reveal>
-      <div class="plan__head">
-        <span class="plan__rank">❶ PLATINUM</span>
-        <span class="plan__limit">募集 1社のみ</span>
-      </div>
-      <p class="plan__price">¥50,000<small>/年</small></p>
-      <ul class="plan__list">
-        <li>シャツ前面中央にロゴ掲載</li>
-        <li>SNSショート動画で紹介</li>
-        <li>毎月ストーリーズ紹介</li>
-        <li>SNSサポート（コンサル・動画編集など課題に応じたソリューション提案）</li>
-      </ul>
-    </article>
-
-    <article class="plan plan--gold" data-reveal>
-      <div class="plan__head">
-        <span class="plan__rank">❷ GOLD</span>
-        <span class="plan__limit">募集 1社のみ</span>
-      </div>
-      <p class="plan__price">¥30,000<small>/年</small></p>
-      <ul class="plan__list">
-        <li>シャツ背面下部にロゴ掲載</li>
-        <li>SNSショート動画で紹介</li>
-        <li>2ヶ月に1回ストーリーズ紹介</li>
-      </ul>
-    </article>
-
-    <article class="plan plan--silver" data-reveal>
-      <div class="plan__head">
-        <span class="plan__rank">❸ SILVER</span>
-        <span class="plan__limit">複数社募集</span>
-      </div>
-      <p class="plan__price">¥10,000<small>/年</small></p>
-      <ul class="plan__list">
-        <li>シャツ背面（小）にロゴ掲載</li>
-        <li>半年に1回ストーリーズ紹介</li>
-      </ul>
-    </article>
-
-    <article class="plan plan--personal" data-reveal>
-      <div class="plan__head">
-        <span class="plan__rank">♥ PERSONAL</span>
-        <span class="plan__limit">個人サポーター</span>
-      </div>
-      <p class="plan__price">¥10,000<small>/年</small></p>
-      <ul class="plan__list">
-        <li>お礼の動画（選手指名可能）</li>
-        <li>年1回ストーリーズ紹介</li>
-        <li>熊本グルメ詰め合わせ</li>
-      </ul>
-    </article>
-  </div>
-  <div class="sponsor__cta" data-reveal>
-    <a href="#contact" class="btn btn--gold magnetic" data-scroll data-topic="スポンサー">スポンサーのお問い合わせ <i>→</i></a>
-  </div>
-</section>
-
-<!-- ===== Staff ===== -->
-<section class="staff" id="staff">
-  <div class="staff__head sec-head--center">
-    <span class="sec-head__no" data-reveal>08</span>
-    <h2 class="sec-head__en" data-anim="chars">STAFF</h2>
-    <p class="sec-head__ja" data-anim="wave">運営</p>
-  </div>
-  <div class="staff__card" data-reveal>
-    <div class="staff__role">代表 / REPRESENTATIVE</div>
-    <h3 class="staff__name" data-anim="chars">仲地 祐人</h3>
-    <p class="staff__romaji">NAKACHI YUTO</p>
-    <ul class="staff__career">
-      <li><span>2018</span>看護学校卒業・正看護師免許取得</li>
-      <li><span>2021</span>FC VALIANT 創設</li>
-      <li><span>2024</span>地方創生事業「HIZEROWA」設立</li>
-    </ul>
-    <p class="staff__quote">「サッカーチームとしてスポーツの枠を超えた地域貢献活動を継続的に推進し、熊本の未来を共に創り上げていきます。」</p>
+<!-- SPONSOR teaser -->
+<section class="teaser teaser--navy" id="sponsor">
+  <div class="teaser__grid">
+    <div class="teaser__intro">
+      <span class="teaser__no" data-reveal>06</span>
+      <h2 class="teaser__en" data-anim="chars">SPONSOR</h2>
+      <p class="teaser__ja" data-anim="wave">スポンサー募集</p>
+    </div>
+    <div class="teaser__main">
+      <p class="teaser__lead" data-reveal>FC VALIANT を一緒に育てていただく<br><b>パートナー企業・個人サポーター</b>を募集しています。</p>
+      <p class="teaser__sub" data-reveal>4つの支援プラン ／ ¥10,000〜（年）</p>
+      <a href="sponsor.html" class="btn btn--gold magnetic" data-reveal>スポンサープランを見る <i>→</i></a>
+    </div>
   </div>
 </section>
 
 <!-- ===== Contact ===== -->
 <section class="contact" id="contact">
   <div class="contact__head sec-head--center">
-    <span class="sec-head__no" data-reveal>09</span>
+    <span class="sec-head__no" data-reveal>07</span>
     <h2 class="sec-head__en" data-anim="chars">CONTACT</h2>
     <p class="sec-head__ja" data-anim="wave">お問い合わせ</p>
   </div>
@@ -516,11 +273,9 @@
       <a href="#about" data-scroll>ABOUT</a>
       <a href="#team" data-scroll>TEAM</a>
       <a href="#activity" data-scroll>ACTIVITY</a>
-      <a href="#schedule" data-scroll>SCHEDULE</a>
-      <a href="#recruit" data-scroll>RECRUIT</a>
-      <a href="#vision" data-scroll>VISION</a>
-      <a href="#sponsor" data-scroll>SPONSOR</a>
-      <a href="#staff" data-scroll>STAFF</a>
+      <a href="schedule.html">SCHEDULE</a>
+      <a href="recruit.html">RECRUIT</a>
+      <a href="sponsor.html">SPONSOR</a>
       <a href="#contact" data-scroll>CONTACT</a>
     </nav>
   </div>

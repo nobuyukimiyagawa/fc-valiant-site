@@ -451,6 +451,53 @@ main:focus{outline:none}
 .footer__bottom a{font-family:var(--font-en);color:#cfd2da}
 .footer__bottom a:hover{color:var(--gold)}
 
+/* ---------- Sub-page hero (schedule / recruit / sponsor) ---------- */
+.subhero{background:var(--navy);color:#fff;text-align:center;position:relative;
+  border-bottom:1px solid var(--line);
+  padding:clamp(7rem,15vw,10rem) clamp(1.4rem,5vw,4rem) clamp(2.6rem,6vw,4rem)}
+.subhero__crumb{font-family:var(--font-en);letter-spacing:.16em;font-size:.74rem;
+  color:var(--grey);margin-bottom:1rem}
+.subhero__crumb a{color:var(--grey);transition:color .3s}
+.subhero__crumb a:hover{color:var(--gold)}
+.subhero__en{font-family:var(--font-display);font-size:clamp(2.8rem,9vw,6rem);
+  line-height:.95;letter-spacing:.01em}
+.subhero__ja{font-weight:700;letter-spacing:.2em;color:var(--gold);margin-top:.6rem;font-size:.95rem}
+
+/* trim the leading padding when a section follows the sub-hero */
+.schedule--page,.recruit--page,.sponsor--page{padding-top:clamp(3rem,6vw,4.5rem)}
+
+/* ---------- Section teasers (homepage → detail pages) ---------- */
+.teaser{padding:clamp(3.2rem,7vw,5.5rem) clamp(1.4rem,5vw,4rem)}
+.teaser--dark{background:var(--ink);color:#fff}
+.teaser--navy{background:var(--navy);color:#fff}
+.teaser--light{background:var(--paper);color:var(--ink)}
+.teaser__grid{max-width:var(--maxw);margin:0 auto;display:grid;
+  grid-template-columns:minmax(150px,.55fr) 1fr;gap:clamp(1.6rem,5vw,4rem);align-items:center}
+.teaser__no{font-family:var(--font-en);color:var(--gold-deep);letter-spacing:.2em;
+  font-size:.85rem;display:block;margin-bottom:.35rem}
+.teaser--dark .teaser__no,.teaser--navy .teaser__no{color:var(--gold)}
+.teaser__en{font-family:var(--font-display);font-size:clamp(2.4rem,6vw,4.4rem);line-height:.95}
+.teaser__ja{font-weight:700;letter-spacing:.2em;color:var(--grey);margin-top:.3rem;font-size:.9rem}
+.teaser--light .teaser__ja{color:var(--grey-ink)}
+.teaser__main{border-left:1px solid var(--line);padding-left:clamp(1.4rem,4vw,3rem)}
+.teaser--light .teaser__main{border-color:var(--line-dark)}
+.teaser__kicker{font-family:var(--font-en);letter-spacing:.16em;font-size:.78rem;
+  color:var(--gold);margin-bottom:.6rem}
+.teaser--light .teaser__kicker{color:var(--gold-deep)}
+.teaser__lead{font-size:clamp(1.1rem,2.4vw,1.5rem);font-weight:700;line-height:1.6;margin-bottom:.6rem}
+.teaser__lead b{color:var(--gold)}
+.teaser--light .teaser__lead b{color:var(--gold-deep)}
+.teaser__sub{color:var(--grey);font-size:.92rem;margin-bottom:1.6rem}
+.teaser--light .teaser__sub{color:var(--grey-ink)}
+.teaser__chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.6rem}
+.teaser__chips li{font-family:var(--font-en);letter-spacing:.04em;font-size:.78rem;
+  border:1px solid var(--line-dark);border-radius:999px;padding:.4em 1em;color:#2b2e36}
+.teaser__actions{display:flex;flex-wrap:wrap;gap:.8rem}
+
+/* ---------- In-page CTA row (detail pages) ---------- */
+.page-cta{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;
+  margin-top:clamp(2.6rem,6vw,4rem)}
+
 /* ---------- To top ---------- */
 .totop{position:fixed;right:1.4rem;bottom:1.4rem;z-index:150;width:48px;height:48px;
   border-radius:50%;background:var(--gold);color:var(--navy);display:grid;place-items:center;
@@ -508,6 +555,13 @@ main:focus{outline:none}
   .activity__grid{grid-template-columns:1fr 1fr}
   .recruit__grid{grid-template-columns:1fr;gap:2.6rem}
   .recruit__aside{position:static}
+}
+@media (max-width:720px){
+  .teaser__grid{grid-template-columns:1fr;gap:1.3rem}
+  .teaser__main{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:1.4rem}
+  .teaser--light .teaser__main{border-color:var(--line-dark)}
+  .teaser__en{font-size:clamp(2.6rem,12vw,3.4rem)}
+  .page-cta .btn{width:100%;justify-content:center}
 }
 /* 9項目のナビは中間幅で窮屈になるため、タブレット域からドロワーに切替 */
 @media (max-width:1100px){

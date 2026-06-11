@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SCHEDULE 年間試合スケジュール | FC VALIANT</title>
+<meta name="description" content="FC VALIANT（熊本県社会人サッカーチーム）の2026年間試合スケジュール。公式戦・カップ戦・練習試合の日程と結果。応援・観戦はどなたでも大歓迎です。" />
+<meta property="og:title" content="SCHEDULE | FC VALIANT" />
+<meta property="og:description" content="FC VALIANT の年間試合スケジュール。観戦はどなたでも大歓迎。" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="assets/img/hero.webp" />
+<link rel="icon" href="assets/img/favicon-64.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<!-- ===== Preloader ===== -->
+<div class="preloader" id="preloader">
+  <div class="preloader__inner">
+    <span class="preloader__mark">FCV</span>
+    <span class="preloader__bar"><i></i></span>
+  </div>
+</div>
+
+<!-- ===== Header ===== -->
+<header class="header" id="header">
+  <a href="index.html" class="header__brand">
+    <img src="assets/img/logo.webp" alt="FC VALIANT" class="header__logo" />
+    <span class="header__name">FC VALIANT</span>
+  </a>
+  <nav class="nav" id="nav" aria-label="メインナビゲーション">
+    <a href="index.html#about">ABOUT</a>
+    <a href="index.html#team">TEAM</a>
+    <a href="index.html#activity">ACTIVITY</a>
+    <a href="schedule.html" class="is-active" aria-current="page">SCHEDULE</a>
+    <a href="recruit.html">RECRUIT</a>
+    <a href="sponsor.html">SPONSOR</a>
+    <a href="index.html#contact">CONTACT</a>
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="nav__cta magnetic">INSTAGRAM</a>
+  </nav>
+  <button class="burger" id="burger" aria-label="メニューを開閉" aria-expanded="false" aria-controls="nav">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main id="main" tabindex="-1">
+
+<!-- ===== Sub hero ===== -->
+<section class="subhero" id="top">
+  <p class="subhero__crumb"><a href="index.html">HOME</a> <span aria-hidden="true">/</span> SCHEDULE</p>
+  <h1 class="subhero__en">SCHEDULE</h1>
+  <p class="subhero__ja">2026 年間試合スケジュール</p>
+</section>
+
+<!-- ===== Schedule =====
+     ▼▼▼ プレースホルダー：日程・対戦相手・会場・結果（スコア）はすべて仮データです。実データに差し替えてください。
+     ・各試合の <time datetime="YYYY-MM-DD"> を正しい日付にすると、「NEXT MATCH」ハイライトと
+       過去試合のグレーアウトは JS が自動判定します（手動でのクラス付けは不要）。
+     ・結果バッジは fixture__status--win / --draw / --lose / --scheduled を使い分けてください。
+       シーズン成績（WIN/DRAW/LOSE）はバッジから自動集計されます。
+     ・トップページ（index.html）の「NEXT MATCH」ティザーは自動同期ではないので、直近の試合に合わせて手動更新してください。 ▼▼▼ -->
+<section class="schedule schedule--page">
+  <p class="schedule__lead" data-anim="lines">公式戦・カップ戦・練習試合の年間スケジュール。<br>応援・観戦はどなたでも大歓迎です。会場でお待ちしています。</p>
+
+  <!-- シーズン成績サマリ（JSが結果バッジから自動集計。JS無効時は非表示） -->
+  <div class="season" id="seasonSummary" hidden data-reveal>
+    <p class="season__title">2026 SEASON<span>シーズン成績</span></p>
+    <dl class="season__stats">
+      <div class="season__stat season__stat--win"><dt>WIN<i>勝</i></dt><dd data-season="win">0</dd></div>
+      <div class="season__stat"><dt>DRAW<i>分</i></dt><dd data-season="draw">0</dd></div>
+      <div class="season__stat"><dt>LOSE<i>敗</i></dt><dd data-season="lose">0</dd></div>
+    </dl>
+  </div>
+
+  <div class="fixtures" id="fixtures">
+    <div class="fixture" data-reveal>
+      <time class="fixture__date" datetime="2026-03-15"><b>03.15</b><span>SAT</span></time>
+      <div class="fixture__body">
+        <span class="fixture__comp">PRACTICE MATCH</span>
+        <span class="fixture__match">FC VALIANT vs ○○○○ FC</span>
+        <span class="fixture__venue">📍 フットボールパーク御代志</span>
+      </div>
+      <span class="fixture__status fixture__status--win">3 - 1 <b>WIN</b></span>
+    </div>
+
+    <div class="fixture" data-reveal>
+      <time class="fixture__date" datetime="2026-04-19"><b>04.19</b><span>SUN</span></time>
+      <div class="fixture__body">
+        <span class="fixture__comp">熊本県クラブリーグ 第1節</span>
+        <span class="fixture__match">FC VALIANT vs ○○○○ クラブ</span>
+        <span class="fixture__venue">📍 熊本県民総合運動公園</span>
+      </div>
+      <span class="fixture__status fixture__status--lose">1 - 2 <b>LOSE</b></span>
+    </div>
+
+    <div class="fixture" data-reveal>
+      <time class="fixture__date" datetime="2026-05-24"><b>05.24</b><span>SAT</span></time>
+      <div class="fixture__body">
+        <span class="fixture__comp">熊本県クラブリーグ 第2節</span>
+        <span class="fixture__match">FC VALIANT vs ○○○○ SC</span>
+        <span class="fixture__venue">📍 KKWING 補助競技場</span>
+      </div>
+      <span class="fixture__status fixture__status--win">2 - 0 <b>WIN</b></span>
+    </div>
+
+    <div class="fixture" data-reveal>
+      <time class="fixture__date" datetime="2026-06-21"><b>06.21</b><span>SUN</span></time>
+      <div class="fixture__body">
+        <span class="fixture__comp">熊本県クラブリーグ 第3節</span>
+        <span class="fixture__match">FC VALIANT vs ○○○○ FC</span>
+        <span class="fixture__venue">📍 フットボールパーク御代志</span>
+      </div>
+      <span class="fixture__status fixture__status--scheduled">SCHEDULED</span>
+    </div>
+
+    <div class="fixture" data-reveal>
+      <time class="fixture__date" datetime="2026-07-19"><b>07.19</b><span>SAT</span></time>
+      <div class="fixture__body">
+        <span class="fixture__comp">熊本県クラブリーグ 第4節</span>
+        <span class="fixture__match">FC VALIANT vs ○○○○ クラブ</span>
+        <span class="fixture__venue">📍 会場調整中</span>
+      </div>
+      <span class="fixture__status fixture__status--scheduled">SCHEDULED</span>
+    </div>
+
+    <div class="fixture" data-reveal>
+      <time class="fixture__date" datetime="2026-09-13"><b>09.13</b><span>SUN</span></time>
+      <div class="fixture__body">
+        <span class="fixture__comp">熊本県クラブカップ 1回戦</span>
+        <span class="fixture__match">FC VALIANT vs 未定</span>
+        <span class="fixture__venue">📍 会場調整中</span>
+      </div>
+      <span class="fixture__status fixture__status--scheduled">SCHEDULED</span>
+    </div>
+
+    <div class="fixture" data-reveal>
+      <time class="fixture__date" datetime="2026-11-08"><b>11.08</b><span>SUN</span></time>
+      <div class="fixture__body">
+        <span class="fixture__comp">熊本県クラブリーグ 最終節</span>
+        <span class="fixture__match">FC VALIANT vs ○○○○ FC</span>
+        <span class="fixture__venue">📍 会場調整中</span>
+      </div>
+      <span class="fixture__status fixture__status--scheduled">SCHEDULED</span>
+    </div>
+  </div>
+  <p class="schedule__note" data-reveal>※ 日程・対戦相手・会場は変更となる場合があります。最新情報は公式 Instagram でご確認ください。</p>
+
+  <div class="page-cta" data-reveal>
+    <a href="index.html#contact" class="btn btn--gold magnetic">観戦・対戦のお問い合わせ <i>→</i></a>
+    <a href="index.html" class="btn btn--ghost magnetic">← HOME に戻る</a>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <div class="footer__top">
+    <div class="footer__brand">
+      <img src="assets/img/logo.webp" alt="FC VALIANT" />
+      <p>FC VALIANT</p>
+      <span>サッカーの力で、地方創生を。</span>
+    </div>
+    <nav class="footer__nav">
+      <a href="index.html#about">ABOUT</a>
+      <a href="index.html#team">TEAM</a>
+      <a href="index.html#activity">ACTIVITY</a>
+      <a href="schedule.html">SCHEDULE</a>
+      <a href="recruit.html">RECRUIT</a>
+      <a href="sponsor.html">SPONSOR</a>
+      <a href="index.html#contact">CONTACT</a>
+    </nav>
+  </div>
+  <div class="footer__big" aria-hidden="true" data-marquee-line>VALIANT — VALIANT — VALIANT — </div>
+  <div class="footer__bottom">
+    <span>© 2021–2026 FC VALIANT. KUMAMOTO, JAPAN.</span>
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener">INSTAGRAM</a>
+  </div>
+</footer>
+
+<a href="#top" class="totop" id="totop" data-scroll aria-label="ページトップへ">↑</a>
+
+<script src="assets/js/lenis.min.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
