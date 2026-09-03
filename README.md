@@ -77,18 +77,19 @@ fc-valiant-site/
 ```
 
 ## ページ構成
-- **トップ（index.html）**: ABOUT（マニフェスト）/ TEAM / ACTIVITY / SCHEDULE・RECRUIT・SPONSOR の3ティザー / CONTACT（フォーム）
+- **トップ（index.html）**: ABOUT（マニフェスト）/ TEAM / ACTIVITY / SCHEDULE・RECRUIT・SPONSOR の3ティザー / CONTACT（Instagram DM 導線）
 - **schedule.html**: 年間試合スケジュール（NEXT MATCH 自動判定・シーズン成績自動集計）
 - **recruit.html**: VISION（大切にしていること）/ 募集要項 / 体験参加の流れ / FAQ / 代表
 - **sponsor.html**: スポンサー4プラン（PLATINUM / GOLD / SILVER / PERSONAL）
 
 ナビ・フッターは全ページ共通。トップ内アンカー（ABOUT/TEAM/ACTIVITY/CONTACT）と
 専用ページリンク（SCHEDULE/RECRUIT/SPONSOR）が相互に行き来できます。
-詳細ページのCTAは `index.html?topic=...#contact` でフォームの種別を自動選択した状態で着地します。
+詳細ページのCTAは `index.html?topic=...#contact` で CONTACT の用件チップを選択した状態で着地します。
 
 > **要差し替え（プレースホルダー）**: 試合日程・対戦相手・会場・スコア（schedule.html）、
 > 会費・練習日時・募集ポジション・FAQ回答（recruit.html）、金額・返礼内容（sponsor.html）は仮データ。
 > 各HTMLの `<!-- ▼ -->` コメント箇所を実情報に更新してください。
+> Instagram のアカウント名も未確認（「お問い合わせ」の節を参照）。
 > トップの「NEXT MATCH」ティザーは自動同期ではないので schedule.html の直近試合に手動で合わせてください。
 
 ## 実装したJSアクション
@@ -101,7 +102,7 @@ fc-valiant-site/
 - 流れるティッカー／巨大FCVマーキー
 - モバイルのフルスクリーンハンバーガーメニュー
 - スムーズスクロール、トップへ戻るボタン
-- お問い合わせフォーム（デモ動作）
+- CONTACT の用件チップ切り替えと DM 文面のコピー
 
 ## 確認方法（ローカル）
 ```bash
@@ -115,9 +116,25 @@ python3 -m http.server 8000
 - **Netlify / Vercel / Cloudflare Pages**：このフォルダをドラッグ＆ドロップ
 - **GitHub Pages**：リポジトリに push → Pages を有効化
 
+## お問い合わせ（Instagram DM）
+
+問い合わせフォームは廃止し、**Instagram の DM に一本化**した（2026-09-04）。
+CONTACT は「用件を選ぶ → 文面をコピー → DM を開く」の3ステップ。
+DM は文面を事前に入れられないため、用件別のテンプレートをコピーして貼り付けてもらう方式にしている。
+
+| 用途 | URL |
+|---|---|
+| DM を開く | `https://ig.me/m/fc_valiant` |
+| プロフィール | `https://www.instagram.com/fc_valiant/` |
+
+> ⚠️ **アカウント名 `fc_valiant` は未確認。**
+> サイト内に表示されていたハンドル `@fc_valiant` を採用したもので、実アカウントとの一致は取れていない。
+> **問い合わせ導線そのものがこのURLに依存する**ため、公開運用の前に必ず実アカウントで確認すること。
+> 変更する場合は全4ページを一括置換する（`ig.me/m/<名>` と `instagram.com/<名>/` の2種類）。
+
+用件テンプレートの文面は `assets/js/main.js` の `contactDM()` 内 `TEMPLATES` にある。
+用件を増やす場合は、`index.html` のチップと `TEMPLATES` の両方に同じ文字列で追加する。
+
 ## 差し替えメモ
-- **Instagram リンク**：`index.html` 内の `https://www.instagram.com/` を公式アカウントURLに置換
-- **お問い合わせフォーム**：現在はデモ（送信されません）。実送信は Formspree / Google フォーム /
-  Netlify Forms などに接続してください
 - **写真**：`assets/img/` の画像を差し替えれば自動で反映されます
 - 文章は既存サイトの情報をもとに再構成しています。事実確認のうえ適宜調整してください

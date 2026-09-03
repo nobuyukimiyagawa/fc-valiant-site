@@ -431,35 +431,36 @@ main:focus{outline:none}
 .contact__head .sec-head__ja{color:var(--grey);letter-spacing:.2em;margin-top:.3rem}
 .contact__lead{text-align:center;color:#c2c9da;line-height:1.9;margin-bottom:2.4rem}
 .contact__insta{display:flex;align-items:center;justify-content:center;gap:.8rem;max-width:560px;
-  margin:0 auto 3rem;border:1px solid var(--gold);border-radius:999px;padding:1.1em 2em;
+  margin:clamp(2.4rem,5vw,3.2rem) auto 0;border:1px solid var(--gold);border-radius:999px;padding:1.1em 2em;
   color:var(--gold);font-family:var(--font-en);letter-spacing:.06em;transition:.4s var(--ease)}
 .contact__insta:hover{background:var(--gold);color:var(--navy)}
 .contact__insta i{transition:transform .4s var(--ease)}
 .contact__insta:hover i{transform:translateX(5px)}
-.cform{max-width:620px;margin:0 auto;display:flex;flex-direction:column;gap:1.4rem}
-.cform__row{display:flex;flex-direction:column;gap:.5rem}
-.cform__row label{font-size:.88rem;font-weight:500;letter-spacing:.05em}
-.cform__row label b,.cform__fieldset legend b{color:var(--gold);font-size:.7rem;border:1px solid var(--gold);
-  border-radius:4px;padding:.05em .5em;margin-left:.5em;font-weight:600}
-.cform__fieldset{border:0;padding:0;margin:0;min-width:0}
-.cform__fieldset legend{font-size:.88rem;font-weight:500;letter-spacing:.05em;padding:0;margin-bottom:.7rem}
-.cform__topics{display:flex;flex-wrap:wrap;gap:.6rem}
-.topic{position:relative}
-.topic input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
-.topic span{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.55em 1.25em;
-  font-size:.88rem;color:#d2d8e6;cursor:pointer;transition:border-color .3s ease,background .3s ease,color .3s ease;
-  letter-spacing:.04em;line-height:1.5}
-.topic:hover span{border-color:rgba(230,193,92,.6)}
-.topic input:checked+span{background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:700}
-.topic input:focus-visible+span{outline:2px solid var(--gold);outline-offset:3px}
-.cform input,.cform textarea{background:rgba(255,255,255,.05);border:1px solid var(--line);
-  border-radius:6px;padding:.95em 1.1em;color:#fff;font-family:var(--font-ja);font-size:1rem;
-  transition:.3s ease;resize:vertical}
-.cform input:focus,.cform textarea:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,.08)}
-.cform input::placeholder,.cform textarea::placeholder{color:#6a7488}
-.cform__agree{display:flex;align-items:center;gap:.6rem;font-size:.9rem;color:#c2c9da;cursor:pointer}
-.cform__agree input{width:18px;height:18px;accent-color:var(--gold)}
-.cform__note{color:var(--gold);font-size:.85rem;text-align:center;margin-top:.4rem;line-height:1.7}
+/* DM 導線（旧フォームの置き換え）*/
+.dm{max-width:640px;margin:0 auto}
+.dm__steps{display:flex;flex-direction:column;gap:clamp(1.9rem,4vw,2.6rem);margin:0;padding:0;list-style:none}
+.dm__step{display:flex;gap:1.1rem;align-items:flex-start}
+.dm__no{flex:none;width:2.05rem;height:2.05rem;border-radius:50%;
+  background:var(--gold);color:var(--navy);display:grid;place-items:center;
+  font-family:var(--font-en);font-weight:600;font-size:.9rem;line-height:1;margin-top:.05rem}
+.dm__body{flex:1;min-width:0}
+.dm__h{font-size:1rem;font-weight:700;letter-spacing:.04em;margin-bottom:.9rem;line-height:1.5}
+.dm__hint{font-size:.83rem;color:#c2c9da;line-height:1.8;margin-top:.8rem}
+.dm__topics{display:flex;flex-wrap:wrap;gap:.6rem}
+.topic-btn{font-family:var(--font-ja);font-size:.88rem;line-height:1.5;letter-spacing:.04em;
+  border:1px solid var(--line);border-radius:999px;padding:.55em 1.25em;
+  background:transparent;color:#d2d8e6;cursor:pointer;
+  transition:border-color .3s ease,background .3s ease,color .3s ease}
+.topic-btn:hover{border-color:rgba(230,193,92,.6)}
+.topic-btn[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);
+  color:var(--navy);font-weight:700}
+.topic-btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.dm__template{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:6px;
+  padding:1.1em 1.2em;margin:0;color:#fff;white-space:pre-wrap;overflow-x:auto;
+  font-family:var(--font-ja);font-size:.92rem;line-height:1.9;letter-spacing:.02em}
+.dm__copy{margin-top:1.1rem}
+.dm__copy.btn--ghost:hover{background:rgba(230,193,92,.14);color:var(--gold);border-color:var(--gold)}
+.dm__copy.is-done{background:var(--gold);color:var(--navy);border-color:var(--gold)}
 
 /* ---------- Footer ---------- */
 .footer{background:var(--navy);color:#fff;overflow:hidden;border-top:1px solid var(--line)}

@@ -237,32 +237,91 @@
   })();
 
   /* ============================================================
-     4c. CTA → CONTACT 連携
-     data-topic 付きリンク（体験参加/スポンサー）クリックで
-     フォームの「お問い合わせ種別」を自動選択
+     4c. CONTACT（Instagram DM 導線）
+     用件チップの選択で文面を差し替える。
+     別ページの CTA からは ?topic=... / data-topic で初期選択される。
      ============================================================ */
-  document.querySelectorAll("[data-topic]").forEach((link) => {
-    link.addEventListener("click", () => {
-      const v = link.getAttribute("data-topic");
-      const radio = document.querySelector(
-        '.cform input[name="topic"][value="' + v + '"]'
-      );
-      if (radio) radio.checked = true;
-    });
-  });
+  (function contactDM() {
+    const chips = Array.from(document.querySelectorAll("[data-topic-btn]"));
+    const box = document.getElementById("dmTemplate");
+    if (!chips.length || !box) return;
 
-  // 別ページの CTA から ?topic=... 付きで来た場合に種別を自動選択
-  try {
-    const topic = new URLSearchParams(location.search).get("topic");
-    if (topic) {
-      const radio = document.querySelector(
-        '.cform input[name="topic"][value="' + topic + '"]'
+    const TEMPLATES = {
+      "体験参加・入団":
+        "はじめまして。体験参加を希望しています。\n\n・お名前：\n・年齢 / サッカー歴：\n・希望日：\n\nよろしくお願いします。",
+      "スポンサー":
+        "はじめまして。スポンサーの件でご連絡しました。\n\n・会社 / 団体名：\n・ご担当者名：\n・ご検討中のプラン：\n\nよろしくお願いします。",
+      "取材・メディア":
+        "はじめまして。取材のご相談でご連絡しました。\n\n・媒体名：\n・ご担当者名：\n・取材の趣旨 / 希望時期：\n\nよろしくお願いします。",
+      "対戦・その他":
+        "はじめまして。対戦のご相談でご連絡しました。\n\n・チーム名 / 団体名：\n・ご担当者名：\n・希望日時 / 会場：\n\nよろしくお願いします。"
+    };
+
+    function select(topic) {
+      if (!TEMPLATES[topic]) return false;
+      chips.forEach((c) =>
+        c.setAttribute("aria-pressed", String(c.getAttribute("data-topic-btn") === topic))
       );
-      if (radio) radio.checked = true;
+      box.textContent = TEMPLATES[topic];
+      return true;
     }
-  } catch (e) {
-    /* URLSearchParams 非対応環境は黙ってスキップ */
-  }
+
+    chips.forEach((c) => {
+      c.addEventListener("click", () => select(c.getAttribute("data-topic-btn")));
+    });
+
+    // 同一ページ内の CTA（data-topic 付き）
+    document.querySelectorAll("[data-topic]").forEach((link) => {
+      link.addEventListener("click", () => select(link.getAttribute("data-topic")));
+    });
+
+    // 別ページの CTA から ?topic=... 付きで着地した場合
+    try {
+      const topic = new URLSearchParams(location.search).get("topic");
+      if (topic) select(topic);
+    } catch (e) {
+      /* URLSearchParams 非対応環境は初期値のまま */
+    }
+
+    // 文面のコピー
+    const copyBtn = document.getElementById("dmCopy");
+    const note = document.getElementById("dmCopyNote");
+    const DEFAULT_NOTE = note ? note.textContent : "";
+    if (copyBtn) {
+      copyBtn.addEventListener("click", async () => {
+        const text = box.textContent;
+        let ok = false;
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+            ok = true;
+          }
+        } catch (e) {
+          ok = false;
+        }
+        if (!ok) {
+          // クリップボードが使えない場合は選択状態にして手動コピーを促す
+          const range = document.createRange();
+          range.selectNodeContents(box);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+        }
+        copyBtn.classList.toggle("is-done", ok);
+        copyBtn.innerHTML = ok ? "コピーしました ✓" : "文面をコピー <i>→</i>";
+        if (note) {
+          note.textContent = ok
+            ? "コピーしました。DM に貼り付けてお送りください。"
+            : "文面を選択しました。手動でコピーしてください。";
+        }
+        window.setTimeout(() => {
+          copyBtn.classList.remove("is-done");
+          copyBtn.innerHTML = "文面をコピー <i>→</i>";
+          if (note) note.textContent = DEFAULT_NOTE;
+        }, 4000);
+      });
+    }
+  })();
 
   /* ============================================================
      5. SCROLL-DRIVEN UI (header, totop, parallax, velocity)
@@ -430,25 +489,4 @@
     });
   }
 
-  /* ============================================================
-     8. CONTACT FORM (demo)
-     ============================================================ */
-  const cform = document.getElementById("cform");
-  const note = document.getElementById("cformNote");
-  if (cform) {
-    cform.addEventListener("submit", (e) => {
-      e.preventDefault();
-      if (!cform.checkValidity()) {
-        cform.reportValidity();
-        return;
-      }
-      if (note) note.hidden = false;
-      const btn = cform.querySelector("button[type=submit]");
-      if (btn) {
-        btn.textContent = "送信しました ✓";
-        btn.disabled = true;
-        btn.style.opacity = ".7";
-      }
-    });
-  }
 })();
