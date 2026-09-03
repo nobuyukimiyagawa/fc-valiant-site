@@ -225,6 +225,56 @@
   });
 
   /* ============================================================
+     4a2. スポンサーのマーキー
+     画面幅に対して1組では足りず隙間が空くため、
+     「半周でコンテナ幅を超える」まで組を複製してから -50% で回す。
+     速度は幅によらず一定（px/秒）に保つ。
+     ============================================================ */
+  (function initSponsorMarquee() {
+    const track = document.getElementById("sponsorTrack");
+    if (!track) return;
+    const master = track.querySelector(".sponsor-run");
+    if (!master) return;
+    const viewport = track.parentElement;
+    const SPEED = 55; // px/秒
+
+    function layout() {
+      // 複製をいったん戻して1組にする
+      track.querySelectorAll(".sponsor-run").forEach((el, i) => {
+        if (i > 0) el.remove();
+      });
+      const runW = master.getBoundingClientRect().width;
+      if (!runW) return;
+      const need = Math.max(1, Math.ceil(viewport.getBoundingClientRect().width / runW));
+      // 半周分を need 組にし、全体はその2倍（偶数）にする
+      for (let i = 1; i < need * 2; i++) {
+        track.appendChild(master.cloneNode(true));
+      }
+      track.style.animationDuration = (runW * need) / SPEED + "s";
+    }
+
+    // 画像の読み込み完了を待ってから計測する
+    const imgs = Array.from(master.querySelectorAll("img"));
+    const pending = imgs.filter((i) => !i.complete);
+    if (pending.length) {
+      let left = pending.length;
+      pending.forEach((i) => {
+        const done = () => { if (--left === 0) layout(); };
+        i.addEventListener("load", done, { once: true });
+        i.addEventListener("error", done, { once: true });
+      });
+    } else {
+      layout();
+    }
+
+    let t;
+    window.addEventListener("resize", () => {
+      clearTimeout(t);
+      t = setTimeout(layout, 200);
+    });
+  })();
+
+  /* ============================================================
      4b. SCHEDULE: next-match highlight / past dimming / season record
      - <time datetime="YYYY-MM-DD"> から自動判定（HTML側の手動クラス不要）
      - シーズン成績は結果バッジ（--win/--draw/--lose）から自動集計
