@@ -7,6 +7,41 @@
 (function () {
   "use strict";
 
+  /* ============================================================
+     0. 紺の明るさプレビュー  ?navy=0〜4
+     色決めのための一時的な仕組み。パラメータが無いときは何もしない。
+     確定したら tools/set-navy.py で本適用し、このブロックは削除してよい。
+     ============================================================ */
+  (function navyPreview() {
+    const lv = new URLSearchParams(location.search).get("navy");
+    if (lv === null) return;
+    const LEVELS = {
+      0: ["#060f24", "#0a162f", "#0e1d3f", "#101c33"],
+      1: ["#0a1730", "#0f2143", "#152b55", "#13223d"],
+      2: ["#0d1c3a", "#142a52", "#1b3766", "#16294a"],
+      3: ["#112445", "#1a3563", "#23447a", "#1b3158"],
+      4: ["#162c52", "#204074", "#2b5190", "#203a68"]
+    };
+    const set = LEVELS[lv];
+    if (!set) return;
+    const rgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)).join(",");
+    const r = document.documentElement.style;
+    r.setProperty("--navy-deep", set[0]);
+    r.setProperty("--navy", set[1]);
+    r.setProperty("--navy-2", set[2]);
+    r.setProperty("--ink", set[3]);
+    r.setProperty("--navy-deep-rgb", rgb(set[0]));
+    r.setProperty("--navy-rgb", rgb(set[1]));
+    const tag = document.createElement("div");
+    tag.textContent = "\u7d3a\u306e\u660e\u308b\u3055 \u30ec\u30d9\u30eb " + lv;
+    tag.style.cssText =
+      "position:fixed;left:12px;bottom:12px;z-index:9999;background:" + set[1] +
+      ";color:#e6c15c;border:1px solid #e6c15c;border-radius:999px;" +
+      "padding:.45em 1.1em;font:600 12px/1 system-ui,sans-serif;letter-spacing:.08em;pointer-events:none";
+    (document.body ? Promise.resolve() : new Promise((ok) => addEventListener("DOMContentLoaded", ok)))
+      .then(() => document.body.appendChild(tag));
+  })();
+
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isTouch = window.matchMedia("(hover: none)").matches;
 

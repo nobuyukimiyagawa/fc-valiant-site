@@ -3,10 +3,12 @@
    Palette: deep navy / gold / paper (黒は使わず、暗部はすべて紺で作る)
    ============================================================ */
 :root{
-  --navy-deep:#060f24;  /* 最暗部。旧 --ink(ほぼ黒)の置き換え */
-  --navy:#0a162f;
-  --navy-2:#0e1d3f;
-  --ink:#101c33;        /* 紙面上の本文色。純黒ではなく紺寄り */
+  --navy-deep:#0d1c3a;  /* 最暗部。旧 --ink(ほぼ黒)の置き換え */
+  --navy:#142a52;
+  --navy-2:#1b3766;
+  --navy-deep-rgb:13,28,58;  /* --navy-deep の RGB。rgba() 用 */
+  --navy-rgb:20,42,82;       /* --navy の RGB。rgba() 用 */
+  --ink:#16294a;        /* 紙面上の本文色。純黒ではなく紺寄り */
   --gold:#e6c15c;
   --gold-deep:#caa544;
   --paper:#f4f2ec;
@@ -14,7 +16,7 @@
   --grey:#9aa4b8;      /* muted text on dark backgrounds */
   --grey-ink:#5a6478;  /* muted text on paper backgrounds (AA contrast) */
   --line:rgba(255,255,255,.14);
-  --line-dark:rgba(10,22,47,.12);
+  --line-dark:rgba(var(--navy-rgb),.12);
   --maxw:1280px;
   --ease:cubic-bezier(.22,1,.36,1);
   --font-en:"Oswald",sans-serif;
@@ -61,7 +63,7 @@ main:focus{outline:none}
 .btn i{transition:transform .4s var(--ease)}
 .btn:hover i{transform:translateX(5px)}
 .btn--gold{background:var(--gold);color:var(--navy)}
-.btn--gold:hover{background:var(--navy);color:var(--gold);box-shadow:0 10px 30px rgba(10,22,47,.25)}
+.btn--gold:hover{background:var(--navy);color:var(--gold);box-shadow:0 10px 30px rgba(var(--navy-rgb),.25)}
 .btn--ghost{border-color:currentColor;background:transparent}
 .btn--ghost:hover{background:var(--navy-deep);color:var(--paper)}
 .btn--block{width:100%;justify-content:center}
@@ -86,7 +88,7 @@ main:focus{outline:none}
   transition:transform .45s var(--ease),background .45s ease,padding .45s ease;
   mix-blend-mode:normal;
 }
-.header.is-solid{background:rgba(10,22,47,.92);backdrop-filter:blur(10px);
+.header.is-solid{background:rgba(var(--navy-rgb),.92);backdrop-filter:blur(10px);
   padding:.7rem clamp(1rem,4vw,2.6rem);box-shadow:0 1px 0 var(--line)}
 .header.is-hidden{transform:translateY(-110%)}
 .header__brand{display:flex;align-items:center;gap:.65rem;color:#fff}
@@ -120,8 +122,8 @@ main:focus{outline:none}
 .hero__media::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:var(--navy);mix-blend-mode:color;opacity:.45}
 .hero__overlay{position:absolute;inset:0;z-index:2;
-  background:linear-gradient(90deg,rgba(8,16,33,.86) 0%,rgba(8,16,33,.55) 45%,rgba(8,16,33,.25) 100%),
-             linear-gradient(0deg,rgba(8,16,33,.9) 0%,rgba(8,16,33,0) 45%)}
+  background:linear-gradient(90deg,rgba(var(--navy-deep-rgb),.86) 0%,rgba(var(--navy-deep-rgb),.55) 45%,rgba(var(--navy-deep-rgb),.25) 100%),
+             linear-gradient(0deg,rgba(var(--navy-deep-rgb),.9) 0%,rgba(var(--navy-deep-rgb),0) 45%)}
 .hero__content{position:relative;z-index:2;color:#fff;
   padding:0 clamp(1.2rem,5vw,5rem);max-width:var(--maxw);margin:0 auto;width:100%}
 .hero__sub{font-family:var(--font-en);letter-spacing:.28em;font-size:.8rem;
@@ -142,7 +144,7 @@ main:focus{outline:none}
 @keyframes scrolldot{0%{top:-100%}60%,100%{top:100%}}
 /* Hero foot bar — broadcast-style status strip (replaces the old gold ★ ticker) */
 .hero__bar{position:absolute;left:0;bottom:0;width:100%;z-index:3;display:flex;align-items:stretch;
-  background:linear-gradient(0deg,rgba(8,16,33,.94),rgba(8,16,33,.62));
+  background:linear-gradient(0deg,rgba(var(--navy-deep-rgb),.94),rgba(var(--navy-deep-rgb),.62));
   -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
   border-top:1px solid rgba(230,193,92,.45)}
 .hero__bar-tag{flex:none;display:inline-flex;align-items:center;gap:.6rem;
@@ -529,7 +531,7 @@ main:focus{outline:none}
 .totop{position:fixed;right:1.4rem;bottom:1.4rem;z-index:150;width:48px;height:48px;
   border-radius:50%;background:var(--gold);color:var(--navy);display:grid;place-items:center;
   font-size:1.2rem;font-weight:700;opacity:0;visibility:hidden;transform:translateY(12px);
-  transition:.4s var(--ease);box-shadow:0 8px 24px rgba(6,15,36,.38)}
+  transition:.4s var(--ease);box-shadow:0 8px 24px rgba(var(--navy-deep-rgb),.38)}
 .totop.is-show{opacity:1;visibility:visible;transform:translateY(0)}
 .totop:hover{background:#fff}
 
