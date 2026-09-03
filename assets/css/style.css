@@ -3,12 +3,12 @@
    Palette: deep navy / gold / paper (黒は使わず、暗部はすべて紺で作る)
    ============================================================ */
 :root{
-  --navy-deep:#0d1c3a;  /* 最暗部。旧 --ink(ほぼ黒)の置き換え */
-  --navy:#142a52;
-  --navy-2:#1b3766;
-  --navy-deep-rgb:13,28,58;  /* --navy-deep の RGB。rgba() 用 */
-  --navy-rgb:20,42,82;       /* --navy の RGB。rgba() 用 */
-  --ink:#16294a;        /* 紙面上の本文色。純黒ではなく紺寄り */
+  --navy-deep:#162c52;  /* 最暗部。旧 --ink(ほぼ黒)の置き換え */
+  --navy:#204074;
+  --navy-2:#2b5190;
+  --navy-deep-rgb:22,44,82;  /* --navy-deep の RGB。rgba() 用 */
+  --navy-rgb:32,64,116;       /* --navy の RGB。rgba() 用 */
+  --ink:#203a68;        /* 紙面上の本文色。純黒ではなく紺寄り */
   --gold:#e6c15c;
   --gold-deep:#caa544;
   --paper:#f4f2ec;
