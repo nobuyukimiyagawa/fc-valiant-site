@@ -8,6 +8,33 @@
   "use strict";
 
   /* ============================================================
+     0a. Instagram アカウント名
+     ★ここ1か所を実アカウント名に書き換えれば、全ページの
+       プロフィールリンク・DMリンク・ハンドル表示がまとめて切り替わる。
+       例) const IG_HANDLE = "fcvaliant_kumamoto";
+
+     空文字のあいだは Instagram のトップに逃がす。
+     未確認の名前を入れると ig.me がエラーページを返すため、
+     確認が取れるまでは空のままにしておくこと。
+     ============================================================ */
+  const IG_HANDLE = "";
+
+  (function applyInstagramLinks() {
+    if (!IG_HANDLE) return; // 未設定ならHTMLの既定値（instagram.com）のまま
+    const urls = {
+      profile: "https://www.instagram.com/" + IG_HANDLE + "/",
+      dm: "https://ig.me/m/" + IG_HANDLE
+    };
+    document.querySelectorAll("[data-ig]").forEach((a) => {
+      const kind = a.getAttribute("data-ig");
+      if (urls[kind]) a.href = urls[kind];
+    });
+    document.querySelectorAll("[data-ig-handle]").forEach((el) => {
+      el.textContent = "@" + IG_HANDLE;
+    });
+  })();
+
+  /* ============================================================
      0. 紺の明るさプレビュー  ?navy=0〜4
      色決めのための一時的な仕組み。パラメータが無いときは何もしない。
      確定したら tools/set-navy.py で本適用し、このブロックは削除してよい。

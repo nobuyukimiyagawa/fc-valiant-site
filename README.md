@@ -89,7 +89,7 @@ fc-valiant-site/
 > **要差し替え（プレースホルダー）**: 試合日程・対戦相手・会場・スコア（schedule.html）、
 > 会費・練習日時・募集ポジション・FAQ回答（recruit.html）、金額・返礼内容（sponsor.html）は仮データ。
 > 各HTMLの `<!-- ▼ -->` コメント箇所を実情報に更新してください。
-> Instagram のアカウント名も未確認（「お問い合わせ」の節を参照）。
+> Instagram のアカウント名は未設定（「お問い合わせ」の節を参照）。
 > トップの「NEXT MATCH」ティザーは自動同期ではないので schedule.html の直近試合に手動で合わせてください。
 
 ## 実装したJSアクション
@@ -122,15 +122,32 @@ python3 -m http.server 8000
 CONTACT は「用件を選ぶ → 文面をコピー → DM を開く」の3ステップ。
 DM は文面を事前に入れられないため、用件別のテンプレートをコピーして貼り付けてもらう方式にしている。
 
-| 用途 | URL |
-|---|---|
-| DM を開く | `https://ig.me/m/fc_valiant` |
-| プロフィール | `https://www.instagram.com/fc_valiant/` |
+### ⚠️ Instagram アカウント名が未設定
 
-> ⚠️ **アカウント名 `fc_valiant` は未確認。**
-> サイト内に表示されていたハンドル `@fc_valiant` を採用したもので、実アカウントとの一致は取れていない。
-> **問い合わせ導線そのものがこのURLに依存する**ため、公開運用の前に必ず実アカウントで確認すること。
-> 変更する場合は全4ページを一括置換する（`ig.me/m/<名>` と `instagram.com/<名>/` の2種類）。
+**現在アカウント名は未設定（`IG_HANDLE = ""`）で、Instagram のリンクはすべて
+`https://www.instagram.com/`（トップ）に向いている。**
+
+当初サイト内の表示テキストにあった `fc_valiant` を採用したが、
+`https://ig.me/m/fc_valiant` が Facebook のエラーページを返したため撤去した。
+プロジェクトの全履歴を調べても、実在が確認できるハンドルは存在しない。
+
+**実アカウント名が分かったら、`assets/js/main.js` の次の1行だけを書き換える。**
+
+```js
+const IG_HANDLE = "";   // ← ここに実アカウント名を入れる
+```
+
+これだけで全4ページのプロフィールリンク・DMリンク・ハンドル表示が揃う。
+HTML 側は触らなくてよい（リンクは `data-ig="profile"` / `data-ig="dm"`、
+ハンドル表示は `data-ig-handle` で印を付けてある）。
+
+| 生成されるURL | 形 |
+|---|---|
+| プロフィール | `https://www.instagram.com/<名>/` |
+| DM | `https://ig.me/m/<名>` |
+
+未設定のあいだは HTML の既定値のまま Instagram のトップが開く。
+エラーページは出ないので、公開したままでも壊れて見えることはない。
 
 用件テンプレートの文面は `assets/js/main.js` の `contactDM()` 内 `TEMPLATES` にある。
 用件を増やす場合は、`index.html` のチップと `TEMPLATES` の両方に同じ文字列で追加する。
