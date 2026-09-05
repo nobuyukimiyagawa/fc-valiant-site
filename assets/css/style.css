@@ -136,6 +136,25 @@ main:focus{outline:none}
 .hero__lead em{display:inline-block;margin-top:.15em;font-style:normal;
   font-family:var(--font-display);font-weight:400;color:var(--gold);
   font-size:1.28em;letter-spacing:.02em}
+/* ヒーロー右下の次戦カード */
+.hero__next{position:absolute;right:clamp(1.2rem,4vw,3rem);bottom:5.6rem;
+  z-index:4;display:flex;flex-direction:column;gap:.28rem;max-width:min(20rem,72vw);
+  padding:1rem 1.25rem;border-radius:10px;color:#fff;
+  background:rgba(var(--navy-deep-rgb),.72);border:1px solid rgba(230,193,92,.35);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  transition:border-color .3s var(--ease),transform .3s var(--ease)}
+.hero__next:hover{border-color:var(--gold);transform:translateY(-2px)}
+.hero__next:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.hero__next-kicker{font-family:var(--font-en);font-size:.64rem;font-weight:600;
+  letter-spacing:.22em;color:var(--gold)}
+.hero__next-date{font-family:var(--font-display);font-size:1.75rem;line-height:1;
+  letter-spacing:.02em;display:flex;align-items:baseline;gap:.1em}
+.hero__next-date i{font-style:normal;color:var(--gold);margin:0 .04em}
+.hero__next-date em{font-family:var(--font-en);font-style:normal;font-size:.42em;
+  font-weight:500;letter-spacing:.16em;color:var(--grey);margin-left:.5em}
+.hero__next-comp{font-family:var(--font-en);font-size:.7rem;letter-spacing:.08em;color:var(--gold)}
+.hero__next-match{font-size:.95rem;font-weight:700;line-height:1.45;letter-spacing:.02em}
+.hero__next-meta{font-size:.76rem;color:#c2c9da;line-height:1.6}
 .hero__scroll{position:absolute;left:50%;bottom:5.5rem;transform:translateX(-50%);z-index:3;
   display:flex;flex-direction:column;align-items:center;gap:.6rem;color:#fff;
   font-family:var(--font-en);font-size:.68rem;letter-spacing:.3em}
@@ -173,6 +192,19 @@ main:focus{outline:none}
 .hero__bar-ticker:hover .hero__bar-track,
 .hero__bar-track:focus-within{animation-play-state:paused}
 @keyframes marquee{to{transform:translateX(-50%)}}
+/* 次戦カード：狭い画面ではロゴタイプ・SCROLL と重なるため全幅に落とす */
+@media (max-width:900px){
+  /* 中央寄せのままだとロゴタイプの下端がカードに掛かるので上寄せにする */
+  .hero{align-items:flex-start}
+  .hero__content{padding-top:clamp(5.5rem,17vh,9rem)}
+  .hero__next{left:clamp(1.2rem,5vw,5rem);right:clamp(1.2rem,5vw,5rem);
+    max-width:none;bottom:5.4rem;padding:.85rem 1.05rem;gap:.22rem}
+  .hero__next-date{font-size:1.5rem}
+  .hero__next-match{font-size:.9rem}
+  .hero__scroll{display:none}
+  .hero__title{font-size:clamp(3.4rem,14vw,6.5rem)}
+}
+
 @media (prefers-reduced-motion:reduce){.hero__bar-track{animation:none}}
 
 /* ---------- Section heads ---------- */
