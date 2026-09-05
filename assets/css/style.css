@@ -126,8 +126,6 @@ main:focus{outline:none}
              linear-gradient(0deg,rgba(var(--navy-deep-rgb),.9) 0%,rgba(var(--navy-deep-rgb),0) 45%)}
 .hero__content{position:relative;z-index:2;color:#fff;
   padding:0 clamp(1.2rem,5vw,5rem);max-width:var(--maxw);margin:0 auto;width:100%}
-.hero__sub{font-family:var(--font-en);letter-spacing:.28em;font-size:.8rem;
-  color:var(--gold);margin-bottom:1.2rem;font-weight:500}
 .hero__title{font-family:var(--font-display);line-height:.86;
   font-size:clamp(4rem,17vw,15rem);letter-spacing:.01em;margin-bottom:1.6rem}
 .hero__title .line{display:block}
