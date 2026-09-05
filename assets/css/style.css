@@ -127,12 +127,12 @@ main:focus{outline:none}
 .hero__content{position:relative;z-index:2;color:#fff;
   padding:0 clamp(1.2rem,5vw,5rem);max-width:var(--maxw);margin:0 auto;width:100%}
 .hero__title{font-family:var(--font-display);line-height:.86;
-  font-size:clamp(4rem,17vw,15rem);letter-spacing:.01em;margin-bottom:1.6rem}
+  font-size:clamp(3.4rem,13vw,12rem);letter-spacing:.01em;margin-bottom:0}
 .hero__title .line{display:block}
 .hero__title .outline{color:transparent;-webkit-text-stroke:2px var(--gold);
   text-stroke:2px var(--gold)}
-.hero__lead{font-weight:700;font-size:clamp(1.1rem,2.6vw,1.7rem);line-height:1.5;
-  letter-spacing:.05em}
+.hero__lead{font-weight:700;font-size:clamp(1.3rem,3.1vw,2.2rem);line-height:1.5;
+  letter-spacing:.05em;margin-bottom:1.1rem}
 .hero__scroll{position:absolute;left:50%;bottom:5.5rem;transform:translateX(-50%);z-index:3;
   display:flex;flex-direction:column;align-items:center;gap:.6rem;color:#fff;
   font-family:var(--font-en);font-size:.68rem;letter-spacing:.3em}
@@ -636,7 +636,7 @@ main:focus{outline:none}
   .plans{grid-template-columns:1fr}
   .stats{grid-template-columns:1fr}
   .stat{border-left:0;border-top:1px solid var(--line)}
-  .hero__title{font-size:22vw}
+  .hero__title{font-size:17vw}
   .team__meta>div{grid-template-columns:90px 1fr}
   .recruit__spec>div{grid-template-columns:1fr;gap:.5rem}
 }
