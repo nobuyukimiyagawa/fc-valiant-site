@@ -130,7 +130,7 @@ main:focus{outline:none}
   letter-spacing:.05em;margin-bottom:1.2rem}
 .hero__lead em{display:inline-block;margin-top:.15em;font-style:normal;
   font-family:var(--font-display);font-weight:400;color:var(--gold);
-  font-size:1.28em;letter-spacing:.02em}
+  font-size:1.75em;letter-spacing:.02em}
 /* ヒーロー右下の次戦カード */
 .hero__next{position:absolute;right:clamp(1.2rem,4vw,3rem);bottom:5.6rem;
   z-index:4;display:flex;flex-direction:column;gap:.28rem;max-width:min(20rem,72vw);
