@@ -43,7 +43,7 @@ main:focus{outline:none}
 
 /* ---------- Focus ring (keyboard) ---------- */
 :focus-visible{outline:2px solid var(--gold-deep);outline-offset:3px;border-radius:2px}
-.header :focus-visible,.nav :focus-visible,.manifesto :focus-visible,.stats :focus-visible,
+.header :focus-visible,.nav :focus-visible,.stats :focus-visible,
 .schedule :focus-visible,.vision :focus-visible,.sponsor :focus-visible,.contact :focus-visible,
 .footer :focus-visible,.recruit__aside :focus-visible,.act-card--insta:focus-visible,
 .totop:focus-visible{outline-color:var(--gold)}
@@ -131,8 +131,11 @@ main:focus{outline:none}
 .hero__title .line{display:block}
 .hero__title .outline{color:transparent;-webkit-text-stroke:2px var(--gold);
   text-stroke:2px var(--gold)}
-.hero__lead{font-weight:700;font-size:clamp(1.3rem,3.1vw,2.2rem);line-height:1.5;
-  letter-spacing:.05em;margin-bottom:1.1rem}
+.hero__lead{font-weight:700;font-size:clamp(1.3rem,3.1vw,2.2rem);line-height:1.45;
+  letter-spacing:.05em;margin-bottom:1.2rem}
+.hero__lead em{display:inline-block;margin-top:.15em;font-style:normal;
+  font-family:var(--font-display);font-weight:400;color:var(--gold);
+  font-size:1.28em;letter-spacing:.02em}
 .hero__scroll{position:absolute;left:50%;bottom:5.5rem;transform:translateX(-50%);z-index:3;
   display:flex;flex-direction:column;align-items:center;gap:.6rem;color:#fff;
   font-family:var(--font-en);font-size:.68rem;letter-spacing:.3em}
@@ -184,16 +187,6 @@ main:focus{outline:none}
 .sec-head--light .sec-head__no{color:var(--gold)}
 
 /* ---------- Manifesto ---------- */
-.manifesto{background:var(--navy-deep);color:var(--paper);
-  padding:clamp(5rem,12vw,10rem) clamp(1.4rem,6vw,6rem);
-  display:grid;grid-template-columns:minmax(120px,1fr) 3fr;gap:clamp(2rem,6vw,5rem)}
-.manifesto__index{font-family:var(--font-en);letter-spacing:.25em;color:var(--gold);
-  font-size:.9rem;border-top:1px solid var(--line);padding-top:1rem}
-.manifesto__body p{font-size:clamp(1.05rem,2.2vw,1.55rem);font-weight:500;
-  line-height:2.1;margin-bottom:1.6rem;color:#d6dcea}
-.manifesto__punch{font-family:var(--font-en);color:#fff!important;font-weight:700!important;
-  font-size:clamp(1.8rem,5vw,3.2rem)!important;line-height:1.2!important;margin-top:2.5rem!important}
-.manifesto__punch em{color:var(--gold);font-style:normal}
 
 /* ---------- Team ---------- */
 .team{display:grid;grid-template-columns:1.05fr 1fr;align-items:center;
@@ -614,8 +607,7 @@ main:focus{outline:none}
   .header{mix-blend-mode:normal}
 }
 @media (max-width:768px){
-  .manifesto{grid-template-columns:1fr;gap:1.4rem}
-  .stats{grid-template-columns:repeat(2,1fr)}
+    .stats{grid-template-columns:repeat(2,1fr)}
   .stat:nth-child(odd){border-left:0}
   .stat:nth-child(n+3){border-top:1px solid var(--line)}
   .activity__grid{grid-template-columns:1fr;grid-template-rows:none;height:auto}

@@ -64,7 +64,7 @@ https://nobuyukimiyagawa.github.io/fc-valiant-site/?navy=3
 
 ```
 fc-valiant-site/
-├── index.html            # トップ（Hero / ABOUT / TEAM / ACTIVITY / 3ティザー / CONTACT）
+├── index.html            # トップ（Hero / TEAM / ACTIVITY / 3ティザー / CONTACT）
 ├── schedule.html         # 年間試合スケジュール（全日程・成績）
 ├── recruit.html          # メンバー募集要項（VISION・募集要項・FAQ・代表）
 ├── sponsor.html          # スポンサープラン（4段階）
@@ -77,12 +77,12 @@ fc-valiant-site/
 ```
 
 ## ページ構成
-- **トップ（index.html）**: ABOUT（マニフェスト）/ TEAM / ACTIVITY / SCHEDULE・RECRUIT・SPONSOR の3ティザー / CONTACT（Instagram DM 導線）
+- **トップ（index.html）**: TEAM / ACTIVITY / SCHEDULE・RECRUIT・SPONSOR の3ティザー / CONTACT（Instagram DM 導線）
 - **schedule.html**: 年間試合スケジュール（NEXT MATCH 自動判定・シーズン成績自動集計）
 - **recruit.html**: VISION（大切にしていること）/ 募集要項 / 体験参加の流れ / FAQ / 代表
 - **sponsor.html**: スポンサー4プラン（PLATINUM / GOLD / SILVER / PERSONAL）
 
-ナビ・フッターは全ページ共通。トップ内アンカー（ABOUT/TEAM/ACTIVITY/CONTACT）と
+ナビ・フッターは全ページ共通。トップ内アンカー（TEAM/ACTIVITY/CONTACT）と
 専用ページリンク（SCHEDULE/RECRUIT/SPONSOR）が相互に行き来できます。
 詳細ページのCTAは `index.html?topic=...#contact` で CONTACT の用件チップを選択した状態で着地します。
 
@@ -123,7 +123,7 @@ VISION の2見出しもタグラインと同じ「〜であること」で揃え
 
 ### 書き方
 
-- **ABOUT は常体**（〜だ・〜る）。他は敬体（〜です・ます）。常体の断章が全体の格を上げている。
+- 全体は敬体（〜です・ます）。ヒーローの `Be VALIANT.` だけがブランドの署名。
 - **英字のアイブロウ（小見出しの上に置く飾りの英語）を足さない。**
   ヒーローにあった `KUMAMOTO FOOTBALL CLUB / SINCE 2021` は
   「AIっぽい」として削除した（2026-09-05）。情報を足していない飾りは置かない。
