@@ -35,8 +35,8 @@ python3 tools/set-navy.py 3      # レベル3を適用
 | 0 | 最暗。黒に近い紺 | `#060f24` | `#0a162f` |
 | 1 | やや明るい | `#0a1730` | `#0f2143` |
 | 2 | 明るい | `#0d1c3a` | `#142a52` |
-| 3 | さらに明るい | `#112445` | `#1a3563` |
-| 4 | かなり明るい。ロイヤルブルー寄り（**現在**） | `#162c52` | `#204074` |
+| 3 | さらに明るい（**現在**） | `#112445` | `#1a3563` |
+| 4 | かなり明るい。ロイヤルブルー寄り | `#162c52` | `#204074` |
 
 5段階すべて WCAG AA 以上（最小 5.32:1）を満たすので、どれを選んでも可読性の問題はない。
 
@@ -210,14 +210,18 @@ HTML 側の目印は次の3つ。全4ページに入っている。
 ロゴを収めてある。支給画像が白背景の暗いロゴばかりで、紺のバーに透過で置くと
 読めなくなるため、白タイルのまま並べる方式にした。
 
-| ファイル | スポンサー |
-|---|---|
-| `bar-babel.webp` | BAR BABEL |
-| `tra-sure.webp` | TRA-SURE PERSONAL BODY MAKE |
-| `hirano-sekkeishitsu.webp` | 平野設計室（Heartful Design） |
-| `hako-sauna.webp` | ハコサウナ PRIVATE SAUNA |
-| `uekitto.webp` | 株式会社ミチル UEKITTO |
-| `hizerowa.webp` | HIZEROWA |
+| ファイル | スポンサー | リンク先 |
+|---|---|---|
+| `bar-babel.webp` | BAR BABEL | instagram.com/bar_babel2026 |
+| `tra-sure.webp` | TRA-SURE PERSONAL BODY MAKE | tra-sure.com |
+| `hirano-sekkeishitsu.webp` | 平野設計室（Heartful Design） | j-hirano.co.jp |
+| `hako-sauna.webp` | ハコサウナ PRIVATE SAUNA | hakosauna.com |
+| `uekitto.webp` | 株式会社ミチル UEKITTO | instagram.com/uekitto__310 |
+| `hizerowa.webp` | HIZEROWA | hizerowa.studio.site |
+
+各ロゴは `<a class="sponsor-link" target="_blank" rel="noopener">` で各社サイトへ。
+表示高は 50px。**流れている最中は掴めないので、帯に触れると流れが止まる**
+（`:hover` と `:focus-within` で `animation-play-state:paused`）。
 
 **追加・差し替えの手順**
 1. 元画像を白背景のまま用意する
@@ -232,9 +236,9 @@ HTML 側の目印は次の3つ。全4ページに入っている。
 
 ヒーロー左下のタグは `SINCE 2021` から `SPONSORS` に変更した。
 
-> ティッカーは `aria-hidden="true"`（同じ内容を複製するため）。
-> スクリーンリーダーにはスポンサー名が伝わらないので、
-> スポンサー一覧を `sponsor.html` に別途載せることを検討したい。
+読み上げ対応: ティッカー自体の `aria-hidden` は外した。
+**先頭の1組だけが読み上げ・タブ移動の対象**で、`initSponsorMarquee()` が作る複製には
+`aria-hidden="true"` と `tabindex="-1"` を付けて二重読み上げを防いでいる。
 
 ## ロゴ
 

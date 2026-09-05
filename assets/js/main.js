@@ -248,7 +248,11 @@
       const need = Math.max(1, Math.ceil(viewport.getBoundingClientRect().width / runW));
       // 半周分を need 組にし、全体はその2倍（偶数）にする
       for (let i = 1; i < need * 2; i++) {
-        track.appendChild(master.cloneNode(true));
+        const clone = master.cloneNode(true);
+        // 複製は見た目を埋めるためだけのもの。読み上げとタブ移動から外す
+        clone.setAttribute("aria-hidden", "true");
+        clone.querySelectorAll("a").forEach((a) => a.setAttribute("tabindex", "-1"));
+        track.appendChild(clone);
       }
       track.style.animationDuration = (runW * need) / SPEED + "s";
     }

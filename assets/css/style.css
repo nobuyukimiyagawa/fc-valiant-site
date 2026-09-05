@@ -3,12 +3,12 @@
    Palette: deep navy / gold / paper (黒は使わず、暗部はすべて紺で作る)
    ============================================================ */
 :root{
-  --navy-deep:#162c52;  /* 最暗部。旧 --ink(ほぼ黒)の置き換え */
-  --navy:#204074;
-  --navy-2:#2b5190;
-  --navy-deep-rgb:22,44,82;  /* --navy-deep の RGB。rgba() 用 */
-  --navy-rgb:32,64,116;       /* --navy の RGB。rgba() 用 */
-  --ink:#203a68;        /* 紙面上の本文色。純黒ではなく紺寄り */
+  --navy-deep:#112445;  /* 最暗部。旧 --ink(ほぼ黒)の置き換え */
+  --navy:#1a3563;
+  --navy-2:#23447a;
+  --navy-deep-rgb:17,36,69;  /* --navy-deep の RGB。rgba() 用 */
+  --navy-rgb:26,53,99;       /* --navy の RGB。rgba() 用 */
+  --ink:#1b3158;        /* 紙面上の本文色。純黒ではなく紺寄り */
   --gold:#e6c15c;
   --gold-deep:#caa544;
   --paper:#f4f2ec;
@@ -155,14 +155,22 @@ main:focus{outline:none}
   animation:pulse 2.4s var(--ease) infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(230,193,92,.55)}
   70%{box-shadow:0 0 0 7px rgba(230,193,92,0)}100%{box-shadow:0 0 0 0 rgba(230,193,92,0)}}
-.hero__bar-ticker{flex:1;min-width:0;overflow:hidden;display:flex;align-items:center;padding:.55rem 0;
+.hero__bar-ticker{flex:1;min-width:0;overflow:hidden;display:flex;align-items:center;padding:.6rem 0;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
           mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
 .hero__bar-track{display:flex;white-space:nowrap;width:max-content;animation:marquee 34s linear infinite}
 .hero__bar-track span{display:inline-flex;align-items:center;flex:none;
   gap:clamp(.9rem,2.2vw,1.6rem);padding-right:clamp(.9rem,2.2vw,1.6rem)}
-.sponsor-logo{height:38px;width:auto;display:block;flex:none;
-  background:#fff;border-radius:5px}
+.sponsor-link{display:block;flex:none;border-radius:6px;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.sponsor-link:hover{transform:translateY(-2px);
+  box-shadow:0 6px 18px rgba(6,15,36,.45)}
+.sponsor-link:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.sponsor-logo{height:50px;width:auto;display:block;
+  background:#fff;border-radius:6px}
+/* 流れている最中は掴みにくいので、触れたら止める */
+.hero__bar-ticker:hover .hero__bar-track,
+.hero__bar-track:focus-within{animation-play-state:paused}
 @keyframes marquee{to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){.hero__bar-track{animation:none}}
 
