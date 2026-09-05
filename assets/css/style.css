@@ -126,12 +126,7 @@ main:focus{outline:none}
              linear-gradient(0deg,rgba(var(--navy-deep-rgb),.9) 0%,rgba(var(--navy-deep-rgb),0) 45%)}
 .hero__content{position:relative;z-index:2;color:#fff;
   padding:0 clamp(1.2rem,5vw,5rem);max-width:var(--maxw);margin:0 auto;width:100%}
-.hero__title{font-family:var(--font-display);line-height:.86;
-  font-size:clamp(3.4rem,13vw,12rem);letter-spacing:.01em;margin-bottom:0}
-.hero__title .line{display:block}
-.hero__title .outline{color:transparent;-webkit-text-stroke:2px var(--gold);
-  text-stroke:2px var(--gold)}
-.hero__lead{font-weight:700;font-size:clamp(1.3rem,3.1vw,2.2rem);line-height:1.45;
+.hero__lead{margin:0;font-weight:700;font-size:clamp(1.3rem,3.1vw,2.2rem);line-height:1.45;
   letter-spacing:.05em;margin-bottom:1.2rem}
 .hero__lead em{display:inline-block;margin-top:.15em;font-style:normal;
   font-family:var(--font-display);font-weight:400;color:var(--gold);
@@ -194,15 +189,11 @@ main:focus{outline:none}
 @keyframes marquee{to{transform:translateX(-50%)}}
 /* 次戦カード：狭い画面ではロゴタイプ・SCROLL と重なるため全幅に落とす */
 @media (max-width:900px){
-  /* 中央寄せのままだとロゴタイプの下端がカードに掛かるので上寄せにする */
-  .hero{align-items:flex-start}
-  .hero__content{padding-top:clamp(5.5rem,17vh,9rem)}
   .hero__next{left:clamp(1.2rem,5vw,5rem);right:clamp(1.2rem,5vw,5rem);
     max-width:none;bottom:5.4rem;padding:.85rem 1.05rem;gap:.22rem}
   .hero__next-date{font-size:1.5rem}
   .hero__next-match{font-size:.9rem}
   .hero__scroll{display:none}
-  .hero__title{font-size:clamp(3.4rem,14vw,6.5rem)}
 }
 
 @media (prefers-reduced-motion:reduce){.hero__bar-track{animation:none}}
@@ -660,7 +651,6 @@ main:focus{outline:none}
   .plans{grid-template-columns:1fr}
   .stats{grid-template-columns:1fr}
   .stat{border-left:0;border-top:1px solid var(--line)}
-  .hero__title{font-size:17vw}
   .team__meta>div{grid-template-columns:90px 1fr}
   .recruit__spec>div{grid-template-columns:1fr;gap:.5rem}
 }
