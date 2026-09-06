@@ -170,10 +170,16 @@ main:focus{outline:none}
   animation:pulse 2.4s var(--ease) infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(230,193,92,.55)}
   70%{box-shadow:0 0 0 7px rgba(230,193,92,0)}100%{box-shadow:0 0 0 0 rgba(230,193,92,0)}}
-.hero__bar-ticker{flex:1;min-width:0;overflow:hidden;display:flex;align-items:center;padding:.6rem 0;
+.hero__bar-ticker{flex:1;min-width:0;display:flex;align-items:center;padding:.6rem 0;
+  overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scroll-behavior:auto;
+  scrollbar-width:none;-ms-overflow-style:none;cursor:grab;
+  -webkit-overflow-scrolling:touch;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
           mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
-.hero__bar-track{display:flex;white-space:nowrap;width:max-content;animation:marquee 34s linear infinite}
+.hero__bar-ticker::-webkit-scrollbar{display:none}
+.hero__bar-ticker.is-dragging{cursor:grabbing}
+.hero__bar-ticker.is-dragging .sponsor-link{pointer-events:none}
+.hero__bar-track{display:flex;white-space:nowrap;width:max-content}
 .hero__bar-track span{display:inline-flex;align-items:center;flex:none;
   gap:clamp(.9rem,2.2vw,1.6rem);padding-right:clamp(.9rem,2.2vw,1.6rem)}
 .sponsor-link{display:block;flex:none;border-radius:6px;
@@ -183,10 +189,6 @@ main:focus{outline:none}
 .sponsor-link:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 .sponsor-logo{height:50px;width:auto;display:block;
   background:#fff;border-radius:6px}
-/* 流れている最中は掴みにくいので、触れたら止める */
-.hero__bar-ticker:hover .hero__bar-track,
-.hero__bar-track:focus-within{animation-play-state:paused}
-@keyframes marquee{to{transform:translateX(-50%)}}
 /* 次戦カード：狭い画面ではロゴタイプ・SCROLL と重なるため全幅に落とす */
 @media (max-width:900px){
   .hero__next{left:clamp(1.2rem,5vw,5rem);right:clamp(1.2rem,5vw,5rem);
@@ -196,7 +198,6 @@ main:focus{outline:none}
   .hero__scroll{display:none}
 }
 
-@media (prefers-reduced-motion:reduce){.hero__bar-track{animation:none}}
 
 /* ---------- Section heads ---------- */
 .sec-head{margin-bottom:2.4rem}

@@ -225,50 +225,111 @@
   });
 
   /* ============================================================
-     4a2. スポンサーのマーキー
-     画面幅に対して1組では足りず隙間が空くため、
-     「半周でコンテナ幅を超える」まで組を複製してから -50% で回す。
-     速度は幅によらず一定（px/秒）に保つ。
+     4a2. スポンサーのマーキー（手動スクロール対応）
+     CSS アニメーションではなく scrollLeft を進める方式。
+     こうすると指・ホイール・ドラッグでの横スクロールがそのまま効く。
+     1組の幅ぶん進んだら 1組ぶん戻す（各組は同一なので継ぎ目が出ない）。
      ============================================================ */
   (function initSponsorMarquee() {
     const track = document.getElementById("sponsorTrack");
     if (!track) return;
     const master = track.querySelector(".sponsor-run");
     if (!master) return;
-    const viewport = track.parentElement;
-    const SPEED = 55; // px/秒
+    const view = track.parentElement;
+    const SPEED = 55;        // px/秒
+    const RESUME_MS = 2500;  // 操作をやめてから再開するまで
+    let runW = 0;
+    let paused = false;
+    let resumeTimer = null;
+    let last = 0;
 
     function layout() {
-      // 複製をいったん戻して1組にする
       track.querySelectorAll(".sponsor-run").forEach((el, i) => {
         if (i > 0) el.remove();
       });
-      const runW = master.getBoundingClientRect().width;
-      if (!runW) return;
-      const need = Math.max(1, Math.ceil(viewport.getBoundingClientRect().width / runW));
-      // 半周分を need 組にし、全体はその2倍（偶数）にする
-      for (let i = 1; i < need * 2; i++) {
+      const w = master.getBoundingClientRect().width;
+      if (!w) return;
+      runW = w;
+      // 「1組ぶん戻しても右端が途切れない」だけの組数を用意する
+      const need = Math.max(2, Math.ceil(view.getBoundingClientRect().width / runW) + 1);
+      for (let i = 1; i < need; i++) {
         const clone = master.cloneNode(true);
-        // 複製は見た目を埋めるためだけのもの。読み上げとタブ移動から外す
         clone.setAttribute("aria-hidden", "true");
         clone.querySelectorAll("a").forEach((a) => a.setAttribute("tabindex", "-1"));
         track.appendChild(clone);
       }
-      track.style.animationDuration = (runW * need) / SPEED + "s";
+      if (view.scrollLeft >= runW) view.scrollLeft = view.scrollLeft % runW;
     }
 
-    // 画像の読み込み完了を待ってから計測する
+    function hold() {
+      paused = true;
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => { paused = false; }, RESUME_MS);
+    }
+
+    // 自動送り。手を触れている間は止める
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let pos = 0; // scrollLeft は丸められることがあるので位置は自前で持つ
+    function tick(now) {
+      const dt = last ? now - last : 0;
+      // タブが裏に回ると rAF が止まる。復帰1フレーム目で飛ばないよう間引く
+      if (last && runW && dt < 100) {
+        if (Math.abs(view.scrollLeft - pos) > 1.5) pos = view.scrollLeft; // 手で動かされた分を取り込む
+        if (!paused) pos += (SPEED * dt) / 1000;
+        if (pos >= runW) pos -= runW;
+        if (pos < 0) pos += runW;
+        view.scrollLeft = pos;
+      }
+      last = now;
+      requestAnimationFrame(tick);
+    }
+
+    // ホイール／指／フォーカスでいったん止める
+    view.addEventListener("wheel", hold, { passive: true });
+    view.addEventListener("touchstart", hold, { passive: true });
+    view.addEventListener("touchend", hold, { passive: true });
+    view.addEventListener("mouseenter", () => { paused = true; });
+    view.addEventListener("mouseleave", () => { paused = false; });
+    view.addEventListener("focusin", () => { paused = true; });
+    view.addEventListener("focusout", () => { paused = false; });
+    // 巻き戻し位置の補正（手で送られたときも継ぎ目を出さない）
+
+
+    // マウスのドラッグでも動かせるようにする
+    let dragging = false, startX = 0, startLeft = 0, moved = 0;
+    view.addEventListener("pointerdown", (e) => {
+      if (e.pointerType === "touch") return; // 指はブラウザ標準に任せる
+      dragging = true; moved = 0;
+      startX = e.clientX; startLeft = view.scrollLeft;
+      hold();
+    });
+    window.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+      const dx = e.clientX - startX;
+      moved = Math.max(moved, Math.abs(dx));
+      if (moved > 4) view.classList.add("is-dragging");
+      view.scrollLeft = startLeft - dx;
+    });
+    window.addEventListener("pointerup", () => {
+      if (!dragging) return;
+      dragging = false;
+      // ドラッグ直後のクリックでリンクが開かないように一拍置く
+      setTimeout(() => view.classList.remove("is-dragging"), 0);
+      hold();
+    });
+
     const imgs = Array.from(master.querySelectorAll("img"));
     const pending = imgs.filter((i) => !i.complete);
+    const start = () => { layout(); if (!reduce) requestAnimationFrame(tick); };
     if (pending.length) {
       let left = pending.length;
       pending.forEach((i) => {
-        const done = () => { if (--left === 0) layout(); };
+        const done = () => { if (--left === 0) start(); };
         i.addEventListener("load", done, { once: true });
         i.addEventListener("error", done, { once: true });
       });
     } else {
-      layout();
+      start();
     }
 
     let t;

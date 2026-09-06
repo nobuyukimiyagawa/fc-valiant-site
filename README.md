@@ -239,9 +239,22 @@ HTML 側の目印は次の3つ。全4ページに入っている。
 | `uekitto.webp` | 株式会社ミチル UEKITTO | instagram.com/uekitto__310 |
 | `hizerowa.webp` | HIZEROWA | hizerowa.studio.site |
 
-各ロゴは `<a class="sponsor-link" target="_blank" rel="noopener">` で各社サイトへ。
-表示高は 50px。**流れている最中は掴めないので、帯に触れると流れが止まる**
-（`:hover` と `:focus-within` で `animation-play-state:paused`）。
+掲載順は上の表のとおり（クライアント指定・2026-09-06）。`index.html` の
+`.sponsor-run` に書いた順がそのまま並ぶ。各ロゴは
+`<a class="sponsor-link" target="_blank" rel="noopener">` で各社サイトへ。表示高 50px。
+
+**流し方は CSS アニメーションではなく `scrollLeft` を進める方式**（2026-09-06 に変更）。
+こうすると指・ホイール・ドラッグでの横スクロールがそのまま効く。
+
+- `.hero__bar-ticker` に `overflow-x:auto`。スクロールバーは隠してある
+- **`scroll-behavior:auto` を明示するのが必須。** `html` 側の
+  `scroll-behavior:smooth` を継承すると、毎フレームの微小な移動が
+  打ち消されて一切進まなくなる（実際にこれで止まった）
+- 位置は JS 側で保持する。`scrollLeft` は丸められることがあるため
+- 1組ぶん進んだら1組ぶん戻す。各組が同一なので継ぎ目は出ない
+- ホバー・フォーカス中は停止。ホイール／指／ドラッグ操作後は 2.5 秒で再開
+- ドラッグ中は `.is-dragging` が付き、リンクのクリックを無効化する
+- タブが裏に回ると rAF が止まるので、復帰1フレーム目（間隔100ms超）は間引く
 
 **追加・差し替えの手順**
 1. 元画像を白背景のまま用意する
