@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/style.css?v=0cb54318" />
+<link rel="stylesheet" href="assets/css/style.css?v=5290b68c" />
 </head>
 <body>
 
@@ -64,18 +64,16 @@
     <img class="stage__layer stage__layer--back" src="assets/img/stage-back.webp" alt="" aria-hidden="true" />
     <img class="stage__layer stage__layer--front" src="assets/img/stage-front.webp" alt="" aria-hidden="true" />
     <div class="stage__glow" aria-hidden="true"></div>
-    <figure class="stage__figure is-empty" id="stageFigure">
-      <img class="stage__photo" id="stagePhoto" alt="" />
-      <img class="stage__crest" src="assets/img/logo.webp" alt="" aria-hidden="true" />
-      <figcaption class="stage__soon">PHOTO COMING SOON</figcaption>
-    </figure>
+    <!-- 登場と退場を重ねるため、選手はJSで出し入れする -->
+    <div class="stage__cast" id="stageCast"></div>
     <div class="stage__scrim" aria-hidden="true"></div>
   </div>
   <div class="stage__plate" id="stagePlate" role="status" aria-live="polite">
-    <p class="stage__pos"></p>
-    <p class="stage__name"></p>
-    <p class="stage__kana"></p>
-    <p class="stage__dob"></p>
+    <span class="stage__rule" aria-hidden="true"></span>
+    <p class="stage__pos"><span></span></p>
+    <p class="stage__name"><span></span></p>
+    <p class="stage__kana"><span></span></p>
+    <p class="stage__dob"><span></span></p>
   </div>
   </div>
   <p class="stage__hint">下のカードを選ぶと、その選手がステージに立ちます。</p>
@@ -304,6 +302,6 @@
 <a href="#top" class="totop" id="totop" data-scroll aria-label="ページトップへ">↑</a>
 
 <script src="assets/js/lenis.min.js"></script>
-<script src="assets/js/main.js?v=593c8145"></script>
+<script src="assets/js/main.js?v=933ed777"></script>
 </body>
 </html>

@@ -754,19 +754,31 @@ button.btn{color:inherit;font:inherit}
   background:radial-gradient(60% 46% at 50% 74%,rgba(255,238,200,.16),transparent 70%)}
 /* 立ち位置は楕円の中心（レンダで実測して 78.6%）。
    背丈は実寸より少し大きめにして、主役として見えるようにする */
+/* ---- 登場の振り付け ----------------------------------------
+   0-80ms    舞台をわずかに落とす（溜め）
+   0-160ms   前の選手が沈んで消える。影も先に縮む
+   40-180ms  テロップの文字だけ上へ抜ける（板と罫は残す）
+   180-260ms 誰もいない80ms。ここが「間」
+   260-340ms 中心のスポットが戻る
+   300-420ms 新しい選手の影が、人より先に出る
+   340-700ms 人が奥から静かに立ち、わずかに着地して収まる
+   430-720ms 金の罫 → タグ → 氏名 → カナ → 生年月日 の順に出る
+   写真は1枚しかないので、人は小さくしか動かさない。
+   重さは影と床で作る。 */
+.stage__cast{position:absolute;inset:0}
 .stage__figure{position:absolute;left:50%;bottom:21.3%;height:66%;
   margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
   transform:translate(calc(-50% + var(--px,0px)),0);will-change:transform,opacity}
-.stage__figure::after{content:"";position:absolute;bottom:-4%;left:50%;
-  width:150%;height:13%;transform:translateX(-50%);
-  background:radial-gradient(50% 50% at 50% 50%,rgba(0,0,0,.55),transparent 72%)}
+.stage__shadow{position:absolute;bottom:-3%;left:50%;width:150%;height:11%;
+  transform:translateX(-50%);transform-origin:50% 100%;opacity:.28;
+  background:radial-gradient(50% 50% at 50% 50%,rgba(0,0,0,.62),transparent 72%)}
 .stage__photo{height:100%;width:auto;object-fit:contain;object-position:bottom;
   filter:drop-shadow(2px -1px 0 rgba(230,193,92,.42))
          drop-shadow(0 0 22px rgba(var(--navy-deep-rgb),.75))}
 .stage__crest{height:46%;width:auto;opacity:.45}
 /* 胸から上の写真は、切れ目をぼかして光の中から現れるように見せる */
 .stage__figure.is-bust{height:50%}
-.stage__figure.is-bust::after{opacity:0}
+.stage__figure.is-bust .stage__shadow{opacity:0}
 .stage__figure.is-bust .stage__photo{
   -webkit-mask-image:linear-gradient(to bottom,#000 72%,transparent 99%);
           mask-image:linear-gradient(to bottom,#000 72%,transparent 99%)}
@@ -774,37 +786,67 @@ button.btn{color:inherit;font:inherit}
   color:var(--grey);margin-bottom:.9rem}
 /* 写真が無いときは、エンブレムの足元が立ち位置に来るように並べ替える */
 .stage__figure.is-empty{flex-direction:column-reverse;justify-content:flex-start}
+.stage__figure.is-empty .stage__photo{display:none}
 .stage__figure:not(.is-empty) .stage__crest,
 .stage__figure:not(.is-empty) .stage__soon{display:none}
-.stage__figure.is-empty .stage__photo{display:none}
-/* 登場 */
-@keyframes stage-in{
-  from{opacity:0;transform:translate(calc(-50% + var(--px,0px)),14px) scale(.965)}
-  to{opacity:1;transform:translate(calc(-50% + var(--px,0px)),0) scale(1)}}
-.stage__figure.is-in{animation:stage-in .55s var(--ease) both}
-/* 文字が芝に乗るので、左下だけ落とす */
-.stage__scrim{position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(0deg,rgba(var(--navy-deep-rgb),.42),transparent 38%)}
+
+@keyframes actor-in{
+  0%  {opacity:0;transform:translate(calc(-50% + var(--px,0px)),12px) scale(.972)}
+  72% {opacity:1;transform:translate(calc(-50% + var(--px,0px)),0) scale(1.004)}
+  100%{opacity:1;transform:translate(calc(-50% + var(--px,0px)),0) scale(1)}}
+@keyframes actor-out{
+  to{opacity:0;transform:translate(calc(-50% + var(--px,0px)),8px) scale(.985);filter:brightness(.86)}}
+@keyframes shadow-in{from{opacity:0;transform:translateX(-50%) scaleX(.55)}}
+@keyframes shadow-out{to{opacity:0;transform:translateX(-50%) scaleX(.75) scaleY(.75)}}
+.stage__figure.is-in{animation:actor-in 360ms cubic-bezier(.16,1,.3,1) 80ms both}
+.stage__figure.is-in .stage__shadow{animation:shadow-in 120ms cubic-bezier(.16,1,.3,1) 40ms both}
+.stage__figure.is-out{animation:actor-out 160ms cubic-bezier(.55,.06,.68,.19) both}
+.stage__figure.is-out .stage__shadow{animation:shadow-out 160ms cubic-bezier(.55,.06,.68,.19) both}
+/* 入れ替えのあいだ、舞台をわずかに落として中心だけ戻す */
+.stage__scene.is-swapping .stage__layer{filter:brightness(.955)}
+.stage__layer{transition:filter .28s cubic-bezier(.4,0,.2,1)}
+.stage__glow{transition:opacity .3s cubic-bezier(.22,1,.36,1)}
+.stage__scene.is-swapping .stage__glow{opacity:.55}
+
 /* 名前は舞台の外に置かず、中継のテロップのように芝の上に重ねる */
 .stage__plate{position:absolute;left:clamp(1.2rem,3.2vw,2.6rem);bottom:clamp(1.1rem,3vw,2.2rem);
   max-width:46%;text-align:left;
-  padding:1.05rem 1.9rem 1.05rem 1.15rem;border-left:2px solid var(--gold);
+  padding:1.05rem 1.9rem 1.05rem 1.15rem;
   background:linear-gradient(90deg,rgba(var(--navy-deep-rgb),.93),rgba(var(--navy-deep-rgb),.74) 78%,
     rgba(var(--navy-deep-rgb),.66));
   -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
-.stage__pos{display:flex;gap:.35rem;margin:0 0 .7rem;min-height:1.2em}
-.stage__pos span{font-family:var(--font-en);font-size:.68rem;font-weight:600;
-  letter-spacing:.14em;color:var(--gold);line-height:1;
-  border:1px solid rgba(230,193,92,.45);border-radius:3px;padding:.35em .6em}
-.stage__pos b{font-family:var(--font-ja);font-size:.66rem;font-weight:700;letter-spacing:.1em;
-  background:var(--gold);color:var(--navy-deep);border-radius:3px;padding:.45em .7em;line-height:1}
+.stage__rule{position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);
+  transform-origin:50% 50%}
+.stage__plate p{overflow:hidden;margin:0}
+.stage__plate p>span{display:block;will-change:transform,opacity}
+.stage__pos{margin:0 0 .7rem;min-height:1.2em}
+.stage__pos>span{display:flex;flex-wrap:wrap;gap:.35rem}
+/* 塗り＝役割、線＝ポジション。カードと同じ区別 */
+.stage__pos>span>b{font-family:var(--font-ja);font-size:.66rem;font-weight:700;letter-spacing:.1em;
+  line-height:1;border-radius:3px;padding:.45em .7em;white-space:nowrap;
+  background:var(--gold);color:var(--navy-deep)}
+.stage__pos>span>span{font-family:var(--font-en);font-size:.68rem;font-weight:600;
+  letter-spacing:.14em;color:var(--gold);line-height:1;white-space:nowrap;
+  border:1px solid rgba(230,193,92,.45);border-radius:3px;padding:.42em .6em}
+@keyframes line-out{to{opacity:0;transform:translateY(-100%)}}
+@keyframes line-in{from{opacity:0;transform:translateY(100%)}}
+@keyframes rule-in{from{opacity:0;transform:scaleY(.65)}}
+@keyframes fade-in{from{opacity:0}}
+@keyframes fade-out{to{opacity:0}}
+.stage__plate.is-out p>span{animation:line-out 140ms cubic-bezier(.4,0,.2,1) 40ms both}
+.stage__plate.is-in .stage__rule{animation:rule-in 90ms cubic-bezier(.22,1,.36,1) 170ms both}
+.stage__plate.is-in p>span{animation:line-in 160ms cubic-bezier(.22,1,.36,1) both}
+.stage__plate.is-in .stage__pos>span{animation-delay:240ms;animation-duration:120ms}
+.stage__plate.is-in .stage__name>span{animation-delay:300ms}
+.stage__plate.is-in .stage__kana>span{animation-delay:340ms}
+.stage__plate.is-in .stage__dob>span{animation-delay:380ms}
 .stage__name{font-size:clamp(1.5rem,3.4vw,2.3rem);font-weight:900;letter-spacing:.08em;
   color:#fff;margin:0;line-height:1.25;text-shadow:0 2px 14px rgba(var(--navy-deep-rgb),.8)}
 .stage__kana{font-size:.76rem;letter-spacing:.2em;color:#cbd3e2;margin:.45rem 0 0}
 .stage__dob{font-family:var(--font-en);font-size:.74rem;letter-spacing:.08em;color:#b4bdd0;
-  margin:.9rem 0 0;padding-top:.7rem;border-top:1px solid rgba(230,193,92,.35);
-  display:inline-flex;align-items:baseline;gap:.6rem}
-.stage__dob span{font-size:.62rem;letter-spacing:.18em}
+  margin:.9rem 0 0}
+.stage__dob>span{padding-top:.7rem;border-top:1px solid rgba(230,193,92,.35)}
+.stage__dob i{font-style:normal;font-size:.62rem;letter-spacing:.18em;margin-right:.6rem}
 .stage__hint{text-align:center;font-size:.76rem;color:var(--grey);margin:1.6rem 0 0}
 /* カードは押せる */
 .mcard{cursor:pointer}
@@ -816,15 +858,24 @@ button.btn{color:inherit;font:inherit}
   .stage__scene{border-radius:6px;aspect-ratio:5/4}
   .stage__scrim{background:linear-gradient(0deg,rgba(var(--navy-deep-rgb),.55),transparent 42%)}
   .stage__plate{position:static;max-width:none;text-align:center;background:none;
-    -webkit-backdrop-filter:none;backdrop-filter:none;border-left:0;
+    -webkit-backdrop-filter:none;backdrop-filter:none;
     margin:1.2rem auto 0;padding:1.1rem 0 0;border-top:1px solid var(--line)}
-  .stage__pos{justify-content:center}
+  .stage__rule{display:none}
+  .stage__pos>span{justify-content:center}
   .stage__dob{margin-top:.8rem}
   .stage__soon{font-size:.56rem}
   .stage__hint{font-size:.72rem}
 }
 @media (prefers-reduced-motion:reduce){
-  .stage__figure.is-in{animation:none}
+  /* 沈み込みや拡大はやめ、短いフェードだけにする */
+  .stage__figure.is-in{animation:fade-in 180ms linear both}
+  .stage__figure.is-in .stage__shadow,
+  .stage__figure.is-out .stage__shadow{animation:none}
+  .stage__figure.is-out{animation:fade-out 120ms linear both}
+  .stage__plate.is-in p>span,
+  .stage__plate.is-in .stage__rule{animation:fade-in 160ms linear both;animation-delay:0ms}
+  .stage__plate.is-out p>span{animation:fade-out 100ms linear both}
+  .stage__scene.is-swapping .stage__layer{filter:none}
 }
 
 /* ---------- MEMBER ---------- */

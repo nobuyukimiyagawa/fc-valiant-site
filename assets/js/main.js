@@ -451,51 +451,91 @@
      ============================================================ */
   (function initStage() {
     const scene = document.getElementById("stageScene");
+    const cast  = document.getElementById("stageCast");
     const grid  = document.getElementById("mgrid");
-    if (!scene || !grid) return;
+    if (!scene || !cast || !grid) return;
 
-    const fig   = document.getElementById("stageFigure");
-    const photo = document.getElementById("stagePhoto");
     const plate = document.getElementById("stagePlate");
-    const elPos = plate.querySelector(".stage__pos");
-    const elNm  = plate.querySelector(".stage__name");
-    const elKn  = plate.querySelector(".stage__kana");
-    const elDb  = plate.querySelector(".stage__dob");
+    const elPos = plate.querySelector(".stage__pos > span");
+    const elNm  = plate.querySelector(".stage__name > span");
+    const elKn  = plate.querySelector(".stage__kana > span");
+    const elDb  = plate.querySelector(".stage__dob > span");
     const cards = Array.from(grid.querySelectorAll(".mcard"));
     const soft  = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    function show(card) {
-      cards.forEach((c) => c.classList.toggle("is-on", c === card));
+    // 動きを止める設定のときは、短いクロスフェードに縮退する
+    const OUT = soft ? 160 : 90;   // 前の選手が消えるまで
+    const GAP = soft ? 260 : 90;   // 誰もいない「間」を挟んで新しい選手が入る
+    const ALL = soft ? 780 : 260;  // 全体
 
-      const roles = Array.from(card.querySelectorAll(".mcard__pos b"));
+    let current = null, timers = [];
+    const clear = () => { timers.forEach(clearTimeout); timers = []; };
+    const later = (fn, ms) => timers.push(setTimeout(fn, ms));
+
+    function actor(card) {
+      const el = document.createElement("div");
+      el.className = "stage__figure is-empty";
+      const sh = document.createElement("span");
+      sh.className = "stage__shadow";
+      const img = new Image();
+      img.className = "stage__photo";
+      img.alt = card.querySelector(".mcard__name").textContent;
+      img.addEventListener("load", () => {
+        el.classList.remove("is-empty");
+        // 全身は縦長、胸から上は正方形に近い。腰で切れた写真は扱いを変える
+        el.classList.toggle("is-bust", img.naturalWidth / img.naturalHeight > 0.62);
+      });
+      const crest = new Image();
+      crest.className = "stage__crest"; crest.src = "assets/img/logo.webp"; crest.alt = "";
+      const soon = document.createElement("span");
+      soon.className = "stage__soon"; soon.textContent = "PHOTO COMING SOON";
+      el.append(sh, img, crest, soon);
+      img.src = `assets/img/member/${card.dataset.photo}.webp`;
+      return el;
+    }
+
+    function fillPlate(card) {
       elPos.innerHTML =
-        roles.map((r) => `<b>${r.textContent}</b>`).join("") +
+        Array.from(card.querySelectorAll(".mcard__pos b")).map((r) => `<b>${r.textContent}</b>`).join("") +
         card.dataset.pos.split(" ").map((p) => `<span>${p}</span>`).join("");
       elNm.textContent = card.querySelector(".mcard__name").textContent;
       elKn.textContent = card.querySelector(".mcard__kana").textContent;
-      if (elDb) elDb.innerHTML =
-        '<span>BORN</span>' + card.querySelector(".mcard__dob").lastChild.textContent.trim();
-
-      // 写真がまだ無い選手はエンブレムのまま
-      fig.classList.add("is-empty");
-      photo.alt = elNm.textContent;
-      photo.src = `assets/img/member/${card.dataset.photo}.webp`;
-
-      if (soft) {
-        fig.classList.remove("is-in");
-        void fig.offsetWidth;          // アニメを頭から流し直す
-        fig.classList.add("is-in");
-      }
+      elDb.innerHTML = "<i>BORN</i>" +
+        card.querySelector(".mcard__dob").lastChild.textContent.trim();
     }
 
-    photo.addEventListener("load", () => {
-      fig.classList.remove("is-empty");
-      // 全身は縦長、胸から上は正方形に近い。腰で切れた写真を立たせると
-      // 体が切断されて見えるので、扱いを変える
-      const ratio = photo.naturalWidth / photo.naturalHeight;
-      fig.classList.toggle("is-bust", ratio > 0.62);
-    });
-    photo.addEventListener("error", () => fig.classList.add("is-empty"));
+    function show(card, first) {
+      if (card === current) return;
+      current = card;
+      clear();
+      cards.forEach((c) => c.classList.toggle("is-on", c === card));
+
+      // 連打されても、いま見えている人だけを退場させて後は捨てる
+      Array.from(cast.children).forEach((el, i, all) => {
+        if (i < all.length - 1) { el.remove(); return; }
+        el.classList.remove("is-in");
+        el.classList.add("is-out");
+        later(() => el.remove(), OUT + 40);
+      });
+
+      if (!first) {
+        scene.classList.add("is-swapping");
+        plate.classList.remove("is-in");
+        plate.classList.add("is-out");
+      }
+
+      later(() => {
+        const el = actor(card);
+        cast.appendChild(el);
+        fillPlate(card);
+        void el.offsetWidth;          // 位置を確定させてから動かす（rAF待ちにしない）
+        el.classList.add("is-in");
+        plate.classList.remove("is-out");
+        plate.classList.add("is-in");
+      }, first ? 0 : GAP);
+
+      later(() => scene.classList.remove("is-swapping"), ALL);
+    }
 
     cards.forEach((c) => {
       c.tabIndex = 0;
@@ -521,18 +561,17 @@
         const y = (e.clientY - b.top)  / b.height - .5;
         back.style.transform  = `translate(${x * -8}px, ${y * -5}px) scale(1.03)`;
         front.style.transform = `translate(${x * -16}px, ${y * -9}px) scale(1.02)`;
-        fig.style.setProperty("--px", `${x * -22}px`);
+        scene.style.setProperty("--px", `${x * -22}px`);
       });
       scene.addEventListener("pointerleave", () => {
         back.style.transform = front.style.transform = "";
-        fig.style.setProperty("--px", "0px");
+        scene.style.setProperty("--px", "0px");
       });
     }
 
-    // 最初はキャプテンに立ってもらう
     // 最初はキャプテンに立ってもらう（副キャプテンと取り違えないよう完全一致で）
     show(cards.find((c) => Array.from(c.querySelectorAll(".mcard__pos b"))
-      .some((r) => r.textContent === "キャプテン")) || cards[0]);
+      .some((r) => r.textContent === "キャプテン")) || cards[0], true);
   })();
 
   /* ============================================================
