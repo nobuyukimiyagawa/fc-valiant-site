@@ -467,9 +467,9 @@
     function show(card) {
       cards.forEach((c) => c.classList.toggle("is-on", c === card));
 
-      const cap = card.querySelector(".mcard__cap");
+      const roles = Array.from(card.querySelectorAll(".mcard__roles span"));
       elPos.innerHTML =
-        (cap ? `<b>${cap.textContent}</b>` : "") +
+        roles.map((r) => `<b>${r.textContent}</b>`).join("") +
         card.dataset.pos.split(" ").map((p) => `<span>${p}</span>`).join("");
       elNm.textContent = card.querySelector(".mcard__name").textContent;
       elKn.textContent = card.querySelector(".mcard__kana").textContent;
@@ -530,7 +530,9 @@
     }
 
     // 最初はキャプテンに立ってもらう
-    show(cards.find((c) => c.querySelector(".mcard__cap")) || cards[0]);
+    // 最初はキャプテンに立ってもらう（副キャプテンと取り違えないよう完全一致で）
+    show(cards.find((c) => Array.from(c.querySelectorAll(".mcard__roles span"))
+      .some((r) => r.textContent === "キャプテン")) || cards[0]);
   })();
 
   /* ============================================================
