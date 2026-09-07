@@ -124,10 +124,10 @@ button.btn{color:inherit;font:inherit}
 .hero__img{width:100%;height:120%;object-fit:cover;object-position:center 35%;
   will-change:transform}
 .hero__media::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:var(--navy);mix-blend-mode:color;opacity:.45}
+  background:var(--navy);mix-blend-mode:color;opacity:.22}
 .hero__overlay{position:absolute;inset:0;z-index:2;
-  background:linear-gradient(90deg,rgba(var(--navy-deep-rgb),.86) 0%,rgba(var(--navy-deep-rgb),.55) 45%,rgba(var(--navy-deep-rgb),.25) 100%),
-             linear-gradient(0deg,rgba(var(--navy-deep-rgb),.9) 0%,rgba(var(--navy-deep-rgb),0) 45%)}
+  background:linear-gradient(90deg,rgba(var(--navy-deep-rgb),.60) 0%,rgba(var(--navy-deep-rgb),.32) 45%,rgba(var(--navy-deep-rgb),.10) 100%),
+             linear-gradient(0deg,rgba(var(--navy-deep-rgb),.70) 0%,rgba(var(--navy-deep-rgb),0) 45%)}
 .hero__content{position:relative;z-index:2;color:#fff;
   padding:0 clamp(1.2rem,5vw,5rem);max-width:var(--maxw);margin:0 auto;width:100%}
 .hero__lead{margin:0;font-weight:700;font-size:clamp(1.3rem,3.1vw,2.2rem);line-height:1.45;
@@ -239,8 +239,8 @@ button.btn{color:inherit;font:inherit}
   gap:clamp(1.2rem,4vw,3rem);
   padding:clamp(3rem,6vw,5rem) clamp(1.4rem,6vw,5rem)}
 .stats::before{content:"";position:absolute;inset:0;
-  background:url("../img/contact-bg.webp") center/cover no-repeat;
-  opacity:.10;filter:grayscale(.3)}
+  background:url("../img/stats-bg.webp") center 62%/cover no-repeat;
+  opacity:.16;filter:grayscale(.25)}
 .stats::after{content:"";position:absolute;inset:0;
   background:linear-gradient(90deg,rgba(var(--navy-rgb),.96),rgba(var(--navy-rgb),.55) 50%,rgba(var(--navy-rgb),.96))}
 .stats>*{position:relative;z-index:1}
