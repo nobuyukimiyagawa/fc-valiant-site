@@ -108,13 +108,17 @@
 
 <!-- ===== Stats ===== -->
 <section class="stats">
-  <div class="stat" data-reveal>
-    <span class="stat__num" data-count="2021">2021</span>
-    <span class="stat__label">創設年</span>
+  <div class="stats__item" data-reveal>
+    <span class="stats__cap">SINCE</span>
+    <span class="stats__num" data-count="2021">2021</span>
+    <span class="stats__label">創設年</span>
   </div>
-  <div class="stat" data-reveal>
-    <span class="stat__num">∞</span>
-    <span class="stat__label">可能性</span>
+  <!-- 創設から、これから先へ。2つの数字を線でつなぐ -->
+  <div class="stats__line" aria-hidden="true"><i></i></div>
+  <div class="stats__item stats__item--end" data-reveal>
+    <span class="stats__cap">POSSIBILITY</span>
+    <span class="stats__num">∞</span>
+    <span class="stats__label">可能性</span>
   </div>
 </section>
 
@@ -128,12 +132,17 @@
   <p class="activity__lead" data-anim="lines">日々の活動は Instagram にて発信中。<br>サッカーを楽しめるようなコンテンツ多数あり。</p>
   <div class="activity__grid">
     <a class="act-card act-card--lg" href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener" data-img>
-      <img src="assets/img/team-group.webp" alt="活動の様子" loading="lazy" />
+      <img src="assets/img/act-01.webp" alt="試合中のドリブル" loading="lazy" />
       <span class="act-card__tag">MATCH</span>
     </a>
     <a class="act-card" href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener" data-img>
-      <img src="assets/img/hero.webp" alt="活動の様子" loading="lazy" />
-      <span class="act-card__tag">TRAINING</span>
+      <img src="assets/img/act-02.webp" alt="シュートの場面" loading="lazy" />
+    </a>
+    <a class="act-card" href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener" data-img>
+      <img src="assets/img/act-03.webp" alt="得点後のチーム" loading="lazy" />
+    </a>
+    <a class="act-card" href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener" data-img>
+      <img src="assets/img/act-04.webp" alt="試合中の走り出し" loading="lazy" />
     </a>
     <a class="act-card act-card--insta" href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener" data-reveal>
       <span class="ig-mark" aria-hidden="true">
@@ -145,9 +154,6 @@
       </span>
       <span class="act-card__follow"><span data-ig-handle>公式アカウント</span><br><b>FOLLOW US →</b></span>
     </a>
-  </div>
-  <div class="activity__more" data-reveal>
-    <a href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener" class="btn btn--ghost magnetic">Instagramをもっと見る <i>→</i></a>
   </div>
 </section>
 
@@ -209,7 +215,7 @@
 </section>
 
 <!-- ===== Contact ===== -->
-<section class="contact" id="contact">
+<section class="contact contact--photo" id="contact">
   <div class="contact__head sec-head--center">
     <span class="sec-head__no" data-reveal>06</span>
     <h2 class="sec-head__en" data-anim="chars">CONTACT</h2>
