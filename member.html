@@ -55,6 +55,28 @@
   <p class="subhero__ja">メンバー紹介</p>
 </section>
 
+<!-- ===== Player stage =====
+     選手を選ぶとステージに登場する。写真は assets/img/member/<data-photo>.webp
+     まだ無いあいだはエンブレムを出しておく。 -->
+<section class="stage" id="stage" aria-label="選手ステージ">
+  <div class="stage__scene" id="stageScene">
+    <img class="stage__layer stage__layer--back" src="assets/img/stage-back.webp" alt="" aria-hidden="true" />
+    <img class="stage__layer stage__layer--front" src="assets/img/stage-front.webp" alt="" aria-hidden="true" />
+    <div class="stage__glow" aria-hidden="true"></div>
+    <figure class="stage__figure is-empty" id="stageFigure">
+      <img class="stage__photo" id="stagePhoto" alt="" />
+      <img class="stage__crest" src="assets/img/logo.webp" alt="" aria-hidden="true" />
+      <figcaption class="stage__soon">PHOTO COMING SOON</figcaption>
+    </figure>
+  </div>
+  <div class="stage__plate" id="stagePlate" role="status" aria-live="polite">
+    <p class="stage__pos"></p>
+    <p class="stage__name"></p>
+    <p class="stage__kana"></p>
+  </div>
+  <p class="stage__hint">下のカードを選ぶと、その選手がステージに立ちます。</p>
+</section>
+
 <!-- ===== Members ===== -->
 <section class="members members--page">
   <p class="members__lead" data-reveal>
@@ -72,170 +94,170 @@
   <p class="mfilter__count" id="mcount" role="status" aria-live="polite"></p>
 
   <ul class="mgrid" id="mgrid">
-      <li class="mcard" data-pos="MF DF" data-reveal>
+      <li class="mcard" data-photo="kadota-koki" data-pos="MF DF" data-reveal>
         <p class="mcard__pos"><span>MF</span><span>DF</span></p>
         <h2 class="mcard__name">門田 貢輝</h2>
         <p class="mcard__kana">カドタ コウキ</p>
         <p class="mcard__dob"><span>BORN</span>1991.12.29</p>
       </li>
-      <li class="mcard" data-pos="MF DF" data-reveal>
+      <li class="mcard" data-photo="hayashida-shu" data-pos="MF DF" data-reveal>
         <p class="mcard__pos"><span>MF</span><span>DF</span></p>
         <h2 class="mcard__name">林田 柊</h2>
         <p class="mcard__kana">ハヤシダ シュウ</p>
         <p class="mcard__dob"><span>BORN</span>1995.10.04</p>
       </li>
-      <li class="mcard" data-pos="MF DF" data-reveal>
+      <li class="mcard" data-photo="ozono-ryo" data-pos="MF DF" data-reveal>
         <p class="mcard__pos"><span>MF</span><span>DF</span></p>
         <h2 class="mcard__name">小園 凌</h2>
         <p class="mcard__kana">オゾノ リョウ</p>
         <p class="mcard__dob"><span>BORN</span>1995.10.09</p>
       </li>
-      <li class="mcard" data-pos="DF" data-reveal>
+      <li class="mcard" data-photo="iwamura-naoki" data-pos="DF" data-reveal>
         <p class="mcard__pos"><span>DF</span></p>
         <h2 class="mcard__name">岩村 直樹</h2>
         <p class="mcard__kana">イワムラ ナオキ</p>
         <p class="mcard__dob"><span>BORN</span>1995.12.26</p>
       </li>
-      <li class="mcard" data-pos="MF DF" data-reveal>
+      <li class="mcard" data-photo="nakachi-yuto" data-pos="MF DF" data-reveal>
         <p class="mcard__pos"><span>MF</span><span>DF</span></p>
         <h2 class="mcard__name">仲地 祐人</h2>
         <p class="mcard__kana">ナカチ ユウト</p>
         <p class="mcard__dob"><span>BORN</span>1996.01.19</p>
       </li>
-      <li class="mcard" data-pos="DF" data-reveal>
+      <li class="mcard" data-photo="yoshida-ryoya" data-pos="DF" data-reveal>
         <p class="mcard__pos"><span>DF</span></p>
         <h2 class="mcard__name">吉田 稜弥</h2>
         <p class="mcard__kana">ヨシダ リョウヤ</p>
         <p class="mcard__dob"><span>BORN</span>1996.12.10</p>
       </li>
-      <li class="mcard" data-pos="DF" data-reveal>
+      <li class="mcard" data-photo="otomo-kento" data-pos="DF" data-reveal>
         <p class="mcard__pos"><span>DF</span></p>
         <h2 class="mcard__name">大友 拳斗</h2>
         <p class="mcard__kana">オオトモ ケント</p>
         <p class="mcard__dob"><span>BORN</span>1997.03.19</p>
       </li>
-      <li class="mcard" data-pos="FW" data-reveal>
+      <li class="mcard" data-photo="inoue-yuichiro" data-pos="FW" data-reveal>
         <p class="mcard__pos"><span>FW</span></p>
         <h2 class="mcard__name">井上 雄一郎</h2>
         <p class="mcard__kana">イノウエ ユウイチロウ</p>
         <p class="mcard__dob"><span>BORN</span>1998.04.20</p>
       </li>
-      <li class="mcard" data-pos="MF" data-reveal>
+      <li class="mcard" data-photo="otomo-ryusei" data-pos="MF" data-reveal>
         <p class="mcard__pos"><span>MF</span></p>
         <h2 class="mcard__name">大友 龍聖</h2>
         <p class="mcard__kana">オオトモ リュウセイ</p>
         <p class="mcard__dob"><span>BORN</span>1998.05.03</p>
       </li>
-      <li class="mcard" data-pos="FW MF DF" data-reveal>
+      <li class="mcard" data-photo="hirose-tomoya" data-pos="FW MF DF" data-reveal>
         <p class="mcard__pos"><span>FW</span><span>MF</span><span>DF</span></p>
         <h2 class="mcard__name">廣瀬 朝耀</h2>
         <p class="mcard__kana">ヒロセ トモヤ</p>
         <p class="mcard__dob"><span>BORN</span>1998.08.04</p>
       </li>
-      <li class="mcard" data-pos="MF" data-reveal>
+      <li class="mcard" data-photo="watanabe-shogo" data-pos="MF" data-reveal>
         <p class="mcard__pos"><span>MF</span></p>
         <h2 class="mcard__name">渡邊 笙伍</h2>
         <p class="mcard__kana">ワタナベ ショウゴ</p>
         <p class="mcard__dob"><span>BORN</span>1998.08.06</p>
       </li>
-      <li class="mcard" data-pos="MF" data-reveal>
+      <li class="mcard" data-photo="yonemura-takumi" data-pos="MF" data-reveal>
         <p class="mcard__pos"><span>MF</span></p>
         <h2 class="mcard__name">米村 拓美</h2>
         <p class="mcard__kana">ヨネムラ タクミ</p>
         <p class="mcard__dob"><span>BORN</span>1998.10.01</p>
       </li>
-      <li class="mcard" data-pos="DF GK" data-reveal>
+      <li class="mcard" data-photo="murakami-shota" data-pos="DF GK" data-reveal>
         <span class="mcard__cap">キャプテン</span>
         <p class="mcard__pos"><span>DF</span><span>GK</span></p>
         <h2 class="mcard__name">村上 将太</h2>
         <p class="mcard__kana">ムラカミ ショウタ</p>
         <p class="mcard__dob"><span>BORN</span>1999.05.17</p>
       </li>
-      <li class="mcard" data-pos="MF" data-reveal>
+      <li class="mcard" data-photo="arimura-yusuke" data-pos="MF" data-reveal>
         <p class="mcard__pos"><span>MF</span></p>
         <h2 class="mcard__name">有村 友裕</h2>
         <p class="mcard__kana">アリムラ ユウスケ</p>
         <p class="mcard__dob"><span>BORN</span>2000.05.03</p>
       </li>
-      <li class="mcard" data-pos="MF" data-reveal>
+      <li class="mcard" data-photo="hirakawa-ryusei" data-pos="MF" data-reveal>
         <p class="mcard__pos"><span>MF</span></p>
         <h2 class="mcard__name">平川 竜聖</h2>
         <p class="mcard__kana">ヒラカワ リュウセイ</p>
         <p class="mcard__dob"><span>BORN</span>2000.05.13</p>
       </li>
-      <li class="mcard" data-pos="FW" data-reveal>
+      <li class="mcard" data-photo="miyamoto-kanta" data-pos="FW" data-reveal>
         <p class="mcard__pos"><span>FW</span></p>
         <h2 class="mcard__name">宮本 寛大</h2>
         <p class="mcard__kana">ミヤモト カンタ</p>
         <p class="mcard__dob"><span>BORN</span>2000.05.18</p>
       </li>
-      <li class="mcard" data-pos="FW MF" data-reveal>
+      <li class="mcard" data-photo="kawai-keigo" data-pos="FW MF" data-reveal>
         <p class="mcard__pos"><span>FW</span><span>MF</span></p>
         <h2 class="mcard__name">河合 慶吾</h2>
         <p class="mcard__kana">カワイ ケイゴ</p>
         <p class="mcard__dob"><span>BORN</span>2000.08.11</p>
       </li>
-      <li class="mcard" data-pos="MF DF" data-reveal>
+      <li class="mcard" data-photo="yamakawa-shota" data-pos="MF DF" data-reveal>
         <p class="mcard__pos"><span>MF</span><span>DF</span></p>
         <h2 class="mcard__name">山川 翔太</h2>
         <p class="mcard__kana">ヤマカワ ショウタ</p>
         <p class="mcard__dob"><span>BORN</span>2000.10.20</p>
       </li>
-      <li class="mcard" data-pos="DF" data-reveal>
+      <li class="mcard" data-photo="miyamoto-ryutaro" data-pos="DF" data-reveal>
         <p class="mcard__pos"><span>DF</span></p>
         <h2 class="mcard__name">宮本 隆太郎</h2>
         <p class="mcard__kana">ミヤモト リュウタロウ</p>
         <p class="mcard__dob"><span>BORN</span>2001.10.03</p>
       </li>
-      <li class="mcard" data-pos="MF" data-reveal>
+      <li class="mcard" data-photo="takahama-rento" data-pos="MF" data-reveal>
         <p class="mcard__pos"><span>MF</span></p>
         <h2 class="mcard__name">高濱 廉人</h2>
         <p class="mcard__kana">タカハマ レント</p>
         <p class="mcard__dob"><span>BORN</span>2002.07.02</p>
       </li>
-      <li class="mcard" data-pos="MF DF" data-reveal>
+      <li class="mcard" data-photo="tanaka-keito" data-pos="MF DF" data-reveal>
         <p class="mcard__pos"><span>MF</span><span>DF</span></p>
         <h2 class="mcard__name">田中 敬人</h2>
         <p class="mcard__kana">タナカ ケイト</p>
         <p class="mcard__dob"><span>BORN</span>2002.08.01</p>
       </li>
-      <li class="mcard" data-pos="MF" data-reveal>
+      <li class="mcard" data-photo="miyazaki-reishi" data-pos="MF" data-reveal>
         <p class="mcard__pos"><span>MF</span></p>
         <h2 class="mcard__name">宮崎 玲至</h2>
         <p class="mcard__kana">ミヤザキ レイシ</p>
         <p class="mcard__dob"><span>BORN</span>2002.11.16</p>
       </li>
-      <li class="mcard" data-pos="GK" data-reveal>
+      <li class="mcard" data-photo="matsuda-manato" data-pos="GK" data-reveal>
         <p class="mcard__pos"><span>GK</span></p>
         <h2 class="mcard__name">松田 愛斗</h2>
         <p class="mcard__kana">マツダ マナト</p>
         <p class="mcard__dob"><span>BORN</span>2002.12.21</p>
       </li>
-      <li class="mcard" data-pos="MF" data-reveal>
+      <li class="mcard" data-photo="oshima-ryuto" data-pos="MF" data-reveal>
         <p class="mcard__pos"><span>MF</span></p>
         <h2 class="mcard__name">大島 龍翔</h2>
         <p class="mcard__kana">オオシマ リュウト</p>
         <p class="mcard__dob"><span>BORN</span>2003.04.27</p>
       </li>
-      <li class="mcard" data-pos="DF" data-reveal>
+      <li class="mcard" data-photo="hioki-daichi" data-pos="DF" data-reveal>
         <p class="mcard__pos"><span>DF</span></p>
         <h2 class="mcard__name">日置 大智</h2>
         <p class="mcard__kana">ヒオキ ダイチ</p>
         <p class="mcard__dob"><span>BORN</span>2004.07.08</p>
       </li>
-      <li class="mcard" data-pos="MF DF" data-reveal>
+      <li class="mcard" data-photo="kiyono-hiromu" data-pos="MF DF" data-reveal>
         <p class="mcard__pos"><span>MF</span><span>DF</span></p>
         <h2 class="mcard__name">清野 広夢</h2>
         <p class="mcard__kana">キヨノ ヒロム</p>
         <p class="mcard__dob"><span>BORN</span>2005.10.02</p>
       </li>
-      <li class="mcard" data-pos="MF" data-reveal>
+      <li class="mcard" data-photo="maruyama-kenta" data-pos="MF" data-reveal>
         <p class="mcard__pos"><span>MF</span></p>
         <h2 class="mcard__name">丸山 健太</h2>
         <p class="mcard__kana">マルヤマ ケンタ</p>
         <p class="mcard__dob"><span>BORN</span>2006.10.28</p>
       </li>
-      <li class="mcard" data-pos="DF" data-reveal>
+      <li class="mcard" data-photo="sakamoto-yuya" data-pos="DF" data-reveal>
         <p class="mcard__pos"><span>DF</span></p>
         <h2 class="mcard__name">坂本 結哉</h2>
         <p class="mcard__kana">サカモト ユウヤ</p>

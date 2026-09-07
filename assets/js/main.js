@@ -445,6 +445,84 @@
   })();
 
   /* ============================================================
+     4d. MEMBER: 選手をステージに立たせる
+     ============================================================ */
+  (function initStage() {
+    const scene = document.getElementById("stageScene");
+    const grid  = document.getElementById("mgrid");
+    if (!scene || !grid) return;
+
+    const fig   = document.getElementById("stageFigure");
+    const photo = document.getElementById("stagePhoto");
+    const plate = document.getElementById("stagePlate");
+    const elPos = plate.querySelector(".stage__pos");
+    const elNm  = plate.querySelector(".stage__name");
+    const elKn  = plate.querySelector(".stage__kana");
+    const cards = Array.from(grid.querySelectorAll(".mcard"));
+    const soft  = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function show(card) {
+      cards.forEach((c) => c.classList.toggle("is-on", c === card));
+
+      const cap = card.querySelector(".mcard__cap");
+      elPos.innerHTML =
+        (cap ? `<b>${cap.textContent}</b>` : "") +
+        card.dataset.pos.split(" ").map((p) => `<span>${p}</span>`).join("");
+      elNm.textContent = card.querySelector(".mcard__name").textContent;
+      elKn.textContent = card.querySelector(".mcard__kana").textContent;
+
+      // 写真がまだ無い選手はエンブレムのまま
+      fig.classList.add("is-empty");
+      photo.alt = elNm.textContent;
+      photo.src = `assets/img/member/${card.dataset.photo}.webp`;
+
+      if (soft) {
+        fig.classList.remove("is-in");
+        void fig.offsetWidth;          // アニメを頭から流し直す
+        fig.classList.add("is-in");
+      }
+    }
+
+    photo.addEventListener("load", () => fig.classList.remove("is-empty"));
+    photo.addEventListener("error", () => fig.classList.add("is-empty"));
+
+    cards.forEach((c) => {
+      c.tabIndex = 0;
+      c.setAttribute("role", "button");
+      const go = () => {
+        show(c);
+        const top = scene.getBoundingClientRect().top + window.scrollY - 90;
+        window.scrollTo({ top, behavior: soft ? "smooth" : "auto" });
+      };
+      c.addEventListener("click", go);
+      c.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); }
+      });
+    });
+
+    // 奥行きを出すための視差。触れる端末では動かさない
+    if (soft && matchMedia("(hover:hover)").matches) {
+      const back  = scene.querySelector(".stage__layer--back");
+      const front = scene.querySelector(".stage__layer--front");
+      scene.addEventListener("pointermove", (e) => {
+        const b = scene.getBoundingClientRect();
+        const x = (e.clientX - b.left) / b.width  - .5;
+        const y = (e.clientY - b.top)  / b.height - .5;
+        back.style.transform  = `translate(${x * -8}px, ${y * -5}px) scale(1.03)`;
+        front.style.transform = `translate(${x * -16}px, ${y * -9}px) scale(1.02)`;
+        fig.style.setProperty("--px", `${x * -22}px`);
+      });
+      scene.addEventListener("pointerleave", () => {
+        back.style.transform = front.style.transform = "";
+        fig.style.setProperty("--px", "0px");
+      });
+    }
+
+    // 最初はキャプテンに立ってもらう
+    show(cards.find((c) => c.querySelector(".mcard__cap")) || cards[0]);
+  })();
+
+  /* ============================================================
      4c. MEMBER: ポジションで絞り込む
      ============================================================ */
   (function initMembers() {
