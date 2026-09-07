@@ -340,6 +340,88 @@
   })();
 
   /* ============================================================
+     4a3. 掲載枠の3Dビュー（スポンサーページ）
+     番号を押すと該当プランへ、プランを押すとその枠が見える向きへ。
+     model-viewer が読めなかった場合は poster 画像が残るだけで壊れない。
+     ============================================================ */
+  (function initJersey() {
+    const view = document.getElementById("jerseyView");
+    if (!view) return;
+
+    // 枠ごとの見せたい向き（方位角 仰角 距離）
+    const ORBIT = {
+      platina: "-22deg 78deg 5.9m",
+      gold:    "168deg 92deg 5.9m",
+      silver:  "158deg 74deg 5.7m",
+    };
+    const FACE = { front: "-28deg 78deg 6.4m", back: "160deg 80deg 6.4m" };
+
+    // camera-orbit はプロパティ代入だと反映されない。必ず属性で渡す。
+    function moveTo(orbit) { view.setAttribute("camera-orbit", orbit); }
+
+    const hots  = Array.from(view.querySelectorAll(".jersey__hot"));
+    const plans = Array.from(document.querySelectorAll(".plan[data-plan]"));
+    const btns  = Array.from(document.querySelectorAll(".jersey__btn"));
+
+    // 一度でも操作されたら、読み込み時の寄りは行わない
+    let picked = false;
+    function stopSpin() { picked = true; }
+
+    function pick(plan, move) {
+      hots.forEach((h) => h.classList.toggle("is-on", h.dataset.plan === plan));
+      plans.forEach((p) => p.classList.toggle("is-picked", p.dataset.plan === plan));
+      if (move && ORBIT[plan]) {
+        stopSpin();
+        moveTo(ORBIT[plan]);
+        btns.forEach((b) => b.classList.remove("is-on"));
+      }
+    }
+
+    hots.forEach((h) => {
+      h.addEventListener("click", () => {
+        pick(h.dataset.plan, true);
+        // 3Dを見ながら選べるよう、カードが画面外のときだけ寄せる
+        const card = plans.find((p) => p.dataset.plan === h.dataset.plan);
+        if (card) {
+          const r = card.getBoundingClientRect();
+          const hidden = r.top > window.innerHeight - 80 || r.bottom < 80;
+          if (hidden) card.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+      });
+    });
+
+    plans.forEach((p) => {
+      p.addEventListener("click", () => pick(p.dataset.plan, true));
+      p.style.cursor = "pointer";
+    });
+
+    btns.forEach((b) => {
+      b.addEventListener("click", () => {
+        stopSpin();
+        moveTo(FACE[b.dataset.view]);
+        btns.forEach((x) => x.classList.toggle("is-on", x === b));
+        hots.forEach((h) => h.classList.remove("is-on"));
+        plans.forEach((p) => p.classList.remove("is-picked"));
+      });
+    });
+
+    // auto-rotate はモデル側（ターンテーブル）を回すので camera-orbit と角度がずれる。
+    // 代わりに読み込み時、斜めから正面へ一度だけ寄せる。
+    view.addEventListener("load", () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        moveTo(FACE.front);
+        return;
+      }
+      setTimeout(() => { if (!picked) moveTo(FACE.front); }, 260);
+    }, { once: true });
+
+    // 手で回し始めたら自動回転は止める
+    view.addEventListener("camera-change", (e) => {
+      if (e.detail && e.detail.source === "user-interaction") picked = true;
+    });
+  })();
+
+  /* ============================================================
      4b. SCHEDULE: next-match highlight / past dimming / season record
      - <time datetime="YYYY-MM-DD"> から自動判定（HTML側の手動クラス不要）
      - シーズン成績は結果バッジ（--win/--draw/--lose）から自動集計

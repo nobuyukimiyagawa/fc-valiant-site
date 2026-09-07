@@ -433,6 +433,41 @@ button.btn{color:inherit;font:inherit}
 .sponsor{background:var(--navy);color:#fff;
   padding:clamp(5rem,11vw,9rem) clamp(1.4rem,5vw,4rem)}
 .sponsor__lead{text-align:center;color:#c2c9da;max-width:680px;margin:0 auto 3.4rem;line-height:1.9}
+/* ---------- 掲載枠の3Dビュー ---------- */
+.jersey{max-width:var(--maxw);margin:0 auto clamp(2.4rem,5vw,3.6rem);
+  display:flex;flex-direction:column;align-items:center;gap:1rem}
+.jersey__stage{position:relative;width:100%;max-width:860px;
+  border:1px solid var(--line);
+  background:radial-gradient(120% 90% at 50% 38%,rgba(255,255,255,.07),rgba(255,255,255,.02) 60%,transparent 100%)}
+#jerseyView{width:100%;height:clamp(400px,58vh,560px);
+  --poster-color:transparent;background:transparent}
+.jersey__hint{position:absolute;left:50%;bottom:.8rem;transform:translateX(-50%);
+  margin:0;font-size:.74rem;color:var(--grey);letter-spacing:.04em;
+  text-align:center;pointer-events:none;padding:0 1rem}
+/* 枠を指す丸番号 */
+.jersey__hot{width:26px;height:26px;border-radius:50%;
+  border:1px solid var(--gold);background:rgba(var(--navy-deep-rgb),.9);
+  color:var(--gold);font-family:var(--font-en);font-weight:600;font-size:.8rem;
+  line-height:1;cursor:pointer;display:grid;place-items:center;padding:0;
+  transition:background .25s var(--ease),color .25s var(--ease),transform .25s var(--ease)}
+.jersey__hot:hover,.jersey__hot.is-on{background:var(--gold);color:var(--navy);transform:scale(1.15)}
+.jersey__hot:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.jersey__ctrl{display:flex;border:1px solid var(--line)}
+.jersey__btn{font-family:var(--font-en);font-size:.76rem;font-weight:600;letter-spacing:.14em;
+  padding:.6em 1.5em;background:transparent;color:var(--grey);cursor:pointer;
+  border:0;border-left:1px solid var(--line);transition:background .25s,color .25s}
+.jersey__btn:first-child{border-left:0}
+.jersey__btn.is-on{background:var(--gold);color:var(--navy)}
+.jersey__btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+/* 3Dから選ばれたプランを強調する */
+.plan.is-picked{border-color:var(--gold);background:rgba(230,193,92,.08)}
+@media (max-width:640px){
+  /* 狭い画面では文がモデルに重なるので、枠の下に置く */
+  .jersey__hint{position:static;transform:none;font-size:.7rem;
+    padding:0 1rem .9rem;line-height:1.7}
+  #jerseyView{height:clamp(360px,54vh,460px)}
+}
+
 .plans{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
 .plan{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:8px;
   padding:2rem 1.6rem;display:flex;flex-direction:column;transition:.45s var(--ease);position:relative}
