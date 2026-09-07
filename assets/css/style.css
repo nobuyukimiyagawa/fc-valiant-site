@@ -698,6 +698,11 @@ button.btn{color:inherit;font:inherit}
     gap:1.6rem;transform:translateX(100%);transition:transform .5s var(--ease),opacity .5s ease,visibility .5s ease;
     opacity:0;visibility:hidden}
   .nav.is-open{transform:translateX(0);opacity:1;visibility:visible}
+  /* ドロワーを開いているあいだは、ヘッダーの backdrop-filter / transform を切る。
+     これらが付いていると position:fixed の基準がヘッダーの箱になり、
+     inset:0 のドロワーがヘッダーの高さまで潰れて背景が出なくなる */
+  .header.is-nav-open{transform:none;background:transparent;box-shadow:none;
+    -webkit-backdrop-filter:none;backdrop-filter:none}
   .nav a{font-size:clamp(1.15rem,2.5vw,1.3rem)}
   .burger{display:flex}
   .header{mix-blend-mode:normal}

@@ -185,6 +185,7 @@
 
   function closeMenu() {
     nav.classList.remove("is-open");
+    if (header) header.classList.remove("is-nav-open");
     burger.classList.remove("is-open");
     burger.setAttribute("aria-expanded", "false");
     if (lenis) lenis.start();
@@ -205,6 +206,7 @@
 
   burger.addEventListener("click", () => {
     const open = nav.classList.toggle("is-open");
+    if (header) header.classList.toggle("is-nav-open", open);
     burger.classList.toggle("is-open", open);
     burger.setAttribute("aria-expanded", String(open));
     if (open) {
