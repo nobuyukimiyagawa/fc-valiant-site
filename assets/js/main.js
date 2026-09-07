@@ -348,16 +348,39 @@
     const view = document.getElementById("jerseyView");
     if (!view) return;
 
-    // 枠ごとの見せたい向き（方位角 仰角 距離）
+    // 枠ごとの見せたい向き（方位角 仰角）
     const ORBIT = {
-      platina: "-22deg 78deg 6.4m",
-      gold:    "168deg 92deg 6.4m",
-      silver:  "158deg 74deg 6.3m",
+      platina: "-18deg 82deg",
+      gold:    "170deg 88deg",
+      silver:  "166deg 74deg",
     };
-    const FACE = { front: "-28deg 78deg 7.0m", back: "160deg 80deg 7.0m" };
+    const FACE = { front: "-24deg 80deg", back: "156deg 80deg" };
+
+    // auto 任せだと横長の枠で小さく収まるので、枠の縦横から距離を出す。
+    // 画角は縦30度。横は縦×アスペクト。
+    function fitRadius() {
+      const b = view.getBoundingClientRect();
+      if (!b.height) return 6.6;
+      const half = Math.tan(15 * Math.PI / 180);
+      const d = view.getDimensions();
+      const w = (d.x || 3.16) / 2 * 1.06, h = (d.y || 2.62) / 2 * 1.10;
+      return Math.max(h / half, w / (half * (b.width / b.height)));
+    }
 
     // camera-orbit はプロパティ代入だと反映されない。必ず属性で渡す。
-    function moveTo(orbit) { view.setAttribute("camera-orbit", orbit); }
+    function moveTo(orbit) {
+      view.setAttribute("camera-orbit", orbit + " " + fitRadius().toFixed(2) + "m");
+    }
+
+    // 枠の幅が変わったら寄りも取り直す
+    let resizeT = 0;
+    addEventListener("resize", () => {
+      clearTimeout(resizeT);
+      resizeT = setTimeout(() => {
+        const cur = (view.getAttribute("camera-orbit") || "").split(" ");
+        if (cur.length === 3) moveTo(cur[0] + " " + cur[1]);
+      }, 200);
+    });
 
     const hots  = Array.from(view.querySelectorAll(".jersey__hot"));
     const plans = Array.from(document.querySelectorAll(".plan[data-plan]"));
