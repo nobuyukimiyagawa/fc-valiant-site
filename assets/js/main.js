@@ -467,7 +467,7 @@
     function show(card) {
       cards.forEach((c) => c.classList.toggle("is-on", c === card));
 
-      const roles = Array.from(card.querySelectorAll(".mcard__roles span"));
+      const roles = Array.from(card.querySelectorAll(".mcard__pos b"));
       elPos.innerHTML =
         roles.map((r) => `<b>${r.textContent}</b>`).join("") +
         card.dataset.pos.split(" ").map((p) => `<span>${p}</span>`).join("");
@@ -531,7 +531,7 @@
 
     // 最初はキャプテンに立ってもらう
     // 最初はキャプテンに立ってもらう（副キャプテンと取り違えないよう完全一致で）
-    show(cards.find((c) => Array.from(c.querySelectorAll(".mcard__roles span"))
+    show(cards.find((c) => Array.from(c.querySelectorAll(".mcard__pos b"))
       .some((r) => r.textContent === "キャプテン")) || cards[0]);
   })();
 

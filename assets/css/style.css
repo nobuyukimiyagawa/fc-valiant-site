@@ -859,11 +859,12 @@ button.btn{color:inherit;font:inherit}
 .mcard__dob{font-family:var(--font-en);font-size:.78rem;letter-spacing:.08em;
   color:#c2c9da;margin:1.1rem 0 0;display:flex;align-items:baseline;gap:.6rem}
 .mcard__dob span{font-size:.64rem;letter-spacing:.18em;color:var(--grey)}
-/* 役割の印。キャプテン・副キャプテン・オーナー・監督。複数付く人がいる */
-.mcard__roles{position:absolute;top:0;right:1.1rem;transform:translateY(-50%);
-  display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.3rem;margin:0;max-width:calc(100% - 2.2rem)}
-.mcard__roles span{font-size:.66rem;font-weight:700;letter-spacing:.1em;white-space:nowrap;
-  background:var(--gold);color:var(--navy-deep);border-radius:3px;padding:.35em .7em;line-height:1}
+/* 役割の印（キャプテン・副キャプテン・オーナー・監督）。
+   1人に複数付く。枠線に浮かせると行間に食い込んで雑になるので、
+   ポジションと同じ行に、塗りと線で区別して並べる */
+.mcard__pos b{font-family:var(--font-ja);font-size:.66rem;font-weight:700;letter-spacing:.08em;
+  white-space:nowrap;line-height:1;border-radius:3px;padding:.42em .7em;
+  background:var(--gold);color:var(--navy-deep)}
 @media (max-width:520px){
   .mgrid{grid-template-columns:1fr 1fr;gap:.7rem}
   .mcard{padding:1.2rem 1rem 1.1rem}
