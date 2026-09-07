@@ -20,3 +20,24 @@
 - 背景を透過した webp
 - 画像の下端＝足の裏。左右は体の中央が画像の中央
 - 高さ 1400px 前後
+
+## 切り抜きのやり方
+
+```
+~/Projects/fcv-cutout-venv/bin/python tools/cutout.py <写真のパス> <ファイル名>
+```
+
+例：
+```
+~/Projects/fcv-cutout-venv/bin/python tools/cutout.py ~/Downloads/S__8888520.jpg nakachi-yuto
+```
+
+試合写真でも使えます。相手選手が写り込んでいても、いちばん大きく写っている
+人だけを残します。全身か胸から上かは縦横比で自動判定され、
+全身なら足元が接地し、胸から上なら下端がぼけて表示されます。
+
+venv がまだ無い場合：
+```
+python3 -m venv ~/Projects/fcv-cutout-venv
+~/Projects/fcv-cutout-venv/bin/pip install "rembg[cpu]" scipy
+```

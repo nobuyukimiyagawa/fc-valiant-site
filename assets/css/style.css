@@ -743,8 +743,9 @@ button.btn{color:inherit;font:inherit}
 /* スポットの空気感。レンダに足すより、ここで動かせるほうが調整しやすい */
 .stage__glow{position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(60% 46% at 50% 74%,rgba(255,238,200,.16),transparent 70%)}
-/* 立ち位置は楕円の中心（レンダで実測して 78.6%） */
-.stage__figure{position:absolute;left:50%;bottom:21.4%;height:55%;
+/* 立ち位置は楕円の中心（レンダで実測して 78.6%）。
+   背丈は実寸より少し大きめにして、主役として見えるようにする */
+.stage__figure{position:absolute;left:50%;bottom:21.4%;height:64%;
   margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
   transform:translate(calc(-50% + var(--px,0px)),0);will-change:transform,opacity}
 .stage__figure::after{content:"";position:absolute;bottom:-4%;left:50%;
