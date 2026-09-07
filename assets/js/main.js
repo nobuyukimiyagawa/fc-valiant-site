@@ -460,6 +460,7 @@
     const elPos = plate.querySelector(".stage__pos");
     const elNm  = plate.querySelector(".stage__name");
     const elKn  = plate.querySelector(".stage__kana");
+    const elDb  = plate.querySelector(".stage__dob");
     const cards = Array.from(grid.querySelectorAll(".mcard"));
     const soft  = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -472,6 +473,8 @@
         card.dataset.pos.split(" ").map((p) => `<span>${p}</span>`).join("");
       elNm.textContent = card.querySelector(".mcard__name").textContent;
       elKn.textContent = card.querySelector(".mcard__kana").textContent;
+      if (elDb) elDb.innerHTML =
+        '<span>BORN</span>' + card.querySelector(".mcard__dob").lastChild.textContent.trim();
 
       // 写真がまだ無い選手はエンブレムのまま
       fig.classList.add("is-empty");

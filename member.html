@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/style.css?v=5768a919" />
+<link rel="stylesheet" href="assets/css/style.css?v=dbb45d3d" />
 </head>
 <body>
 
@@ -59,6 +59,7 @@
      選手を選ぶとステージに登場する。写真は assets/img/member/<data-photo>.webp
      まだ無いあいだはエンブレムを出しておく。 -->
 <section class="stage" id="stage" aria-label="選手ステージ">
+  <div class="stage__frame">
   <div class="stage__scene" id="stageScene">
     <img class="stage__layer stage__layer--back" src="assets/img/stage-back.webp" alt="" aria-hidden="true" />
     <img class="stage__layer stage__layer--front" src="assets/img/stage-front.webp" alt="" aria-hidden="true" />
@@ -68,11 +69,14 @@
       <img class="stage__crest" src="assets/img/logo.webp" alt="" aria-hidden="true" />
       <figcaption class="stage__soon">PHOTO COMING SOON</figcaption>
     </figure>
+    <div class="stage__scrim" aria-hidden="true"></div>
   </div>
   <div class="stage__plate" id="stagePlate" role="status" aria-live="polite">
     <p class="stage__pos"></p>
     <p class="stage__name"></p>
     <p class="stage__kana"></p>
+    <p class="stage__dob"></p>
+  </div>
   </div>
   <p class="stage__hint">下のカードを選ぶと、その選手がステージに立ちます。</p>
 </section>
@@ -301,6 +305,6 @@
 <a href="#top" class="totop" id="totop" data-scroll aria-label="ページトップへ">↑</a>
 
 <script src="assets/js/lenis.min.js"></script>
-<script src="assets/js/main.js?v=ef5e01dc"></script>
+<script src="assets/js/main.js?v=18ab4360"></script>
 </body>
 </html>

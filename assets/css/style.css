@@ -736,7 +736,10 @@ button.btn{color:inherit;font:inherit}
 
 /* ---------- 選手ステージ ---------- */
 .stage{background:var(--navy-deep);padding:clamp(2.4rem,5vw,4rem) clamp(1.4rem,5vw,4rem) 0}
-.stage__scene{position:relative;max-width:900px;margin:0 auto;aspect-ratio:1800/1000;
+/* 舞台とテロップの入れ物。舞台は overflow:hidden なので、
+   テロップは外側に置いて、広い画面だけ上に重ねる */
+.stage__frame{position:relative;max-width:900px;margin:0 auto}
+.stage__scene{position:relative;width:100%;aspect-ratio:1800/820;
   border-radius:10px;overflow:hidden;isolation:isolate}
 .stage__layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   will-change:transform}
@@ -745,14 +748,15 @@ button.btn{color:inherit;font:inherit}
   background:radial-gradient(60% 46% at 50% 74%,rgba(255,238,200,.16),transparent 70%)}
 /* 立ち位置は楕円の中心（レンダで実測して 78.6%）。
    背丈は実寸より少し大きめにして、主役として見えるようにする */
-.stage__figure{position:absolute;left:50%;bottom:21.4%;height:64%;
+.stage__figure{position:absolute;left:50%;bottom:21.3%;height:66%;
   margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
   transform:translate(calc(-50% + var(--px,0px)),0);will-change:transform,opacity}
 .stage__figure::after{content:"";position:absolute;bottom:-4%;left:50%;
   width:150%;height:13%;transform:translateX(-50%);
   background:radial-gradient(50% 50% at 50% 50%,rgba(0,0,0,.55),transparent 72%)}
 .stage__photo{height:100%;width:auto;object-fit:contain;object-position:bottom;
-  filter:drop-shadow(0 0 18px rgba(0,0,0,.55))}
+  filter:drop-shadow(2px -1px 0 rgba(230,193,92,.42))
+         drop-shadow(0 0 22px rgba(var(--navy-deep-rgb),.75))}
 .stage__crest{height:46%;width:auto;opacity:.45}
 /* 胸から上の写真は、切れ目をぼかして光の中から現れるように見せる */
 .stage__figure.is-bust{height:50%}
@@ -772,18 +776,29 @@ button.btn{color:inherit;font:inherit}
   from{opacity:0;transform:translate(calc(-50% + var(--px,0px)),14px) scale(.965)}
   to{opacity:1;transform:translate(calc(-50% + var(--px,0px)),0) scale(1)}}
 .stage__figure.is-in{animation:stage-in .55s var(--ease) both}
-/* 名前の帯 */
-.stage__plate{max-width:900px;margin:1.4rem auto 0;text-align:center;
-  border-top:1px solid var(--line);padding-top:1.3rem}
-.stage__pos{display:flex;justify-content:center;gap:.35rem;margin:0 0 .7rem;min-height:1.2em}
+/* 文字が芝に乗るので、左下だけ落とす */
+.stage__scrim{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(0deg,rgba(var(--navy-deep-rgb),.42),transparent 38%)}
+/* 名前は舞台の外に置かず、中継のテロップのように芝の上に重ねる */
+.stage__plate{position:absolute;left:clamp(1.2rem,3.2vw,2.6rem);bottom:clamp(1.1rem,3vw,2.2rem);
+  max-width:46%;text-align:left;
+  padding:1.05rem 1.9rem 1.05rem 1.15rem;border-left:2px solid var(--gold);
+  background:linear-gradient(90deg,rgba(var(--navy-deep-rgb),.93),rgba(var(--navy-deep-rgb),.74) 78%,
+    rgba(var(--navy-deep-rgb),.66));
+  -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.stage__pos{display:flex;gap:.35rem;margin:0 0 .7rem;min-height:1.2em}
 .stage__pos span{font-family:var(--font-en);font-size:.68rem;font-weight:600;
   letter-spacing:.14em;color:var(--gold);line-height:1;
   border:1px solid rgba(230,193,92,.45);border-radius:3px;padding:.35em .6em}
 .stage__pos b{font-family:var(--font-ja);font-size:.66rem;font-weight:700;letter-spacing:.1em;
   background:var(--gold);color:var(--navy-deep);border-radius:3px;padding:.45em .7em;line-height:1}
-.stage__name{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;letter-spacing:.08em;
-  color:#fff;margin:0;line-height:1.3}
-.stage__kana{font-size:.76rem;letter-spacing:.2em;color:var(--grey);margin:.5rem 0 0}
+.stage__name{font-size:clamp(1.5rem,3.4vw,2.3rem);font-weight:900;letter-spacing:.08em;
+  color:#fff;margin:0;line-height:1.25;text-shadow:0 2px 14px rgba(var(--navy-deep-rgb),.8)}
+.stage__kana{font-size:.76rem;letter-spacing:.2em;color:#cbd3e2;margin:.45rem 0 0}
+.stage__dob{font-family:var(--font-en);font-size:.74rem;letter-spacing:.08em;color:#b4bdd0;
+  margin:.9rem 0 0;padding-top:.7rem;border-top:1px solid rgba(230,193,92,.35);
+  display:inline-flex;align-items:baseline;gap:.6rem}
+.stage__dob span{font-size:.62rem;letter-spacing:.18em}
 .stage__hint{text-align:center;font-size:.76rem;color:var(--grey);margin:1.6rem 0 0}
 /* カードは押せる */
 .mcard{cursor:pointer}
@@ -793,6 +808,12 @@ button.btn{color:inherit;font:inherit}
   .stage{padding-top:1.8rem}
   /* 横長のままだと舞台が低すぎる。左右を切って縦を稼ぐ（立ち位置は縦基準なのでずれない） */
   .stage__scene{border-radius:6px;aspect-ratio:5/4}
+  .stage__scrim{background:linear-gradient(0deg,rgba(var(--navy-deep-rgb),.55),transparent 42%)}
+  .stage__plate{position:static;max-width:none;text-align:center;background:none;
+    -webkit-backdrop-filter:none;backdrop-filter:none;border-left:0;
+    margin:1.2rem auto 0;padding:1.1rem 0 0;border-top:1px solid var(--line)}
+  .stage__pos{justify-content:center}
+  .stage__dob{margin-top:.8rem}
   .stage__soon{font-size:.56rem}
   .stage__hint{font-size:.72rem}
 }
