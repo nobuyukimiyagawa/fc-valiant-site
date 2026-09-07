@@ -748,6 +748,12 @@ button.btn{color:inherit;font:inherit}
 .stage__photo{height:100%;width:auto;object-fit:contain;object-position:bottom;
   filter:drop-shadow(0 0 18px rgba(0,0,0,.55))}
 .stage__crest{height:46%;width:auto;opacity:.45}
+/* 胸から上の写真は、切れ目をぼかして光の中から現れるように見せる */
+.stage__figure.is-bust{height:50%}
+.stage__figure.is-bust::after{opacity:0}
+.stage__figure.is-bust .stage__photo{
+  -webkit-mask-image:linear-gradient(to bottom,#000 72%,transparent 99%);
+          mask-image:linear-gradient(to bottom,#000 72%,transparent 99%)}
 .stage__soon{font-family:var(--font-en);font-size:.62rem;letter-spacing:.22em;
   color:var(--grey);margin-bottom:.9rem}
 /* 写真が無いときは、エンブレムの足元が立ち位置に来るように並べ替える */

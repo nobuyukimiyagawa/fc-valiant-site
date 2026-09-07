@@ -483,7 +483,13 @@
       }
     }
 
-    photo.addEventListener("load", () => fig.classList.remove("is-empty"));
+    photo.addEventListener("load", () => {
+      fig.classList.remove("is-empty");
+      // 全身は縦長、胸から上は正方形に近い。腰で切れた写真を立たせると
+      // 体が切断されて見えるので、扱いを変える
+      const ratio = photo.naturalWidth / photo.naturalHeight;
+      fig.classList.toggle("is-bust", ratio > 0.62);
+    });
     photo.addEventListener("error", () => fig.classList.add("is-empty"));
 
     cards.forEach((c) => {
