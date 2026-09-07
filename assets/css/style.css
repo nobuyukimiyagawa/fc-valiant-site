@@ -593,7 +593,7 @@ button.btn{color:inherit;font:inherit}
 .subhero__ja{font-weight:700;letter-spacing:.2em;color:var(--gold);margin-top:.6rem;font-size:.95rem}
 
 /* trim the leading padding when a section follows the sub-hero */
-.schedule--page,.recruit--page,.sponsor--page{padding-top:clamp(3rem,6vw,4.5rem)}
+.schedule--page,.recruit--page,.sponsor--page,.members--page{padding-top:clamp(3rem,6vw,4.5rem)}
 
 /* ---------- Section teasers (homepage → detail pages) ---------- */
 .teaser{padding:clamp(3.2rem,7vw,5.5rem) clamp(1.4rem,5vw,4rem)}
@@ -727,6 +727,52 @@ button.btn{color:inherit;font:inherit}
   .stats{grid-template-columns:1fr}
     .team__meta>div{grid-template-columns:90px 1fr}
   .recruit__spec>div{grid-template-columns:1fr;gap:.5rem}
+}
+
+/* ---------- MEMBER ---------- */
+.members{background:var(--navy-deep);color:#fff;
+  padding:clamp(5rem,11vw,9rem) clamp(1.4rem,5vw,4rem)}
+.members__lead{text-align:center;color:#c2c9da;max-width:680px;
+  margin:0 auto 2.6rem;line-height:1.9}
+/* ポジションで絞る */
+.mfilter{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;
+  max-width:var(--maxw);margin:0 auto}
+.mfilter__btn{font-family:var(--font-en);font-size:.78rem;font-weight:600;
+  letter-spacing:.16em;padding:.62em 1.5em;border-radius:999px;cursor:pointer;
+  border:1px solid var(--line);background:transparent;color:#c2c9da;
+  transition:background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease)}
+.mfilter__btn:hover{border-color:var(--gold);color:var(--gold)}
+.mfilter__btn.is-on{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+.mfilter__btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.mfilter__btn i{font-style:normal;margin-left:.6em;font-size:.9em;opacity:.65}
+.mfilter__count{text-align:center;font-family:var(--font-en);font-size:.76rem;
+  letter-spacing:.16em;color:var(--grey);margin:1.1rem 0 0}
+/* 名鑑 */
+.mgrid{list-style:none;margin:2.4rem auto 0;padding:0;max-width:var(--maxw);
+  display:grid;gap:.9rem;
+  grid-template-columns:repeat(auto-fill,minmax(228px,1fr))}
+.mcard{position:relative;border:1px solid var(--line);border-radius:6px;
+  padding:1.5rem 1.4rem 1.3rem;background:rgba(255,255,255,.02);
+  transition:background .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease)}
+.mcard:hover{background:rgba(230,193,92,.06);border-color:var(--gold);transform:translateY(-4px)}
+.mcard__pos{display:flex;flex-wrap:wrap;gap:.35rem;margin:0 0 .9rem}
+.mcard__pos span{font-family:var(--font-en);font-size:.68rem;font-weight:600;
+  letter-spacing:.14em;color:var(--gold);line-height:1;
+  border:1px solid rgba(230,193,92,.45);border-radius:3px;padding:.35em .6em}
+.mcard__name{font-size:1.3rem;font-weight:700;letter-spacing:.05em;margin:0;line-height:1.4}
+.mcard__kana{font-size:.74rem;letter-spacing:.14em;color:var(--grey);margin:.4rem 0 0}
+.mcard__dob{font-family:var(--font-en);font-size:.78rem;letter-spacing:.08em;
+  color:#c2c9da;margin:1.1rem 0 0;display:flex;align-items:baseline;gap:.6rem}
+.mcard__dob span{font-size:.64rem;letter-spacing:.18em;color:var(--grey)}
+.mcard__cap{position:absolute;top:0;right:1.1rem;transform:translateY(-50%);
+  font-size:.66rem;font-weight:700;letter-spacing:.1em;
+  background:var(--gold);color:var(--navy-deep);border-radius:3px;padding:.35em .7em;line-height:1}
+@media (max-width:520px){
+  .mgrid{grid-template-columns:1fr 1fr;gap:.7rem}
+  .mcard{padding:1.2rem 1rem 1.1rem}
+  .mcard__name{font-size:1.12rem}
+  /* 2列だと「イノウエ ユウイチロウ」が折り返すので、少しだけ詰める */
+  .mcard__kana{font-size:.68rem;letter-spacing:.06em}
 }
 
 /* ---------- Reduced motion ---------- */

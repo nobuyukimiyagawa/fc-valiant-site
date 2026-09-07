@@ -445,6 +445,56 @@
   })();
 
   /* ============================================================
+     4c. MEMBER: ポジションで絞り込む
+     ============================================================ */
+  (function initMembers() {
+    const bar  = document.getElementById("mfilter");
+    const grid = document.getElementById("mgrid");
+    if (!bar || !grid) return;
+
+    const cards = Array.from(grid.querySelectorAll(".mcard"));
+    const btns  = Array.from(bar.querySelectorAll(".mfilter__btn"));
+    const count = document.getElementById("mcount");
+
+    // 該当が0人のポジションはボタンごと出さない
+    const tally = (pos) => pos === "all"
+      ? cards.length
+      : cards.filter((c) => c.dataset.pos.split(" ").includes(pos)).length;
+
+    btns.forEach((b) => {
+      const n = tally(b.dataset.filter);
+      if (!n) { b.remove(); return; }
+      b.insertAdjacentHTML("beforeend", `<i>${n}</i>`);
+    });
+
+    function apply(pos, byUser) {
+      let shown = 0;
+      cards.forEach((c) => {
+        const hit = pos === "all" || c.dataset.pos.split(" ").includes(pos);
+        c.hidden = !hit;
+        // 絞り込みで初めて画面に出るカードが、出現アニメ待ちのまま
+        // 透明で残らないようにする（初回表示のときは邪魔しない）
+        if (hit && byUser) c.classList.add("is-in");
+        if (hit) shown++;
+      });
+      if (count) count.textContent = `${shown} / ${cards.length} 名`;
+    }
+
+    bar.addEventListener("click", (e) => {
+      const b = e.target.closest(".mfilter__btn");
+      if (!b) return;
+      bar.querySelectorAll(".mfilter__btn").forEach((x) => {
+        const on = x === b;
+        x.classList.toggle("is-on", on);
+        x.setAttribute("aria-pressed", String(on));
+      });
+      apply(b.dataset.filter, true);
+    });
+
+    apply("all");
+  })();
+
+  /* ============================================================
      4b. SCHEDULE: next-match highlight / past dimming / season record
      - <time datetime="YYYY-MM-DD"> から自動判定（HTML側の手動クラス不要）
      - シーズン成績は結果バッジ（--win/--draw/--lose）から自動集計
