@@ -766,7 +766,7 @@ button.btn{color:inherit;font:inherit}
    写真は1枚しかないので、人は小さくしか動かさない。
    重さは影と床で作る。 */
 .stage__cast{position:absolute;inset:0}
-.stage__figure{position:absolute;left:50%;bottom:21.3%;height:66%;
+.stage__figure{position:absolute;left:50%;bottom:25.3%;height:62%;
   margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
   transform:translate(calc(-50% + var(--px,0px)),0);will-change:transform,opacity}
 .stage__shadow{position:absolute;bottom:-3%;left:50%;width:150%;height:11%;
@@ -777,7 +777,7 @@ button.btn{color:inherit;font:inherit}
          drop-shadow(0 0 22px rgba(var(--navy-deep-rgb),.75))}
 .stage__crest{height:46%;width:auto;opacity:.45}
 /* 胸から上の写真は、切れ目をぼかして光の中から現れるように見せる */
-.stage__figure.is-bust{height:50%}
+.stage__figure.is-bust{height:47%}
 .stage__figure.is-bust .stage__shadow{opacity:0}
 .stage__figure.is-bust .stage__photo{
   -webkit-mask-image:linear-gradient(to bottom,#000 72%,transparent 99%);
@@ -809,12 +809,14 @@ button.btn{color:inherit;font:inherit}
 .stage__scene.is-swapping .stage__glow{opacity:.55}
 
 /* 名前は舞台の外に置かず、中継のテロップのように芝の上に重ねる */
+/* 右端を硬く切ると「板を置いた」だけに見える。文字の外側に
+   逃げの余白を取り、そこで芝へ抜けるようにする */
 .stage__plate{position:absolute;left:clamp(1.2rem,3.2vw,2.6rem);bottom:clamp(1.1rem,3vw,2.2rem);
-  max-width:46%;text-align:left;
-  padding:1.05rem 1.9rem 1.05rem 1.15rem;
-  background:linear-gradient(90deg,rgba(var(--navy-deep-rgb),.93),rgba(var(--navy-deep-rgb),.74) 78%,
-    rgba(var(--navy-deep-rgb),.66));
-  -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+  width:max-content;max-width:56%;text-align:left;
+  padding:1.05rem 5.5rem 1.05rem 1.15rem;
+  background:linear-gradient(90deg,rgba(var(--navy-deep-rgb),.94) 0,
+    rgba(var(--navy-deep-rgb),.94) calc(100% - 5.5rem),rgba(var(--navy-deep-rgb),0) 100%);
+  -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
 .stage__rule{position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);
   transform-origin:50% 50%}
 .stage__plate p{overflow:hidden;margin:0}
@@ -857,7 +859,7 @@ button.btn{color:inherit;font:inherit}
   /* 横長のままだと舞台が低すぎる。左右を切って縦を稼ぐ（立ち位置は縦基準なのでずれない） */
   .stage__scene{border-radius:6px;aspect-ratio:5/4}
   .stage__scrim{background:linear-gradient(0deg,rgba(var(--navy-deep-rgb),.55),transparent 42%)}
-  .stage__plate{position:static;max-width:none;text-align:center;background:none;
+  .stage__plate{position:static;width:auto;max-width:none;text-align:center;background:none;
     -webkit-backdrop-filter:none;backdrop-filter:none;
     margin:1.2rem auto 0;padding:1.1rem 0 0;border-top:1px solid var(--line)}
   .stage__rule{display:none}
