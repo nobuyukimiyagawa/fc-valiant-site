@@ -350,11 +350,11 @@
 
     // 枠ごとの見せたい向き（方位角 仰角 距離）
     const ORBIT = {
-      platina: "-22deg 78deg 5.9m",
-      gold:    "168deg 92deg 5.9m",
-      silver:  "158deg 74deg 5.7m",
+      platina: "-22deg 78deg 6.4m",
+      gold:    "168deg 92deg 6.4m",
+      silver:  "158deg 74deg 6.3m",
     };
-    const FACE = { front: "-28deg 78deg 6.4m", back: "160deg 80deg 6.4m" };
+    const FACE = { front: "-28deg 78deg 7.0m", back: "160deg 80deg 7.0m" };
 
     // camera-orbit はプロパティ代入だと反映されない。必ず属性で渡す。
     function moveTo(orbit) { view.setAttribute("camera-orbit", orbit); }
