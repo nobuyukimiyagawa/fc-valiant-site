@@ -813,7 +813,7 @@ button.btn{color:inherit;font:inherit}
    逃げの余白を取り、そこで芝へ抜けるようにする */
 .stage__plate{position:absolute;left:clamp(1.2rem,3.2vw,2.6rem);bottom:clamp(1.1rem,3vw,2.2rem);
   width:max-content;max-width:56%;text-align:left;
-  padding:1.05rem 5.5rem 1.05rem 1.15rem;
+  padding:1.25rem 5.5rem 1.25rem 1.35rem;
   background:linear-gradient(90deg,rgba(var(--navy-deep-rgb),.94) 0,
     rgba(var(--navy-deep-rgb),.94) calc(100% - 5.5rem),rgba(var(--navy-deep-rgb),0) 100%);
   -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
@@ -821,15 +821,17 @@ button.btn{color:inherit;font:inherit}
   transform-origin:50% 50%}
 .stage__plate p{overflow:hidden;margin:0}
 .stage__plate p>span{display:block;will-change:transform,opacity}
-.stage__pos{margin:0 0 .7rem;min-height:1.2em}
-.stage__pos>span{display:flex;flex-wrap:wrap;gap:.35rem}
+.stage__pos{margin:0 0 1rem;min-height:1.2em}
+.stage__plate .stage__pos>span{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem}
 /* 塗り＝役割、線＝ポジション。カードと同じ区別 */
-.stage__pos>span>b{font-family:var(--font-ja);font-size:.66rem;font-weight:700;letter-spacing:.1em;
-  line-height:1;border-radius:3px;padding:.45em .7em;white-space:nowrap;
+.stage__pos>span>b{font-family:var(--font-ja);font-size:.66rem;font-weight:700;letter-spacing:.12em;
+  line-height:1;border-radius:3px;padding:.58em .9em;white-space:nowrap;
   background:var(--gold);color:var(--navy-deep)}
 .stage__pos>span>span{font-family:var(--font-en);font-size:.68rem;font-weight:600;
-  letter-spacing:.14em;color:var(--gold);line-height:1;white-space:nowrap;
-  border:1px solid rgba(230,193,92,.45);border-radius:3px;padding:.42em .6em}
+  letter-spacing:.16em;color:var(--gold);line-height:1;white-space:nowrap;
+  border:1px solid rgba(230,193,92,.45);border-radius:3px;padding:.55em .8em}
+/* 役割とポジションは別のまとまりなので、境目だけ広く取る */
+.stage__pos>span>b+span{margin-left:.4rem}
 @keyframes line-out{to{opacity:0;transform:translateY(-100%)}}
 @keyframes line-in{from{opacity:0;transform:translateY(100%)}}
 @keyframes rule-in{from{opacity:0;transform:scaleY(.65)}}
@@ -863,7 +865,7 @@ button.btn{color:inherit;font:inherit}
     -webkit-backdrop-filter:none;backdrop-filter:none;
     margin:1.2rem auto 0;padding:1.1rem 0 0;border-top:1px solid var(--line)}
   .stage__rule{display:none}
-  .stage__pos>span{justify-content:center}
+  .stage__plate .stage__pos>span{justify-content:center}
   .stage__dob{margin-top:.8rem}
   .stage__soon{font-size:.56rem}
   .stage__hint{font-size:.72rem}
@@ -906,10 +908,10 @@ button.btn{color:inherit;font:inherit}
   padding:1.5rem 1.4rem 1.3rem;background:rgba(255,255,255,.02);
   transition:background .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease)}
 .mcard:hover{background:rgba(230,193,92,.06);border-color:var(--gold);transform:translateY(-4px)}
-.mcard__pos{display:flex;flex-wrap:wrap;gap:.35rem;margin:0 0 .9rem}
+.mcard__pos{display:flex;flex-wrap:wrap;align-items:center;gap:.42rem;margin:0 0 1rem}
 .mcard__pos span{font-family:var(--font-en);font-size:.68rem;font-weight:600;
-  letter-spacing:.14em;color:var(--gold);line-height:1;
-  border:1px solid rgba(230,193,92,.45);border-radius:3px;padding:.35em .6em}
+  letter-spacing:.15em;color:var(--gold);line-height:1;
+  border:1px solid rgba(230,193,92,.45);border-radius:3px;padding:.5em .72em}
 .mcard__name{font-size:1.3rem;font-weight:700;letter-spacing:.05em;margin:0;line-height:1.4}
 .mcard__kana{font-size:.74rem;letter-spacing:.14em;color:var(--grey);margin:.4rem 0 0}
 .mcard__dob{font-family:var(--font-en);font-size:.78rem;letter-spacing:.08em;
@@ -918,9 +920,10 @@ button.btn{color:inherit;font:inherit}
 /* 役割の印（キャプテン・副キャプテン・オーナー・監督）。
    1人に複数付く。枠線に浮かせると行間に食い込んで雑になるので、
    ポジションと同じ行に、塗りと線で区別して並べる */
-.mcard__pos b{font-family:var(--font-ja);font-size:.66rem;font-weight:700;letter-spacing:.08em;
-  white-space:nowrap;line-height:1;border-radius:3px;padding:.42em .7em;
+.mcard__pos b{font-family:var(--font-ja);font-size:.66rem;font-weight:700;letter-spacing:.1em;
+  white-space:nowrap;line-height:1;border-radius:3px;padding:.55em .82em;
   background:var(--gold);color:var(--navy-deep)}
+.mcard__pos b+span{margin-left:.3rem}
 @media (max-width:520px){
   .mgrid{grid-template-columns:1fr 1fr;gap:.7rem}
   .mcard{padding:1.2rem 1rem 1.1rem}
