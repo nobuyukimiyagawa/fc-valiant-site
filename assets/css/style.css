@@ -240,9 +240,9 @@ button.btn{color:inherit;font:inherit}
   padding:clamp(3rem,6vw,5rem) clamp(1.4rem,6vw,5rem)}
 .stats::before{content:"";position:absolute;inset:0;
   background:url("../img/stats-bg.webp") center 62%/cover no-repeat;
-  opacity:.16;filter:grayscale(.25)}
+  opacity:.5;filter:grayscale(.12)}
 .stats::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg,rgba(var(--navy-rgb),.96),rgba(var(--navy-rgb),.55) 50%,rgba(var(--navy-rgb),.96))}
+  background:linear-gradient(90deg,rgba(var(--navy-rgb),.88),rgba(var(--navy-rgb),.42) 50%,rgba(var(--navy-rgb),.88))}
 .stats>*{position:relative;z-index:1}
 .stats__item{display:flex;flex-direction:column;gap:.35rem}
 .stats__item--end{text-align:right;align-items:flex-end}
@@ -250,7 +250,8 @@ button.btn{color:inherit;font:inherit}
   letter-spacing:.28em;color:var(--gold)}
 .stats__num{font-family:var(--font-display);line-height:.82;
   font-size:clamp(3.4rem,11vw,7.5rem);letter-spacing:.01em}
-.stats__label{font-size:.86rem;color:var(--grey);letter-spacing:.16em}
+/* 写真が透けるぶん、--grey のままだとAAを割るので少しだけ明るく */
+.stats__label{font-size:.86rem;color:#bcc6d8;letter-spacing:.16em}
 /* つなぐ線。左から引かれる */
 .stats__line{position:relative;height:1px;background:var(--line)}
 .stats__line i{position:absolute;inset:0;transform-origin:left;transform:scaleX(0);
@@ -703,6 +704,8 @@ button.btn{color:inherit;font:inherit}
 }
 @media (max-width:768px){
     .stats{grid-template-columns:repeat(2,1fr)}
+  /* 縦積みになると文字が幕のいちばん薄い中央に来るので、幕は一律にする */
+  .stats::after{background:rgba(var(--navy-rgb),.7)}
   .stat:nth-child(odd){border-left:0}
   .stat:nth-child(n+3){border-top:1px solid var(--line)}
   .activity__grid{grid-template-columns:1fr;grid-template-rows:none;height:auto}
