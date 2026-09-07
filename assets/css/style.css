@@ -3,14 +3,15 @@
    Palette: deep navy / gold / paper (黒は使わず、暗部はすべて紺で作る)
    ============================================================ */
 :root{
-  --navy-deep:#112445;  /* 最暗部。旧 --ink(ほぼ黒)の置き換え */
-  --navy:#1a3563;
-  --navy-2:#23447a;
-  --navy-deep-rgb:17,36,69;  /* --navy-deep の RGB。rgba() 用 */
-  --navy-rgb:26,53,99;       /* --navy の RGB。rgba() 用 */
-  --ink:#1b3158;        /* 紙面上の本文色。純黒ではなく紺寄り */
+  --navy-deep:#0d1c3a;  /* 最暗部。旧 --ink(ほぼ黒)の置き換え */
+  --navy:#142a52;
+  --navy-2:#1b3766;
+  --navy-deep-rgb:13,28,58;  /* --navy-deep の RGB。rgba() 用 */
+  --navy-rgb:20,42,82;       /* --navy の RGB。rgba() 用 */
+  --ink:#16294a;        /* 紙面上の本文色。純黒ではなく紺寄り */
   --gold:#e6c15c;
   --gold-deep:#caa544;
+  --gold-ink:#7a5f18;   /* 紙面(--paper)の上に置く金。--gold/--gold-deep は紙面では AA 不足 */
   --paper:#f4f2ec;
   --paper-2:#ffffff;
   --grey:#9aa4b8;      /* muted text on dark backgrounds */
@@ -61,6 +62,9 @@ main:focus{outline:none}
   transition:.4s var(--ease);cursor:pointer;border:1.5px solid transparent;
 }
 .btn i{transition:transform .4s var(--ease)}
+/* button 要素は色を継承しない（UA が buttontext=黒 を当てる）。
+   .btn--ghost は currentColor 頼りなので、明示的に継承させる */
+button.btn{color:inherit;font:inherit}
 .btn:hover i{transform:translateX(5px)}
 .btn--gold{background:var(--gold);color:var(--navy)}
 .btn--gold:hover{background:var(--navy);color:var(--gold);box-shadow:0 10px 30px rgba(var(--navy-rgb),.25)}
@@ -201,7 +205,7 @@ main:focus{outline:none}
 
 /* ---------- Section heads ---------- */
 .sec-head{margin-bottom:2.4rem}
-.sec-head__no{font-family:var(--font-en);color:var(--gold-deep);font-size:.9rem;
+.sec-head__no{font-family:var(--font-en);color:var(--gold-ink);font-size:.9rem;
   letter-spacing:.2em;display:block;margin-bottom:.4rem}
 .sec-head__en{font-family:var(--font-display);font-size:clamp(2.6rem,7vw,5.5rem);
   line-height:.95;letter-spacing:.01em}
@@ -225,7 +229,7 @@ main:focus{outline:none}
 .team__meta>div{display:grid;grid-template-columns:120px 1fr;gap:1rem;
   padding:1.1rem 0;border-top:1px solid var(--line-dark)}
 .team__meta>div:last-child{border-bottom:1px solid var(--line-dark)}
-.team__meta dt{font-family:var(--font-en);letter-spacing:.12em;color:var(--gold-deep);font-size:.85rem;padding-top:.15rem}
+.team__meta dt{font-family:var(--font-en);letter-spacing:.12em;color:var(--gold-ink);font-size:.85rem;padding-top:.15rem}
 .team__meta dd{font-weight:500;color:#2a3348}
 
 /* ---------- Stats ---------- */
@@ -271,7 +275,7 @@ main:focus{outline:none}
 .fixture__date b{display:block;font-size:1.45rem;color:var(--gold);letter-spacing:.02em}
 .fixture__date span{font-size:.72rem;color:var(--grey);letter-spacing:.16em}
 .fixture__comp{font-family:var(--font-en);letter-spacing:.08em;font-size:.74rem;
-  color:var(--gold-deep);display:block;margin-bottom:.3rem}
+  color:var(--gold);display:block;margin-bottom:.3rem}
 .fixture__match{font-weight:700;font-size:1.05rem;line-height:1.4;display:block}
 .fixture__venue{font-size:.82rem;color:var(--grey);margin-top:.25rem;display:block}
 .fixture__ko{font-size:.82rem;color:var(--grey);margin-top:.2rem;display:block;
@@ -345,7 +349,7 @@ main:focus{outline:none}
 .recruit__spec>div{display:grid;grid-template-columns:160px 1fr;gap:1.2rem;
   padding:1.3rem 0;border-top:1px solid var(--line-dark)}
 .recruit__spec>div:last-child{border-bottom:1px solid var(--line-dark)}
-.recruit__spec dt{font-family:var(--font-en);letter-spacing:.1em;color:var(--gold-deep);
+.recruit__spec dt{font-family:var(--font-en);letter-spacing:.1em;color:var(--gold-ink);
   font-size:.82rem;padding-top:.2rem}
 .recruit__spec dt small{display:block;font-family:var(--font-ja);color:var(--grey-ink);
   font-size:.72rem;letter-spacing:.04em;margin-top:.3rem}
@@ -371,7 +375,7 @@ main:focus{outline:none}
 .recruit__faq-title{font-family:var(--font-ja);font-weight:900;font-size:1.25rem;letter-spacing:.08em;
   margin-bottom:1.2rem;display:flex;align-items:baseline;gap:.8rem}
 .recruit__faq-title span{font-family:var(--font-en);font-weight:600;font-size:.78rem;
-  letter-spacing:.2em;color:var(--gold-deep)}
+  letter-spacing:.2em;color:var(--gold-ink)}
 .faq{border-top:1px solid var(--line-dark)}
 .faq:last-of-type{border-bottom:1px solid var(--line-dark)}
 .faq summary{display:flex;align-items:center;gap:.9rem;padding:1.15rem .2rem;cursor:pointer;
@@ -382,7 +386,7 @@ main:focus{outline:none}
   color:var(--gold-deep);font-size:1.5rem;line-height:1;flex-shrink:0;
   transition:transform .35s var(--ease)}
 .faq[open] summary::after{transform:rotate(45deg)}
-.faq__q{font-family:var(--font-en);font-weight:600;color:var(--gold-deep);flex-shrink:0;
+.faq__q{font-family:var(--font-en);font-weight:600;color:var(--gold-ink);flex-shrink:0;
   width:1.7rem;height:1.7rem;border:1px solid rgba(202,165,68,.55);border-radius:50%;
   display:grid;place-items:center;font-size:.8rem}
 .faq__a{padding:0 .2rem 1.4rem 2.8rem;color:#37415a;font-size:.95rem;line-height:1.9;max-width:760px}
@@ -437,13 +441,13 @@ main:focus{outline:none}
 .staff__head .sec-head__ja{color:var(--grey-ink);letter-spacing:.2em;margin-top:.3rem}
 .staff__card{border:1px solid var(--line-dark);border-radius:10px;
   padding:clamp(2.4rem,5vw,3.6rem);background:var(--paper-2)}
-.staff__role{font-family:var(--font-en);letter-spacing:.16em;color:var(--gold-deep);font-size:.82rem}
+.staff__role{font-family:var(--font-en);letter-spacing:.16em;color:var(--gold-ink);font-size:.82rem}
 .staff__name{font-size:clamp(2rem,5vw,2.8rem);font-weight:900;letter-spacing:.08em;margin:.5rem 0 .2rem}
 .staff__romaji{font-family:var(--font-en);letter-spacing:.22em;color:var(--grey-ink);font-size:.9rem;margin-bottom:1.8rem}
 .staff__career{display:inline-flex;flex-direction:column;gap:.6rem;text-align:left;margin-bottom:1.8rem}
 .staff__career li{display:grid;grid-template-columns:64px 1fr;gap:1rem;font-size:.95rem;font-weight:500;
   padding-bottom:.6rem;border-bottom:1px dashed var(--line-dark)}
-.staff__career span{font-family:var(--font-en);color:var(--gold-deep);font-weight:600}
+.staff__career span{font-family:var(--font-en);color:var(--gold-ink);font-weight:600}
 .staff__quote{max-width:620px;margin:0 auto;color:#37415a;font-weight:500;line-height:2;font-size:1.02rem;
   position:relative;padding-top:1.4rem}
 .staff__quote::before{content:"“";font-family:var(--font-display);color:var(--gold);
@@ -530,7 +534,7 @@ main:focus{outline:none}
 .teaser--light{background:var(--paper);color:var(--ink)}
 .teaser__grid{max-width:var(--maxw);margin:0 auto;display:grid;
   grid-template-columns:minmax(150px,.55fr) 1fr;gap:clamp(1.6rem,5vw,4rem);align-items:center}
-.teaser__no{font-family:var(--font-en);color:var(--gold-deep);letter-spacing:.2em;
+.teaser__no{font-family:var(--font-en);color:var(--gold-ink);letter-spacing:.2em;
   font-size:.85rem;display:block;margin-bottom:.35rem}
 .teaser--dark .teaser__no,.teaser--navy .teaser__no{color:var(--gold)}
 .teaser__en{font-family:var(--font-display);font-size:clamp(2.4rem,6vw,4.4rem);line-height:.95}
@@ -540,10 +544,10 @@ main:focus{outline:none}
 .teaser--light .teaser__main{border-color:var(--line-dark)}
 .teaser__kicker{font-family:var(--font-en);letter-spacing:.16em;font-size:.78rem;
   color:var(--gold);margin-bottom:.6rem}
-.teaser--light .teaser__kicker{color:var(--gold-deep)}
+.teaser--light .teaser__kicker{color:var(--gold-ink)}
 .teaser__lead{font-size:clamp(1.1rem,2.4vw,1.5rem);font-weight:700;line-height:1.6;margin-bottom:.6rem}
-.teaser__lead b{color:var(--gold)}
-.teaser--light .teaser__lead b{color:var(--gold-deep)}
+.teaser__lead b{color:var(--gold)}            /* 暗色のティザー用 */
+.teaser--light .teaser__lead b{color:var(--gold-ink)}  /* 紙面のティザー用 */
 .teaser__sub{color:var(--grey);font-size:.92rem;margin-bottom:1.6rem}
 .teaser--light .teaser__sub{color:var(--grey-ink)}
 .teaser__chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.6rem}
