@@ -125,8 +125,11 @@ button.btn{color:inherit;font:inherit}
   will-change:transform}
 .hero__media::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:var(--navy);mix-blend-mode:color;opacity:.22}
+/* 文字が乗る左側だけ落とし、右は前より薄くして写真を見せる。
+   コピーの実位置で測って 白7.87 / 金5.16（幕なしだと 3.04 / 2.16） */
 .hero__overlay{position:absolute;inset:0;z-index:2;
-  background:linear-gradient(90deg,rgba(var(--navy-deep-rgb),.60) 0%,rgba(var(--navy-deep-rgb),.32) 45%,rgba(var(--navy-deep-rgb),.10) 100%),
+  background:linear-gradient(90deg,rgba(var(--navy-deep-rgb),.88) 0%,rgba(var(--navy-deep-rgb),.72) 34%,
+             rgba(var(--navy-deep-rgb),.16) 70%,rgba(var(--navy-deep-rgb),.05) 100%),
              linear-gradient(0deg,rgba(var(--navy-deep-rgb),.70) 0%,rgba(var(--navy-deep-rgb),0) 45%)}
 .hero__content{position:relative;z-index:2;color:#fff;
   padding:0 clamp(1.2rem,5vw,5rem);max-width:var(--maxw);margin:0 auto;width:100%}
