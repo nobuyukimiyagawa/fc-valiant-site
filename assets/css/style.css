@@ -734,6 +734,9 @@ button.btn{color:inherit;font:inherit}
   .recruit__spec>div{grid-template-columns:1fr;gap:.5rem}
 }
 
+/* TEAM からメンバー紹介への導線 */
+.team__cta{margin:2.2rem 0 0}
+
 /* ---------- 選手ステージ ---------- */
 .stage{background:var(--navy-deep);padding:clamp(2.4rem,5vw,4rem) clamp(1.4rem,5vw,4rem) 0}
 /* 舞台とテロップの入れ物。舞台は overflow:hidden なので、
