@@ -229,20 +229,22 @@ python3 -m http.server 8000
 # ブラウザで http://localhost:8000 を開く
 ```
 
-## 計測（GA4）
+## 計測（GA4 / Search Console）
 
-- GA4 アカウント **FC VALIANT** ／ プロパティ **FC VALIANT 公式サイト**（所有者: nobuyuki.miyagawa14@gmail.com）
-- 測定 ID: **G-N5YR1ZRBVX**（ウェブストリーム ID 15737187132、ストリーム URL は GitHub Pages）
+- **本番URL: https://fc-valiant-site.vercel.app/**（Vercel、GitHub main を自動デプロイ）。GitHub Pages
+  https://nobuyukimiyagawa.github.io/fc-valiant-site/ も同じ内容で生きている。
+  ⚠️ `fcvaliant.vercel.app` は存在しない URL（2026-09-08 に canonical/OGP/sitemap/robots をすべて置き換えた）
+- GA4 アカウント **FC VALIANT** ／ プロパティ **FC VALIANT 公式サイト**（property 553063354、所有者: nobuyuki.miyagawa14@gmail.com、Chrome では authuser=1）
+- 測定 ID: **G-N5YR1ZRBVX**（ウェブストリーム ID 15737187132）
 - タグは 5 ページすべての `</head>` 直前。値の変更・撤去は `python3 tools/set-analytics.py --ga G-XXXX` / `--off`
 - タイムゾーン=日本、通貨=JPY、業種=スポーツ。データ共有設定は全て OFF
-- Search Console: URLプレフィックス型で `https://nobuyukimiyagawa.github.io/fc-valiant-site/` を登録済み（同じ gmail 所有）。
-  所有権は **Google Analytics 連携で自動確認**されたので `--sc` の meta タグは不要（gtag を消すと確認が切れる）
-- **サイトマップは未送信。** sitemap.xml / robots.txt / canonical / og:url が `fcvaliant.vercel.app`（2026-09-08 時点で 404）を指しているため。
-  Vercel 公開後にやること: ①`python3 tools/set-site-url.py https://fcvaliant.vercel.app`（既に同じ値なら不要）
-  ②Search Console に vercel.app のプロパティを追加（GA 連携で自動確認される）③そこで `sitemap.xml` を送信
-  ④GA のデータストリーム URL を vercel.app に変更
-- 本公開ドメインを変える（例: Vercel）ときは、GA 管理画面 → データストリーム → ストリーム URL も合わせて更新する
-- 選手・スタッフに閲覧権限を渡すときは 管理 → プロパティのアクセス管理 から Google アカウントを追加
+- Search Console: URLプレフィックス型で **vercel.app** と **github.io** の両方を登録済み（同じ gmail 所有）。
+  所有権は **Google Analytics 連携で自動確認**。`--sc` の meta タグは不要だが、**gtag を消すと確認が切れる**
+- サイトマップ `sitemap.xml` は vercel.app 側のプロパティに送信済み（2026-09-08、5ページ検出・成功）
+- 公開 URL を変える（独自ドメイン等）ときの手順:
+  ①`python3 tools/set-site-url.py https://新URL` → push ②Search Console に新URLのプロパティ追加（GA連携で自動確認）→ sitemap.xml 送信
+  ③GA 管理 → データストリーム → ストリーム URL を更新
+- 選手・スタッフに閲覧権限を渡すときは GA 管理 → プロパティのアクセス管理 / Search Console 設定 → ユーザーと権限 から追加
 
 ## 公開（デプロイ）
 そのまま静的ホスティングに置くだけで公開できます。
