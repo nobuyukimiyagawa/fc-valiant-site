@@ -229,6 +229,16 @@ python3 -m http.server 8000
 # ブラウザで http://localhost:8000 を開く
 ```
 
+## 計測（GA4）
+
+- GA4 アカウント **FC VALIANT** ／ プロパティ **FC VALIANT 公式サイト**（所有者: nobuyuki.miyagawa14@gmail.com）
+- 測定 ID: **G-N5YR1ZRBVX**（ウェブストリーム ID 15737187132、ストリーム URL は GitHub Pages）
+- タグは 5 ページすべての `</head>` 直前。値の変更・撤去は `python3 tools/set-analytics.py --ga G-XXXX` / `--off`
+- タイムゾーン=日本、通貨=JPY、業種=スポーツ。データ共有設定は全て OFF
+- Search Console の確認コードはまだ未設定（`--sc <コード>` で入る）
+- 本公開ドメインを変える（例: Vercel）ときは、GA 管理画面 → データストリーム → ストリーム URL も合わせて更新する
+- 選手・スタッフに閲覧権限を渡すときは 管理 → プロパティのアクセス管理 から Google アカウントを追加
+
 ## 公開（デプロイ）
 そのまま静的ホスティングに置くだけで公開できます。
 - **Netlify / Vercel / Cloudflare Pages**：このフォルダをドラッグ＆ドロップ
