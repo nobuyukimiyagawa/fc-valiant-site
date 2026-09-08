@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fcvaliant.vercel.app/sitemap.xml
+Sitemap: https://fc-valiant-site.vercel.app/sitemap.xml
