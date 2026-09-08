@@ -235,7 +235,12 @@ python3 -m http.server 8000
 - 測定 ID: **G-N5YR1ZRBVX**（ウェブストリーム ID 15737187132、ストリーム URL は GitHub Pages）
 - タグは 5 ページすべての `</head>` 直前。値の変更・撤去は `python3 tools/set-analytics.py --ga G-XXXX` / `--off`
 - タイムゾーン=日本、通貨=JPY、業種=スポーツ。データ共有設定は全て OFF
-- Search Console の確認コードはまだ未設定（`--sc <コード>` で入る）
+- Search Console: URLプレフィックス型で `https://nobuyukimiyagawa.github.io/fc-valiant-site/` を登録済み（同じ gmail 所有）。
+  所有権は **Google Analytics 連携で自動確認**されたので `--sc` の meta タグは不要（gtag を消すと確認が切れる）
+- **サイトマップは未送信。** sitemap.xml / robots.txt / canonical / og:url が `fcvaliant.vercel.app`（2026-09-08 時点で 404）を指しているため。
+  Vercel 公開後にやること: ①`python3 tools/set-site-url.py https://fcvaliant.vercel.app`（既に同じ値なら不要）
+  ②Search Console に vercel.app のプロパティを追加（GA 連携で自動確認される）③そこで `sitemap.xml` を送信
+  ④GA のデータストリーム URL を vercel.app に変更
 - 本公開ドメインを変える（例: Vercel）ときは、GA 管理画面 → データストリーム → ストリーム URL も合わせて更新する
 - 選手・スタッフに閲覧権限を渡すときは 管理 → プロパティのアクセス管理 から Google アカウントを追加
 
