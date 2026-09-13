@@ -29,7 +29,7 @@
 ~/Projects/fcv-cutout-venv/bin/python tools/place-cutout.py ~/Downloads/坂本.png sakamoto-yuya
 ```
 
-胸から上の写真は縦横比が 0.62 を超えるため、ステージでは下端がぼけて表示される（JS の自動判定）。
+写真の下端はぼかさず、そのままポスターの下端に接する。
 
 ## 切り抜きのやり方（未切り抜きの写真）
 

@@ -784,9 +784,6 @@ button.btn{color:inherit;font:inherit}
 .stage__shadow{display:none}
 .stage__photo{height:100%;width:auto;object-fit:contain;object-position:bottom;
   filter:drop-shadow(0 0 1px rgba(255,255,255,.35)) drop-shadow(-16px 12px 0 rgba(var(--navy-deep-rgb),.55))}
-.stage__figure.is-bust .stage__photo{
-  -webkit-mask-image:linear-gradient(to bottom,#000 86%,transparent 100%);
-          mask-image:linear-gradient(to bottom,#000 86%,transparent 100%)}
 /* 写真が無いとき：エンブレムを大きく薄く、予告の札を添える */
 .stage__crest{height:40%;width:auto;opacity:.28;filter:drop-shadow(-12px 9px 0 rgba(var(--navy-deep-rgb),.5))}
 .stage__soon{font-family:var(--font-en);font-size:.62rem;font-weight:600;letter-spacing:.24em;

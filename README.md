@@ -97,7 +97,7 @@ fc-valiant-site/
 - **ローマ字は `data-photo`**（`iwamura-naoki` → IWAMURA ／ NAOKI）から JS が作る。HTML に足すものは無い
 - カードの板・写真・巨大文字は `main.js` の `initMembers()` が組み立てる。HTML は名前・かな・生年月日のまま
 - `member.html?p=<data-photo>` でその選手のポスターを最初に出せる（共有リンク用）
-- 写真は `assets/img/member/<data-photo>.webp`。縦横比 0.62 超は「胸から上」として下端をフェード
+- 写真は `assets/img/member/<data-photo>.webp`。下端は切りっぱなし（フェードしない。2026-09-14 クライアント指示）
 - 旧ステージ画像 `stage-back.webp` / `stage-front.webp` は未使用（削除済み）
 - ⚠️ `.stage__plate` は `color:#fff` を明示すること。外すと body の紺を継承して名前が消える（実際に出した）
 
