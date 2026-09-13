@@ -21,7 +21,17 @@
 - 画像の下端＝足の裏。左右は体の中央が画像の中央
 - 高さ 1400px 前後
 
-## 切り抜きのやり方
+## 透過済みPNGを受け取ったとき（2026-09-14 の9名はこの形式）
+
+背景がすでに透過されている PNG は rembg を通さず、余白詰めと webp 化だけを行う。
+
+```
+~/Projects/fcv-cutout-venv/bin/python tools/place-cutout.py ~/Downloads/坂本.png sakamoto-yuya
+```
+
+胸から上の写真は縦横比が 0.62 を超えるため、ステージでは下端がぼけて表示される（JS の自動判定）。
+
+## 切り抜きのやり方（未切り抜きの写真）
 
 ```
 ~/Projects/fcv-cutout-venv/bin/python tools/cutout.py <写真のパス> <ファイル名>
