@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/style.css?v=b7dc2a97" />
+<link rel="stylesheet" href="assets/css/style.css?v=faa30b87" />
 <!-- GA4 start -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-N5YR1ZRBVX"></script>
 <script>
@@ -69,18 +69,17 @@
   <p class="subhero__ja">メンバー紹介</p>
 </section>
 
-<!-- ===== Player stage =====
-     選手を選ぶとステージに登場する。写真は assets/img/member/<data-photo>.webp
-     まだ無いあいだはエンブレムを出しておく。 -->
-<section class="stage" id="stage" aria-label="選手ステージ">
+<!-- ===== Player poster =====
+     選手を選ぶと、その選手のポスターに切り替わる。写真は assets/img/member/<data-photo>.webp
+     まだ無いあいだはエンブレムを出しておく。巨大なローマ字は data-photo から JS が作る。 -->
+<section class="stage" id="stage" aria-label="選手ポスター">
   <div class="stage__frame">
   <div class="stage__scene" id="stageScene">
-    <img class="stage__layer stage__layer--back" src="assets/img/stage-back.webp" alt="" aria-hidden="true" />
-    <img class="stage__layer stage__layer--front" src="assets/img/stage-front.webp" alt="" aria-hidden="true" />
-    <div class="stage__glow" aria-hidden="true"></div>
+    <div class="stage__slab" aria-hidden="true"></div>
+    <p class="stage__big" id="stageBig" aria-hidden="true"><span></span><i></i></p>
+    <p class="stage__kicker" aria-hidden="true">FC VALIANT — KUMAMOTO</p>
     <!-- 登場と退場を重ねるため、選手はJSで出し入れする -->
     <div class="stage__cast" id="stageCast"></div>
-    <div class="stage__scrim" aria-hidden="true"></div>
   </div>
   <div class="stage__plate" id="stagePlate" role="status" aria-live="polite">
     <span class="stage__rule" aria-hidden="true"></span>
@@ -90,7 +89,7 @@
     <p class="stage__dob"><span></span></p>
   </div>
   </div>
-  <p class="stage__hint">下のカードを選ぶと、その選手がステージに立ちます。</p>
+  <p class="stage__hint">下のカードを選ぶと、その選手のポスターに切り替わります。</p>
 </section>
 
 <!-- ===== Members ===== -->
@@ -316,6 +315,6 @@
 <a href="#top" class="totop" id="totop" data-scroll aria-label="ページトップへ">↑</a>
 
 <script src="assets/js/lenis.min.js"></script>
-<script src="assets/js/main.js?v=933ed777"></script>
+<script src="assets/js/main.js?v=cb29152c"></script>
 </body>
 </html>

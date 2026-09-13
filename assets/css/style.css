@@ -740,103 +740,94 @@ button.btn{color:inherit;font:inherit}
 /* TEAM からメンバー紹介への導線 */
 .team__cta{margin:2.2rem 0 0}
 
-/* ---------- 選手ステージ ---------- */
-.stage{background:var(--navy-deep);padding:clamp(2.4rem,5vw,4rem) clamp(1.4rem,5vw,4rem) 0}
-/* 舞台とテロップの入れ物。舞台は overflow:hidden なので、
-   テロップは外側に置いて、広い画面だけ上に重ねる */
-.stage__frame{position:relative;max-width:900px;margin:0 auto}
-.stage__scene{position:relative;width:100%;aspect-ratio:1800/820;
-  border-radius:10px;overflow:hidden;isolation:isolate}
-.stage__layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  will-change:transform}
-/* スポットの空気感。レンダに足すより、ここで動かせるほうが調整しやすい */
-.stage__glow{position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(60% 46% at 50% 74%,rgba(255,238,200,.16),transparent 70%)}
-/* 立ち位置は楕円の中心（レンダで実測して 78.6%）。
-   背丈は実寸より少し大きめにして、主役として見えるようにする */
-/* ---- 登場の振り付け ----------------------------------------
-   0-80ms    舞台をわずかに落とす（溜め）
-   0-160ms   前の選手が沈んで消える。影も先に縮む
-   40-180ms  テロップの文字だけ上へ抜ける（板と罫は残す）
-   180-260ms 誰もいない80ms。ここが「間」
-   260-340ms 中心のスポットが戻る
-   300-420ms 新しい選手の影が、人より先に出る
-   340-700ms 人が奥から静かに立ち、わずかに着地して収まる
-   430-720ms 金の罫 → タグ → 氏名 → カナ → 生年月日 の順に出る
-   写真は1枚しかないので、人は小さくしか動かさない。
-   重さは影と床で作る。 */
-.stage__cast{position:absolute;inset:0}
-.stage__figure{position:absolute;left:50%;bottom:25.3%;height:62%;
-  margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
-  transform:translate(calc(-50% + var(--px,0px)),0);will-change:transform,opacity}
-.stage__shadow{position:absolute;bottom:-3%;left:50%;width:150%;height:11%;
-  transform:translateX(-50%);transform-origin:50% 100%;opacity:.28;
-  background:radial-gradient(50% 50% at 50% 50%,rgba(0,0,0,.62),transparent 72%)}
+/* ---------- 選手ポスター ----------
+   選手を選ぶと、その選手のポスターに切り替わる。
+   写真は assets/img/member/<data-photo>.webp。無いあいだはエンブレムの仮表示。
+   作り：紙のざらつき ＋ 斜めのハーフトーン帯 ＋ 傾けた金の板 ＋ 巨大なローマ字（実線と輪郭の2段）
+   ＋ 切り抜き写真。整えすぎると安っぽくなるので、板と文字はわざと傾け、端は切らせる */
+.stage{background:var(--navy-deep);padding:clamp(2rem,4vw,3.2rem) clamp(1rem,4vw,3rem) 0}
+.stage__frame{position:relative;max-width:1180px;margin:0 auto}
+.stage__scene{position:relative;width:100%;aspect-ratio:16/8.6;min-height:420px;
+  border-radius:8px;overflow:hidden;isolation:isolate;
+  background:
+    radial-gradient(60% 80% at 72% 62%,rgba(var(--navy-rgb),.95),transparent 70%),
+    linear-gradient(160deg,var(--navy-2),var(--navy-deep) 62%)}
+.stage__scene::before{content:"";position:absolute;inset:0;z-index:6;pointer-events:none;
+  opacity:.26;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");background-size:220px 220px}
+/* 斜めに走るハーフトーンの帯 */
+.stage__scene::after{content:"";position:absolute;inset:-20% -10%;z-index:0;pointer-events:none;opacity:.16;
+  background-image:radial-gradient(rgba(255,255,255,.6) 1.1px,transparent 1.7px);background-size:9px 9px;
+  -webkit-mask-image:linear-gradient(104deg,transparent 36%,#000 50%,#000 64%,transparent 78%);
+          mask-image:linear-gradient(104deg,transparent 36%,#000 50%,#000 64%,transparent 78%)}
+/* 傾けた金の板。選手の背中側に置く */
+.stage__slab{position:absolute;right:-7%;bottom:-10%;width:50%;height:82%;z-index:1;
+  background:var(--gold);transform:rotate(-6deg);transform-origin:100% 100%;
+  clip-path:polygon(0 0,100% 0,100% 100%,9% 100%)}
+.stage__slab::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(135deg,rgba(var(--navy-deep-rgb),.10) 0 2px,transparent 2px 11px)}
+.stage__kicker{position:absolute;right:clamp(1rem,2.6vw,2rem);top:clamp(.9rem,2.2vw,1.6rem);z-index:5;margin:0;
+  font-family:var(--font-en);font-size:.66rem;font-weight:600;letter-spacing:.28em;color:var(--navy-deep);
+  background:#fff;padding:.5em .9em;border-radius:2px}
+/* 巨大なローマ字。1行目は実線、2行目は輪郭だけを右へずらす */
+.stage__big{position:absolute;left:-.03em;top:-.02em;z-index:2;margin:0;pointer-events:none;
+  font-family:var(--font-display);font-weight:400;
+  font-size:clamp(5rem,17.5vw,15.5rem);line-height:.84;letter-spacing:-.01em;
+  color:#fff;white-space:nowrap;text-transform:uppercase}
+.stage__big span,.stage__big i{display:block;font-style:normal}
+.stage__big i{color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.42);
+  transform:translateX(.42em);opacity:.9}
+/* 写真 */
+.stage__cast{position:absolute;inset:0;z-index:3}
+.stage__figure{position:absolute;right:13%;bottom:0;height:96%;margin:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  transform:translateX(var(--px,0px));will-change:transform,opacity}
+.stage__shadow{display:none}
 .stage__photo{height:100%;width:auto;object-fit:contain;object-position:bottom;
-  filter:drop-shadow(2px -1px 0 rgba(230,193,92,.42))
-         drop-shadow(0 0 22px rgba(var(--navy-deep-rgb),.75))}
-.stage__crest{height:46%;width:auto;opacity:.45}
-/* 胸から上の写真は、切れ目をぼかして光の中から現れるように見せる */
-.stage__figure.is-bust{height:47%}
-.stage__figure.is-bust .stage__shadow{opacity:0}
+  filter:drop-shadow(0 0 1px rgba(255,255,255,.35)) drop-shadow(-16px 12px 0 rgba(var(--navy-deep-rgb),.55))}
 .stage__figure.is-bust .stage__photo{
-  -webkit-mask-image:linear-gradient(to bottom,#000 72%,transparent 99%);
-          mask-image:linear-gradient(to bottom,#000 72%,transparent 99%)}
-.stage__soon{font-family:var(--font-en);font-size:.62rem;letter-spacing:.22em;
-  color:var(--grey);margin-bottom:.9rem}
-/* 写真が無いときは、エンブレムの足元が立ち位置に来るように並べ替える */
-.stage__figure.is-empty{flex-direction:column-reverse;justify-content:flex-start}
+  -webkit-mask-image:linear-gradient(to bottom,#000 86%,transparent 100%);
+          mask-image:linear-gradient(to bottom,#000 86%,transparent 100%)}
+/* 写真が無いとき：エンブレムを大きく薄く、予告の札を添える */
+.stage__crest{height:40%;width:auto;opacity:.28;filter:drop-shadow(-12px 9px 0 rgba(var(--navy-deep-rgb),.5))}
+.stage__soon{font-family:var(--font-en);font-size:.62rem;font-weight:600;letter-spacing:.24em;
+  color:var(--navy-deep);background:#fff;padding:.55em .9em;border-radius:2px}
+.stage__figure.is-empty{justify-content:center;gap:1.4rem;right:11%}
 .stage__figure.is-empty .stage__photo{display:none}
 .stage__figure:not(.is-empty) .stage__crest,
 .stage__figure:not(.is-empty) .stage__soon{display:none}
-
-@keyframes actor-in{
-  0%  {opacity:0;transform:translate(calc(-50% + var(--px,0px)),12px) scale(.972)}
-  72% {opacity:1;transform:translate(calc(-50% + var(--px,0px)),0) scale(1.004)}
-  100%{opacity:1;transform:translate(calc(-50% + var(--px,0px)),0) scale(1)}}
-@keyframes actor-out{
-  to{opacity:0;transform:translate(calc(-50% + var(--px,0px)),8px) scale(.985);filter:brightness(.86)}}
-@keyframes shadow-in{from{opacity:0;transform:translateX(-50%) scaleX(.55)}}
-@keyframes shadow-out{to{opacity:0;transform:translateX(-50%) scaleX(.75) scaleY(.75)}}
-.stage__figure.is-in{animation:actor-in 360ms cubic-bezier(.16,1,.3,1) 80ms both}
-.stage__figure.is-in .stage__shadow{animation:shadow-in 120ms cubic-bezier(.16,1,.3,1) 40ms both}
-.stage__figure.is-out{animation:actor-out 160ms cubic-bezier(.55,.06,.68,.19) both}
-.stage__figure.is-out .stage__shadow{animation:shadow-out 160ms cubic-bezier(.55,.06,.68,.19) both}
-/* 入れ替えのあいだ、舞台をわずかに落として中心だけ戻す */
-.stage__scene.is-swapping .stage__layer{filter:brightness(.955)}
-.stage__layer{transition:filter .28s cubic-bezier(.4,0,.2,1)}
-.stage__glow{transition:opacity .3s cubic-bezier(.22,1,.36,1)}
-.stage__scene.is-swapping .stage__glow{opacity:.55}
-
-/* 名前は舞台の外に置かず、中継のテロップのように芝の上に重ねる */
-/* 右端を硬く切ると「板を置いた」だけに見える。文字の外側に
-   逃げの余白を取り、そこで芝へ抜けるようにする */
-.stage__plate{position:absolute;left:clamp(1.2rem,3.2vw,2.6rem);bottom:clamp(1.1rem,3vw,2.2rem);
-  width:max-content;max-width:56%;text-align:left;
-  padding:1.25rem 5.5rem 1.25rem 1.35rem;
-  background:linear-gradient(90deg,rgba(var(--navy-deep-rgb),.94) 0,
-    rgba(var(--navy-deep-rgb),.94) calc(100% - 5.5rem),rgba(var(--navy-deep-rgb),0) 100%);
-  -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
-.stage__rule{position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);
-  transform-origin:50% 50%}
+/* テロップ */
+.stage__plate{position:absolute;left:clamp(1.2rem,3.2vw,2.6rem);bottom:clamp(1.2rem,3.2vw,2.4rem);z-index:4;
+  max-width:min(46%,420px);padding-left:1.1rem;color:#fff}
+.stage__rule{position:absolute;left:0;top:.2rem;bottom:.2rem;width:3px;background:var(--gold);transform-origin:50% 0}
 .stage__plate p{overflow:hidden;margin:0}
 .stage__plate p>span{display:block;will-change:transform,opacity}
-.stage__pos{margin:0 0 1rem;min-height:1.2em}
-.stage__plate .stage__pos>span{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem}
-/* 塗り＝役割、線＝ポジション。カードと同じ区別 */
+.stage__pos{margin:0 0 .9rem;min-height:1.2em}
+.stage__plate .stage__pos>span{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem}
 .stage__pos>span>b{font-family:var(--font-ja);font-size:.66rem;font-weight:700;letter-spacing:.12em;
-  line-height:1;border-radius:3px;padding:.58em .9em;white-space:nowrap;
-  background:var(--gold);color:var(--navy-deep)}
-.stage__pos>span>span{font-family:var(--font-en);font-size:.68rem;font-weight:600;
-  letter-spacing:.16em;color:var(--gold);line-height:1;white-space:nowrap;
-  border:1px solid rgba(230,193,92,.45);border-radius:3px;padding:.55em .8em}
-/* 役割とポジションは別のまとまりなので、境目だけ広く取る */
-.stage__pos>span>b+span{margin-left:.4rem}
-@keyframes line-out{to{opacity:0;transform:translateY(-100%)}}
-@keyframes line-in{from{opacity:0;transform:translateY(100%)}}
-@keyframes rule-in{from{opacity:0;transform:scaleY(.65)}}
+  white-space:nowrap;line-height:1;border-radius:2px;padding:.55em .82em;background:var(--gold);color:var(--navy-deep)}
+.stage__pos>span>span{font-family:var(--font-en);font-size:.7rem;font-weight:600;letter-spacing:.18em;
+  line-height:1;color:var(--navy-deep);background:#fff;border-radius:2px;padding:.55em .75em}
+.stage__name{font-size:clamp(1.7rem,3.8vw,2.7rem);font-weight:900;letter-spacing:.06em;line-height:1.15;
+  text-shadow:0 2px 0 rgba(var(--navy-deep-rgb),.6)}
+.stage__kana{font-size:.76rem;letter-spacing:.24em;color:#d6dced;margin:.5rem 0 0}
+.stage__dob{font-family:var(--font-en);font-size:.78rem;letter-spacing:.1em;color:#d6dced;margin:.9rem 0 0}
+.stage__dob>span{padding-top:.7rem;border-top:1px solid rgba(230,193,92,.5)}
+.stage__dob i{font-style:normal;font-size:.62rem;letter-spacing:.2em;margin-right:.6rem;color:var(--gold)}
+.stage__hint{text-align:center;font-size:.76rem;color:var(--grey);margin:1.6rem 0 0}
+/* ---- 入れ替えの振り付け ---- */
+@keyframes actor-in{
+  0%  {opacity:0;transform:translateX(calc(var(--px,0px) + 28px))}
+  100%{opacity:1;transform:translateX(var(--px,0px))}}
+@keyframes actor-out{to{opacity:0;transform:translateX(calc(var(--px,0px) - 18px))}}
+@keyframes big-in{from{opacity:0;transform:translateX(-.08em)}}
+@keyframes line-in{from{transform:translateY(110%);opacity:0}}
+@keyframes line-out{to{transform:translateY(-110%);opacity:0}}
+@keyframes rule-in{from{transform:scaleY(0)}}
 @keyframes fade-in{from{opacity:0}}
 @keyframes fade-out{to{opacity:0}}
+.stage__figure.is-in{animation:actor-in 420ms cubic-bezier(.16,1,.3,1) 60ms both}
+.stage__figure.is-out{animation:actor-out 160ms cubic-bezier(.55,.06,.68,.19) both}
+.stage__scene.is-swapping .stage__big{animation:big-in 420ms var(--ease) both}
 .stage__plate.is-out p>span{animation:line-out 140ms cubic-bezier(.4,0,.2,1) 40ms both}
 .stage__plate.is-in .stage__rule{animation:rule-in 90ms cubic-bezier(.22,1,.36,1) 170ms both}
 .stage__plate.is-in p>span{animation:line-in 160ms cubic-bezier(.22,1,.36,1) both}
@@ -844,44 +835,35 @@ button.btn{color:inherit;font:inherit}
 .stage__plate.is-in .stage__name>span{animation-delay:300ms}
 .stage__plate.is-in .stage__kana>span{animation-delay:340ms}
 .stage__plate.is-in .stage__dob>span{animation-delay:380ms}
-.stage__name{font-size:clamp(1.5rem,3.4vw,2.3rem);font-weight:900;letter-spacing:.08em;
-  color:#fff;margin:0;line-height:1.25;text-shadow:0 2px 14px rgba(var(--navy-deep-rgb),.8)}
-.stage__kana{font-size:.76rem;letter-spacing:.2em;color:#cbd3e2;margin:.45rem 0 0}
-.stage__dob{font-family:var(--font-en);font-size:.74rem;letter-spacing:.08em;color:#b4bdd0;
-  margin:.9rem 0 0}
-.stage__dob>span{padding-top:.7rem;border-top:1px solid rgba(230,193,92,.35)}
-.stage__dob i{font-style:normal;font-size:.62rem;letter-spacing:.18em;margin-right:.6rem}
-.stage__hint{text-align:center;font-size:.76rem;color:var(--grey);margin:1.6rem 0 0}
-/* カードは押せる */
-.mcard{cursor:pointer}
-.mcard.is-on{border-color:var(--gold);background:rgba(230,193,92,.08)}
 .mcard:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media (max-width:900px){
+  .stage__scene{aspect-ratio:16/10}
+  .stage__figure{right:6%;height:90%}
+  .stage__plate{max-width:52%}
+}
 @media (max-width:640px){
-  .stage{padding-top:1.8rem}
-  /* 横長のままだと舞台が低すぎる。左右を切って縦を稼ぐ（立ち位置は縦基準なのでずれない） */
-  .stage__scene{border-radius:6px;aspect-ratio:5/4}
-  .stage__scrim{background:linear-gradient(0deg,rgba(var(--navy-deep-rgb),.55),transparent 42%)}
-  .stage__plate{position:static;width:auto;max-width:none;text-align:center;background:none;
-    -webkit-backdrop-filter:none;backdrop-filter:none;
-    margin:1.2rem auto 0;padding:1.1rem 0 0;border-top:1px solid var(--line)}
+  .stage{padding-top:1.6rem}
+  .stage__scene{border-radius:6px;aspect-ratio:4/5;min-height:0}
+  .stage__big{font-size:clamp(4.2rem,26vw,7rem)}
+  .stage__slab{right:-14%;bottom:-8%;width:78%;height:60%}
+  .stage__figure{right:50%;transform:translateX(50%);height:78%}
+  .stage__figure.is-in{animation:fade-in 240ms linear both}
+  .stage__figure.is-out{animation:fade-out 120ms linear both}
+  .stage__kicker{font-size:.58rem}
+  .stage__plate{position:static;max-width:none;padding:1.1rem 0 0;margin:1.2rem 0 0;border-top:1px solid var(--line);text-align:center}
   .stage__rule{display:none}
   .stage__plate .stage__pos>span{justify-content:center}
-  .stage__dob{margin-top:.8rem}
-  .stage__soon{font-size:.56rem}
+  .stage__name{text-shadow:none}
   .stage__hint{font-size:.72rem}
 }
 @media (prefers-reduced-motion:reduce){
-  /* 沈み込みや拡大はやめ、短いフェードだけにする */
   .stage__figure.is-in{animation:fade-in 180ms linear both}
-  .stage__figure.is-in .stage__shadow,
-  .stage__figure.is-out .stage__shadow{animation:none}
   .stage__figure.is-out{animation:fade-out 120ms linear both}
+  .stage__scene.is-swapping .stage__big{animation:none}
   .stage__plate.is-in p>span,
   .stage__plate.is-in .stage__rule{animation:fade-in 160ms linear both;animation-delay:0ms}
   .stage__plate.is-out p>span{animation:fade-out 100ms linear both}
-  .stage__scene.is-swapping .stage__layer{filter:none}
 }
-
 /* ---------- MEMBER ---------- */
 .members{background:var(--navy-deep);color:#fff;
   padding:clamp(5rem,11vw,9rem) clamp(1.4rem,5vw,4rem)}
@@ -900,38 +882,63 @@ button.btn{color:inherit;font:inherit}
 .mfilter__btn i{font-style:normal;margin-left:.6em;font-size:.9em;opacity:.65}
 .mfilter__count{text-align:center;font-family:var(--font-en);font-size:.76rem;
   letter-spacing:.16em;color:var(--grey);margin:1.1rem 0 0}
-/* 名鑑 */
+/* 名鑑：1枚ずつが小さなポスター。
+   金の板は傾け、ローマ字は端で切らせる。写真が無い選手はエンブレムを薄く置く。
+   HTMLは名前・かな・生年月日のままで、板や写真の器は main.js が組み立てる */
 .mgrid{list-style:none;margin:2.4rem auto 0;padding:0;max-width:var(--maxw);
-  display:grid;gap:.9rem;
-  grid-template-columns:repeat(auto-fill,minmax(228px,1fr))}
-.mcard{position:relative;border:1px solid var(--line);border-radius:6px;
-  padding:1.5rem 1.4rem 1.3rem;background:rgba(255,255,255,.02);
-  transition:background .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease)}
-.mcard:hover{background:rgba(230,193,92,.06);border-color:var(--gold);transform:translateY(-4px)}
-.mcard__pos{display:flex;flex-wrap:wrap;align-items:center;gap:.42rem;margin:0 0 1rem}
-.mcard__pos span{font-family:var(--font-en);font-size:.68rem;font-weight:600;
-  letter-spacing:.15em;color:var(--gold);line-height:1;
-  border:1px solid rgba(230,193,92,.45);border-radius:3px;padding:.5em .72em}
-.mcard__name{font-size:1.3rem;font-weight:700;letter-spacing:.05em;margin:0;line-height:1.4}
-.mcard__kana{font-size:.74rem;letter-spacing:.14em;color:var(--grey);margin:.4rem 0 0}
-.mcard__dob{font-family:var(--font-en);font-size:.78rem;letter-spacing:.08em;
-  color:#c2c9da;margin:1.1rem 0 0;display:flex;align-items:baseline;gap:.6rem}
-.mcard__dob span{font-size:.64rem;letter-spacing:.18em;color:var(--grey)}
-/* 役割の印（キャプテン・副キャプテン・オーナー・監督）。
-   1人に複数付く。枠線に浮かせると行間に食い込んで雑になるので、
-   ポジションと同じ行に、塗りと線で区別して並べる */
-.mcard__pos b{font-family:var(--font-ja);font-size:.66rem;font-weight:700;letter-spacing:.1em;
-  white-space:nowrap;line-height:1;border-radius:3px;padding:.55em .82em;
-  background:var(--gold);color:var(--navy-deep)}
-.mcard__pos b+span{margin-left:.3rem}
+  display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(212px,1fr))}
+.mcard{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:6px;isolation:isolate;cursor:pointer;
+  padding:0;border:1px solid var(--line);
+  background:radial-gradient(70% 60% at 50% 70%,rgba(var(--navy-rgb),.95),transparent 72%),
+             linear-gradient(168deg,var(--navy-2),var(--navy-deep) 68%);
+  transition:transform .35s var(--ease),border-color .35s var(--ease)}
+.mcard::before{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;
+  opacity:.22;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");background-size:220px 220px}
+.mcard:hover{border-color:var(--gold);transform:translateY(-4px)}
+.mcard.is-on{border-color:var(--gold)}
+.mcard.is-on::after{content:"";position:absolute;inset:0;z-index:6;pointer-events:none;
+  box-shadow:inset 0 0 0 2px var(--gold);border-radius:6px}
+.mcard__big{position:absolute;left:-.04em;top:.3rem;z-index:0;margin:0;pointer-events:none;
+  font-family:var(--font-display);font-size:clamp(3.4rem,7vw,5.4rem);line-height:.86;letter-spacing:-.01em;
+  white-space:nowrap;text-transform:uppercase;color:rgba(255,255,255,.13)}
+.mcard__big i{display:block;font-style:normal;color:transparent;
+  -webkit-text-stroke:1.5px rgba(230,193,92,.42);transform:translateX(.38em)}
+.mcard__photo{position:absolute;left:50%;bottom:0;height:80%;width:auto;max-width:none;z-index:1;
+  transform:translateX(-50%);object-fit:contain;object-position:bottom;
+  filter:drop-shadow(-10px 8px 0 rgba(var(--navy-deep-rgb),.55));
+  transition:transform .5s var(--ease)}
+.mcard:hover .mcard__photo{transform:translateX(-50%) scale(1.035)}
+.mcard__crest{position:absolute;left:50%;top:44%;height:40%;width:auto;z-index:1;
+  transform:translate(-50%,-50%);opacity:.22}
+.mcard__soon{position:absolute;left:50%;top:61%;transform:translateX(-50%);white-space:nowrap;z-index:3;font-family:var(--font-en);font-size:.56rem;
+  font-weight:600;letter-spacing:.2em;color:var(--navy-deep);background:#fff;padding:.5em .7em;border-radius:2px}
+.mcard:not(.is-nophoto) .mcard__crest,.mcard:not(.is-nophoto) .mcard__soon{display:none}
+.mcard__pos{position:absolute;left:.8rem;top:.8rem;z-index:3;display:flex;flex-wrap:wrap;gap:.35rem;margin:0;max-width:78%}
+.mcard__pos span{font-family:var(--font-en);font-size:.62rem;font-weight:600;letter-spacing:.16em;line-height:1;
+  color:var(--navy-deep);background:#fff;border-radius:2px;padding:.5em .65em}
+.mcard__pos b{font-family:var(--font-ja);font-size:.6rem;font-weight:700;letter-spacing:.1em;white-space:nowrap;
+  line-height:1;border-radius:2px;padding:.55em .7em;background:var(--gold);color:var(--navy-deep)}
+/* 金の板：名前とかな */
+.mcard__plate{position:absolute;left:-6px;bottom:1.1rem;z-index:4;max-width:calc(100% - 1.6rem);
+  background:var(--gold);color:var(--navy-deep);padding:.55rem .95rem .5rem 1.15rem;
+  transform:rotate(-2.5deg);transform-origin:0 100%;
+  box-shadow:6px 6px 0 rgba(var(--navy-deep-rgb),.55)}
+.mcard__name{font-size:1.18rem;font-weight:900;letter-spacing:.05em;margin:0;line-height:1.25;color:var(--navy-deep)}
+.mcard__kana{font-size:.6rem;letter-spacing:.16em;color:rgba(var(--navy-deep-rgb),.78);margin:.15rem 0 0}
+.mcard__dob{position:absolute;right:.7rem;bottom:.7rem;z-index:3;margin:0;
+  font-family:var(--font-en);font-size:.68rem;letter-spacing:.08em;color:#fff;line-height:1;
+  display:flex;flex-direction:column;align-items:flex-end;gap:.28rem;
+  text-shadow:0 1px 0 rgba(var(--navy-deep-rgb),.8)}
+.mcard__dob span{font-size:.54rem;letter-spacing:.2em;color:var(--gold)}
 @media (max-width:520px){
   .mgrid{grid-template-columns:1fr 1fr;gap:.7rem}
-  .mcard{padding:1.2rem 1rem 1.1rem}
-  .mcard__name{font-size:1.12rem}
-  /* 2列だと「イノウエ ユウイチロウ」が折り返すので、少しだけ詰める */
-  .mcard__kana{font-size:.68rem;letter-spacing:.06em}
+  .mcard__big{font-size:clamp(3rem,15vw,4rem)}
+  .mcard__name{font-size:1rem}
+  .mcard__kana{font-size:.54rem;letter-spacing:.08em}
+  .mcard__plate{padding:.45rem .7rem .4rem .85rem;bottom:.9rem}
+  .mcard__dob{font-size:.6rem}
+  .mcard__pos span,.mcard__pos b{font-size:.54rem}
 }
-
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.001ms!important;transition-duration:.001ms!important}

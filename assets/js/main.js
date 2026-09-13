@@ -456,6 +456,7 @@
     if (!scene || !cast || !grid) return;
 
     const plate = document.getElementById("stagePlate");
+    const big   = document.getElementById("stageBig");
     const elPos = plate.querySelector(".stage__pos > span");
     const elNm  = plate.querySelector(".stage__name > span");
     const elKn  = plate.querySelector(".stage__kana > span");
@@ -478,6 +479,7 @@
       const sh = document.createElement("span");
       sh.className = "stage__shadow";
       const img = new Image();
+      img.addEventListener("error", () => { el.classList.add("is-empty"); });
       img.className = "stage__photo";
       img.alt = card.querySelector(".mcard__name").textContent;
       img.addEventListener("load", () => {
@@ -494,7 +496,11 @@
       return el;
     }
 
+    // ローマ字の姓は data-photo（例 iwamura-naoki）の前半から作る
+    const surname = (card) => (card.dataset.photo || "").split("-")[0].toUpperCase();
+
     function fillPlate(card) {
+      if (big) big.querySelectorAll("span,i").forEach((n) => { n.textContent = surname(card); });
       elPos.innerHTML =
         Array.from(card.querySelectorAll(".mcard__pos b")).map((r) => `<b>${r.textContent}</b>`).join("") +
         card.dataset.pos.split(" ").map((p) => `<span>${p}</span>`).join("");
@@ -553,24 +559,19 @@
 
     // 奥行きを出すための視差。触れる端末では動かさない
     if (soft && matchMedia("(hover:hover)").matches) {
-      const back  = scene.querySelector(".stage__layer--back");
-      const front = scene.querySelector(".stage__layer--front");
+      // 写真だけをわずかに逆方向へ。巨大文字と板は動かさない（紙のポスターらしさを保つ）
       scene.addEventListener("pointermove", (e) => {
         const b = scene.getBoundingClientRect();
         const x = (e.clientX - b.left) / b.width  - .5;
-        const y = (e.clientY - b.top)  / b.height - .5;
-        back.style.transform  = `translate(${x * -8}px, ${y * -5}px) scale(1.03)`;
-        front.style.transform = `translate(${x * -16}px, ${y * -9}px) scale(1.02)`;
-        scene.style.setProperty("--px", `${x * -22}px`);
+        scene.style.setProperty("--px", `${x * -18}px`);
       });
-      scene.addEventListener("pointerleave", () => {
-        back.style.transform = front.style.transform = "";
-        scene.style.setProperty("--px", "0px");
-      });
+      scene.addEventListener("pointerleave", () => scene.style.setProperty("--px", "0px"));
     }
 
-    // 最初はキャプテンに立ってもらう（副キャプテンと取り違えないよう完全一致で）
-    show(cards.find((c) => Array.from(c.querySelectorAll(".mcard__pos b"))
+    // 最初はキャプテン。?p=<data-photo> が付いていればその選手（共有リンク用）
+    const wanted = new URLSearchParams(location.search).get("p");
+    show(cards.find((c) => wanted && c.dataset.photo === wanted)
+      || cards.find((c) => Array.from(c.querySelectorAll(".mcard__pos b"))
       .some((r) => r.textContent === "キャプテン")) || cards[0], true);
   })();
 
@@ -585,6 +586,28 @@
     const cards = Array.from(grid.querySelectorAll(".mcard"));
     const btns  = Array.from(bar.querySelectorAll(".mfilter__btn"));
     const count = document.getElementById("mcount");
+
+    // カードをポスターに組み立てる（HTMLは名前・かな・生年月日のまま触らない）
+    cards.forEach((c) => {
+      const sur = (c.dataset.photo || "").split("-")[0].toUpperCase();
+      const bigEl = document.createElement("p");
+      bigEl.className = "mcard__big"; bigEl.setAttribute("aria-hidden", "true");
+      bigEl.innerHTML = `<span></span><i></i>`;
+      bigEl.querySelectorAll("span,i").forEach((n) => { n.textContent = sur; });
+      const img = new Image();
+      img.className = "mcard__photo"; img.alt = ""; img.loading = "lazy"; img.decoding = "async";
+      img.addEventListener("error", () => c.classList.add("is-nophoto"));
+      img.src = `assets/img/member/${c.dataset.photo}.webp`;
+      const crest = new Image();
+      crest.className = "mcard__crest"; crest.src = "assets/img/logo.webp"; crest.alt = "";
+      const soon = document.createElement("span");
+      soon.className = "mcard__soon"; soon.textContent = "PHOTO SOON";
+      const plate = document.createElement("div");
+      plate.className = "mcard__plate";
+      plate.append(c.querySelector(".mcard__name"), c.querySelector(".mcard__kana"));
+      c.prepend(bigEl, img, crest, soon);
+      c.append(plate);
+    });
 
     // 該当が0人のポジションはボタンごと出さない
     const tally = (pos) => pos === "all"
