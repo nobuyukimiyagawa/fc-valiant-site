@@ -768,7 +768,7 @@ button.btn{color:inherit;font:inherit}
 .stage__kicker{position:absolute;right:clamp(1rem,2.6vw,2rem);top:clamp(.9rem,2.2vw,1.6rem);z-index:5;margin:0;
   font-family:var(--font-en);font-size:.66rem;font-weight:600;letter-spacing:.28em;color:var(--navy-deep);
   background:#fff;padding:.5em .9em;border-radius:2px}
-/* 巨大なローマ字。1行目は実線、2行目は輪郭だけを右へずらす */
+/* 巨大なローマ字。1行目=姓（実線）、2行目=名（輪郭だけ、右へずらす） */
 .stage__big{position:absolute;left:-.03em;top:-.02em;z-index:2;margin:0;pointer-events:none;
   font-family:var(--font-display);font-weight:400;
   font-size:clamp(5rem,17.5vw,15.5rem);line-height:.84;letter-spacing:-.01em;

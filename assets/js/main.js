@@ -496,11 +496,15 @@
       return el;
     }
 
-    // ローマ字の姓は data-photo（例 iwamura-naoki）の前半から作る
-    const surname = (card) => (card.dataset.photo || "").split("-")[0].toUpperCase();
+    // ローマ字は data-photo（例 iwamura-naoki）から。1行目=姓、2行目=名
+    const roman = (card) => (card.dataset.photo || "").toUpperCase().split("-");
 
     function fillPlate(card) {
-      if (big) big.querySelectorAll("span,i").forEach((n) => { n.textContent = surname(card); });
+      if (big) {
+        const [sur, given] = roman(card);
+        big.querySelector("span").textContent = sur || "";
+        big.querySelector("i").textContent = given || "";
+      }
       elPos.innerHTML =
         Array.from(card.querySelectorAll(".mcard__pos b")).map((r) => `<b>${r.textContent}</b>`).join("") +
         card.dataset.pos.split(" ").map((p) => `<span>${p}</span>`).join("");
@@ -589,11 +593,12 @@
 
     // カードをポスターに組み立てる（HTMLは名前・かな・生年月日のまま触らない）
     cards.forEach((c) => {
-      const sur = (c.dataset.photo || "").split("-")[0].toUpperCase();
+      const [sur, given] = (c.dataset.photo || "").toUpperCase().split("-");
       const bigEl = document.createElement("p");
       bigEl.className = "mcard__big"; bigEl.setAttribute("aria-hidden", "true");
       bigEl.innerHTML = `<span></span><i></i>`;
-      bigEl.querySelectorAll("span,i").forEach((n) => { n.textContent = sur; });
+      bigEl.querySelector("span").textContent = sur || "";
+      bigEl.querySelector("i").textContent = given || "";
       const img = new Image();
       img.className = "mcard__photo"; img.alt = ""; img.loading = "lazy"; img.decoding = "async";
       img.addEventListener("error", () => c.classList.add("is-nophoto"));
