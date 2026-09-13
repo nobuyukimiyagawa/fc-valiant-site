@@ -765,9 +765,6 @@ button.btn{color:inherit;font:inherit}
   clip-path:polygon(0 0,100% 0,100% 100%,9% 100%)}
 .stage__slab::after{content:"";position:absolute;inset:0;
   background:repeating-linear-gradient(135deg,rgba(var(--navy-deep-rgb),.10) 0 2px,transparent 2px 11px)}
-.stage__kicker{position:absolute;right:clamp(1rem,2.6vw,2rem);top:clamp(.9rem,2.2vw,1.6rem);z-index:5;margin:0;
-  font-family:var(--font-en);font-size:.66rem;font-weight:600;letter-spacing:.28em;color:var(--navy-deep);
-  background:#fff;padding:.5em .9em;border-radius:2px}
 /* 巨大なローマ字。1行目=姓（実線）、2行目=名（輪郭だけ）。どちらも左端に揃える */
 .stage__big{position:absolute;left:-.03em;top:-.02em;z-index:2;margin:0;pointer-events:none;
   font-family:var(--font-display);font-weight:400;
@@ -845,7 +842,6 @@ button.btn{color:inherit;font:inherit}
   .stage__figure{right:50%;transform:translateX(50%);height:78%}
   .stage__figure.is-in{animation:fade-in 240ms linear both}
   .stage__figure.is-out{animation:fade-out 120ms linear both}
-  .stage__kicker{font-size:.58rem}
   .stage__plate{position:static;max-width:none;padding:1.1rem 0 0;margin:1.2rem 0 0;border-top:1px solid var(--line);text-align:center}
   .stage__rule{display:none}
   .stage__plate .stage__pos>span{justify-content:center}
