@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/style.css?v=daff34fb" />
+<link rel="stylesheet" href="assets/css/style.css?v=9e48e2cd" />
 <!-- GA4 start -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-N5YR1ZRBVX"></script>
 <script>
@@ -29,33 +29,24 @@
 </script>
 <!-- GA4 end -->
 </head>
-<body>
+<body class="page-schedule">
 
 <a class="skip-link" href="#main">本文へスキップ</a>
 
-<!-- ===== Preloader ===== -->
-<div class="preloader" id="preloader">
-  <div class="preloader__inner">
-    <span class="preloader__mark">FCV</span>
-    <span class="preloader__bar"><i></i></span>
-  </div>
-</div>
-
 <!-- ===== Header ===== -->
 <header class="header" id="header">
-  <a href="index.html" class="header__brand">
-    <img src="assets/img/logo.webp" alt="FC VALIANT" class="header__logo" />
+  <a href="index.html" class="header__brand" aria-label="FC VALIANT ホーム">
+    <img src="assets/img/logo.webp" alt="" class="header__logo" width="230" height="289" />
     <span class="header__name">FC VALIANT</span>
   </a>
   <nav class="nav" id="nav" aria-label="メインナビゲーション">
-    <a href="member.html">MEMBER</a>
-    <a href="schedule.html" class="is-active" aria-current="page">SCHEDULE</a>
-    <a href="recruit.html">RECRUIT</a>
-    <a href="sponsor.html">SPONSOR</a>
-    <a href="index.html#contact">CONTACT</a>
-    <a href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener" class="nav__cta magnetic">INSTAGRAM</a>
+    <a href="schedule.html" class="is-active" aria-current="page"><span>SCHEDULE</span><small>試合日程</small></a>
+    <a href="member.html"><span>MEMBER</span><small>メンバー</small></a>
+    <a href="recruit.html"><span>RECRUIT</span><small>メンバー募集</small></a>
+    <a href="sponsor.html"><span>SPONSOR</span><small>スポンサー</small></a>
+    <a href="index.html#contact" class="nav__cta"><span>CONTACT</span><small>お問い合わせ</small></a>
   </nav>
-  <button class="burger" id="burger" aria-label="メニューを開閉" aria-expanded="false" aria-controls="nav">
+  <button type="button" class="burger" id="burger" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav">
     <span></span><span></span><span></span>
   </button>
 </header>
@@ -63,22 +54,19 @@
 <main id="main" tabindex="-1">
 
 <!-- ===== Sub hero ===== -->
-<section class="subhero" id="top">
+<section class="subhero subhero--schedule poster-paper" id="top">
   <p class="subhero__crumb"><a href="index.html">HOME</a> <span aria-hidden="true">/</span> SCHEDULE</p>
   <h1 class="subhero__en">SCHEDULE</h1>
   <p class="subhero__ja">2026-27 シーズン 試合日程</p>
 </section>
 
 <!-- ===== Schedule =====
-     ▼▼▼ プレースホルダー：日程・対戦相手・会場・結果（スコア）はすべて仮データです。実データに差し替えてください。
-     ・各試合の <time datetime="YYYY-MM-DD"> を正しい日付にすると、「NEXT MATCH」ハイライトと
-       過去試合のグレーアウトは JS が自動判定します（手動でのクラス付けは不要）。
-     ・結果バッジは fixture__status--win / --draw / --lose / --scheduled を使い分けてください。
-       シーズン成績（WIN/DRAW/LOSE）はバッジから自動集計されます。
-     ・トップページ（index.html）の「NEXT MATCH」ティザーは自動同期ではないので、直近の試合に合わせて手動更新してください。 ▼▼▼ -->
+     現行6試合を保持。time[datetime] と結果バッジから次戦・成績を自動判定。
+     トップの次戦は index.html の .hero__next 1か所を手動更新。 -->
 <section class="schedule schedule--page">
-  <p class="schedule__lead" data-anim="lines">熊本県社会人サッカーリーグ（C-4）の日程です。<br>応援・観戦はどなたでも大歓迎です。<br>会場でお待ちしてます。</p>
 
+  <div class="schedule__summary">
+  <p class="schedule__lead" data-anim="lines">熊本県社会人サッカーリーグ（C-4）の日程です。<br>応援・観戦はどなたでも歓迎します。<br>会場でお待ちしています。</p>
   <!-- シーズン成績サマリ（JSが結果バッジから自動集計。JS無効時は非表示） -->
   <div class="season" id="seasonSummary" hidden data-reveal>
     <p class="season__title">2026-27 SEASON<span>シーズン成績</span></p>
@@ -87,6 +75,8 @@
       <div class="season__stat"><dt>DRAW<i>分</i></dt><dd data-season="draw">0</dd></div>
       <div class="season__stat"><dt>LOSE<i>敗</i></dt><dd data-season="lose">0</dd></div>
     </dl>
+  </div>
+
   </div>
 
   <div class="fixtures" id="fixtures">
@@ -159,11 +149,11 @@
       <span class="fixture__status fixture__status--scheduled">SCHEDULED</span>
     </div>
   </div>
-  <p class="schedule__note" data-reveal>※ 日程・対戦相手・会場は変更となる場合があります。最新情報は公式 Instagram でご確認ください。</p>
+  <p class="schedule__note" data-reveal>※ 日程・対戦相手・会場は変更となる場合があります。最新情報は<a href="https://www.instagram.com/fcv.official/" data-ig="profile" target="_blank" rel="noopener">公式 Instagram</a>でご確認ください。</p>
 
   <div class="page-cta" data-reveal>
-    <a href="index.html#contact" class="btn btn--gold magnetic">お問い合わせ <i>→</i></a>
-    <a href="index.html" class="btn btn--ghost magnetic">← HOME に戻る</a>
+    <a href="index.html#contact" class="btn btn--gold">お問い合わせ <i>→</i></a>
+    <a href="index.html" class="btn btn--ghost">← HOME に戻る</a>
   </div>
 </section>
 
@@ -172,31 +162,28 @@
 <!-- ===== Footer ===== -->
 <footer class="footer">
   <div class="footer__top">
-    <div class="footer__brand">
-      <img src="assets/img/logo.webp" alt="FC VALIANT" />
-      <p>FC VALIANT</p>
-      <span>まちと、仲間と。</span>
-    </div>
-    <nav class="footer__nav">
+    <a class="footer__brand" href="index.html">
+      <img src="assets/img/logo.webp" alt="" width="230" height="289" />
+      <p>FC VALIANT<span>まちと、仲間と。</span></p>
+    </a>
+    <nav class="footer__nav" aria-label="フッターナビゲーション">
       <a href="index.html#team">TEAM</a>
       <a href="index.html#activity">ACTIVITY</a>
+      <a href="schedule.html">SCHEDULE</a>
       <a href="member.html">MEMBER</a>
-    <a href="schedule.html">SCHEDULE</a>
       <a href="recruit.html">RECRUIT</a>
       <a href="sponsor.html">SPONSOR</a>
       <a href="index.html#contact">CONTACT</a>
     </nav>
   </div>
-  <div class="footer__big" aria-hidden="true" data-marquee-line>VALIANT — VALIANT — VALIANT — </div>
   <div class="footer__bottom">
     <span>© 2021–2026 FC VALIANT. KUMAMOTO, JAPAN.</span>
-    <a href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener">INSTAGRAM</a>
+    <a href="https://www.instagram.com/fcv.official/" data-ig="profile" target="_blank" rel="noopener">INSTAGRAM ↗</a>
   </div>
 </footer>
 
 <a href="#top" class="totop" id="totop" data-scroll aria-label="ページトップへ">↑</a>
 
-<script src="assets/js/lenis.min.js"></script>
-<script src="assets/js/main.js?v=5a88b37d"></script>
+<script src="assets/js/main.js?v=425f0a3c"></script>
 </body>
 </html>

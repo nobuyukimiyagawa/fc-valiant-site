@@ -1,11 +1,12 @@
 /* ============================================================
    FC VALIANT — interactions
-   - Lenis smooth scroll
+   - native scrolling / accessible mobile navigation
    - text split reveals (chars / lines / wave)
-   - image clip reveal, magnetic buttons, velocity marquee
+   - sponsor ticker / schedule / Instagram DM / MEMBER posters / jersey view
    ============================================================ */
 (function () {
   "use strict";
+  document.documentElement.classList.add("js");
 
   /* ============================================================
      0a. Instagram アカウント名
@@ -156,8 +157,9 @@
     initObservers();
   }
 
-  window.addEventListener("load", () => setTimeout(start, 850));
-  setTimeout(start, 2600); // safety fallback
+  // 写真・外部フォントの読み込みで、案内やリンクを待たせない。
+  // 下の各ページの初期化が終わってから observers を起動する。
+  setTimeout(start, 0);
 
   /* ============================================================
      3. LENIS SMOOTH SCROLL
@@ -172,7 +174,7 @@
         (typeof target === "number"
           ? target
           : target.getBoundingClientRect().top + window.scrollY) + (offset || 0);
-      window.scrollTo({ top, behavior: "smooth" });
+      window.scrollTo({ top, behavior: reduceMotion ? "auto" : "smooth" });
     }
   }
 
@@ -182,12 +184,19 @@
   const header = document.getElementById("header");
   const nav = document.getElementById("nav");
   const burger = document.getElementById("burger");
+  const menuBackground = Array.from(document.querySelectorAll("main, .footer, .totop"));
+
+  function setMenuBackground(inert) {
+    menuBackground.forEach((el) => { el.inert = inert; });
+  }
 
   function closeMenu() {
     nav.classList.remove("is-open");
     if (header) header.classList.remove("is-nav-open");
     burger.classList.remove("is-open");
     burger.setAttribute("aria-expanded", "false");
+    burger.setAttribute("aria-label", "メニューを開く");
+    setMenuBackground(false);
     if (lenis) lenis.start();
     document.body.style.overflow = "";
   }
@@ -200,7 +209,11 @@
       if (target === null) return;
       e.preventDefault();
       closeMenu();
-      scrollToTarget(target, -6);
+      scrollToTarget(target, -84);
+      if (target && typeof target !== "number") {
+        if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+        target.focus({ preventScroll: true });
+      }
     });
   });
 
@@ -209,9 +222,12 @@
     if (header) header.classList.toggle("is-nav-open", open);
     burger.classList.toggle("is-open", open);
     burger.setAttribute("aria-expanded", String(open));
+    burger.setAttribute("aria-label", open ? "メニューを閉じる" : "メニューを開く");
+    setMenuBackground(open);
     if (open) {
       if (lenis) lenis.stop();
       document.body.style.overflow = "hidden";
+      nav.querySelector("a")?.focus();
     } else {
       if (lenis) lenis.start();
       document.body.style.overflow = "";
@@ -224,6 +240,21 @@
       closeMenu();
       burger.focus();
     }
+    if (e.key === "Tab" && nav.classList.contains("is-open")) {
+      const links = Array.from(nav.querySelectorAll("a[href]"));
+      const first = links[0];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        burger.focus();
+      } else if (!e.shiftKey && document.activeElement === burger) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  });
+  nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+  window.matchMedia("(min-width: 1101px)").addEventListener("change", (e) => {
+    if (e.matches) closeMenu();
   });
 
   /* ============================================================
@@ -244,6 +275,12 @@
     let paused = false;
     let resumeTimer = null;
     let last = 0;
+    let visible = true;
+    let hovering = false;
+    let focused = false;
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }).observe(view);
+    }
 
     function layout() {
       track.querySelectorAll(".sponsor-run").forEach((el, i) => {
@@ -275,12 +312,14 @@
     function tick(now) {
       const dt = last ? now - last : 0;
       // タブが裏に回ると rAF が止まる。復帰1フレーム目で飛ばないよう間引く
-      if (last && runW && dt < 100) {
+      if (last && runW && dt < 100 && visible) {
         if (Math.abs(view.scrollLeft - pos) > 1.5) pos = view.scrollLeft; // 手で動かされた分を取り込む
-        if (!paused) pos += (SPEED * dt) / 1000;
-        if (pos >= runW) pos -= runW;
-        if (pos < 0) pos += runW;
-        view.scrollLeft = pos;
+        if (!paused && !hovering && !focused) {
+          pos += (SPEED * dt) / 1000;
+          if (pos >= runW) pos -= runW;
+          if (pos < 0) pos += runW;
+          view.scrollLeft = pos;
+        }
       }
       last = now;
       requestAnimationFrame(tick);
@@ -290,10 +329,10 @@
     view.addEventListener("wheel", hold, { passive: true });
     view.addEventListener("touchstart", hold, { passive: true });
     view.addEventListener("touchend", hold, { passive: true });
-    view.addEventListener("mouseenter", () => { paused = true; });
-    view.addEventListener("mouseleave", () => { paused = false; });
-    view.addEventListener("focusin", () => { paused = true; });
-    view.addEventListener("focusout", () => { paused = false; });
+    view.addEventListener("mouseenter", () => { hovering = true; });
+    view.addEventListener("mouseleave", () => { hovering = false; });
+    view.addEventListener("focusin", () => { focused = true; });
+    view.addEventListener("focusout", () => { focused = view.contains(document.activeElement); });
     // 巻き戻し位置の補正（手で送られたときも継ぎ目を出さない）
 
 
@@ -344,11 +383,14 @@
   /* ============================================================
      4a3. 掲載枠の3Dビュー（スポンサーページ）
      番号を押すと該当プランへ、プランを押すとその枠が見える向きへ。
-     model-viewer が読めなかった場合は poster 画像が残るだけで壊れない。
+     model-viewer の初期化前でも、プラン本文と掲載位置の操作は例外を出さない。
      ============================================================ */
   (function initJersey() {
     const view = document.getElementById("jerseyView");
     if (!view) return;
+    const disclosure = view.closest("details");
+    // 狭い画面ではプランを先に読む。JSがなくても details は操作できる。
+    if (disclosure && matchMedia("(max-width: 760px)").matches) disclosure.open = false;
 
     // 枠ごとの見せたい向き（方位角 仰角）
     const ORBIT = {
@@ -364,7 +406,7 @@
       const b = view.getBoundingClientRect();
       if (!b.height) return 6.6;
       const half = Math.tan(15 * Math.PI / 180);
-      const d = view.getDimensions();
+      const d = (typeof view.getDimensions === "function" ? view.getDimensions() : null) || {};
       const w = (d.x || 3.16) / 2 * 1.06, h = (d.y || 2.62) / 2 * 1.10;
       return Math.max(h / half, w / (half * (b.width / b.height)));
     }
@@ -373,6 +415,11 @@
     function moveTo(orbit) {
       view.setAttribute("camera-orbit", orbit + " " + fitRadius().toFixed(2) + "m");
     }
+    if (disclosure) disclosure.addEventListener("toggle", () => {
+      if (!disclosure.open) return;
+      const cur = (view.getAttribute("camera-orbit") || "").split(" ");
+      if (cur.length === 3) moveTo(cur[0] + " " + cur[1]);
+    });
 
     // 枠の幅が変わったら寄りも取り直す
     let resizeT = 0;
@@ -398,7 +445,10 @@
       if (move && ORBIT[plan]) {
         stopSpin();
         moveTo(ORBIT[plan]);
-        btns.forEach((b) => b.classList.remove("is-on"));
+        btns.forEach((b) => {
+          b.classList.remove("is-on");
+          b.setAttribute("aria-pressed", "false");
+        });
       }
     }
 
@@ -410,13 +460,25 @@
         if (card) {
           const r = card.getBoundingClientRect();
           const hidden = r.top > window.innerHeight - 80 || r.bottom < 80;
-          if (hidden) card.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          if (hidden) card.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
         }
       });
     });
 
     plans.forEach((p) => {
       p.addEventListener("click", () => pick(p.dataset.plan, true));
+      const control = document.createElement("button");
+      control.type = "button";
+      control.className = "plan__view";
+      control.textContent = "掲載位置を見る ↗";
+      control.setAttribute("aria-label", p.querySelector(".plan__rank").textContent + "の掲載位置を見る");
+      control.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (disclosure) disclosure.open = true;
+        pick(p.dataset.plan, true);
+        view.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+      });
+      p.appendChild(control);
       p.style.cursor = "pointer";
     });
 
@@ -424,7 +486,10 @@
       b.addEventListener("click", () => {
         stopSpin();
         moveTo(FACE[b.dataset.view]);
-        btns.forEach((x) => x.classList.toggle("is-on", x === b));
+        btns.forEach((x) => {
+          x.classList.toggle("is-on", x === b);
+          x.setAttribute("aria-pressed", String(x === b));
+        });
         hots.forEach((h) => h.classList.remove("is-on"));
         plans.forEach((p) => p.classList.remove("is-picked"));
       });
@@ -804,7 +869,7 @@
     totop.classList.toggle("is-show", y > 700);
 
     // hero parallax
-    if (heroImg && y < window.innerHeight) {
+    if (heroImg && !reduceMotion && y < window.innerHeight) {
       heroImg.style.transform = "translateY(" + y * 0.16 + "px) scale(1.05)";
     }
 
@@ -923,6 +988,7 @@
   function animateCount(el) {
     const target = parseInt(el.getAttribute("data-count"), 10);
     if (isNaN(target)) return;
+    if (reduceMotion) { el.textContent = String(target); return; }
     const dur = 1300;
     const startT = performance.now();
     function tick(now) {

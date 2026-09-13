@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/style.css?v=daff34fb" />
+<link rel="stylesheet" href="assets/css/style.css?v=9e48e2cd" />
   <script type="module" src="assets/vendor/model-viewer-4.3.1.min.js"></script>
 <!-- GA4 start -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-N5YR1ZRBVX"></script>
@@ -30,33 +30,24 @@
 </script>
 <!-- GA4 end -->
 </head>
-<body>
+<body class="page-sponsor">
 
 <a class="skip-link" href="#main">本文へスキップ</a>
 
-<!-- ===== Preloader ===== -->
-<div class="preloader" id="preloader">
-  <div class="preloader__inner">
-    <span class="preloader__mark">FCV</span>
-    <span class="preloader__bar"><i></i></span>
-  </div>
-</div>
-
 <!-- ===== Header ===== -->
 <header class="header" id="header">
-  <a href="index.html" class="header__brand">
-    <img src="assets/img/logo.webp" alt="FC VALIANT" class="header__logo" />
+  <a href="index.html" class="header__brand" aria-label="FC VALIANT ホーム">
+    <img src="assets/img/logo.webp" alt="" class="header__logo" width="230" height="289" />
     <span class="header__name">FC VALIANT</span>
   </a>
   <nav class="nav" id="nav" aria-label="メインナビゲーション">
-    <a href="member.html">MEMBER</a>
-    <a href="schedule.html">SCHEDULE</a>
-    <a href="recruit.html">RECRUIT</a>
-    <a href="sponsor.html" class="is-active" aria-current="page">SPONSOR</a>
-    <a href="index.html#contact">CONTACT</a>
-    <a href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener" class="nav__cta magnetic">INSTAGRAM</a>
+    <a href="schedule.html"><span>SCHEDULE</span><small>試合日程</small></a>
+    <a href="member.html"><span>MEMBER</span><small>メンバー</small></a>
+    <a href="recruit.html"><span>RECRUIT</span><small>メンバー募集</small></a>
+    <a href="sponsor.html" class="is-active" aria-current="page"><span>SPONSOR</span><small>スポンサー</small></a>
+    <a href="index.html#contact" class="nav__cta"><span>CONTACT</span><small>お問い合わせ</small></a>
   </nav>
-  <button class="burger" id="burger" aria-label="メニューを開閉" aria-expanded="false" aria-controls="nav">
+  <button type="button" class="burger" id="burger" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav">
     <span></span><span></span><span></span>
   </button>
 </header>
@@ -64,49 +55,24 @@
 <main id="main" tabindex="-1">
 
 <!-- ===== Sub hero ===== -->
-<section class="subhero" id="top">
+<section class="subhero subhero--sponsor poster-paper" id="top">
+  <div class="subhero__copy">
   <p class="subhero__crumb"><a href="index.html">HOME</a> <span aria-hidden="true">/</span> SPONSOR</p>
   <h1 class="subhero__en">SPONSOR</h1>
   <p class="subhero__ja">スポンサー様・サポーター募集</p>
+  <p class="subhero__lead">FC VALIANT を応援してくださる<br>企業・個人の方を募集しています。</p>
+  </div>
+  <figure class="subhero__photo"><img src="assets/img/stats-bg.webp" alt="ナイターのピッチへ歩くFC VALIANTの選手たち" width="1567" height="1045" fetchpriority="high" /></figure>
 </section>
 
 <!-- ===== Sponsor =====
      ▼▼▼ プレースホルダー：金額・返礼内容・募集枠は仮の内容です。実際の条件に合わせて差し替えてください。 ▼▼▼ -->
-<section class="sponsor sponsor--page">
-  <p class="sponsor__lead" data-anim="lines">FC VALIANT を応援してくださる企業・個人の方を募集しています。<br>1年間のご支援に対し、次の返礼をご用意しています。</p>
+<section class="sponsor sponsor--page" aria-labelledby="plans-title">
+  <h2 class="compact-title" id="plans-title">スポンサープラン</h2>
+  <p class="sponsor__lead">1年間のご支援に対し、次の返礼をご用意しています。</p>
 
 
-  <!-- ===== 掲載枠の3Dビュー ===== -->
-  <div class="jersey" data-reveal>
-    <div class="jersey__stage">
-      <model-viewer
-        id="jerseyView"
-        src="assets/models/tee.glb"
-        alt="スポンサーロゴの掲載位置を示すチームTシャツの3Dモデル"
-        camera-controls touch-action="pan-y"
-        interaction-prompt="none"
-        shadow-intensity="0.6" exposure="1.0" interpolation-decay="120"
-        camera-orbit="-58deg 84deg auto" field-of-view="30deg"
-        min-camera-orbit="auto 25deg auto" max-camera-orbit="auto 150deg auto"
-        disable-tap>
-        <button class="jersey__hot" slot="hotspot-1"
-          data-position="0.53 -0.08 0.135" data-normal="0 0 1"
-          data-plan="platina" aria-label="掲載枠1 前面 大 プラチナ">1</button>
-        <button class="jersey__hot" slot="hotspot-2"
-          data-position="-0.60 0.71 -0.135" data-normal="0 0 -1"
-          data-plan="gold" aria-label="掲載枠2 背面上部 中 ゴールド">2</button>
-        <button class="jersey__hot" slot="hotspot-3"
-          data-position="-0.43 -0.26 -0.135" data-normal="0 0 -1"
-          data-plan="silver" aria-label="掲載枠3 背面 小 シルバー">3</button>
-      </model-viewer>
-      <p class="jersey__hint">ドラッグで回せます。番号を押すと、その枠のプランが光ります。</p>
-    </div>
-    <div class="jersey__ctrl">
-      <button type="button" class="jersey__btn is-on" data-view="front">前面</button>
-      <button type="button" class="jersey__btn" data-view="back">背面</button>
-    </div>
-  </div>
-
+  <div class="sponsor__layout">
   <div class="plans">
     <article data-plan="platina" class="plan plan--platinum is-closed" data-reveal>
       <span class="plan__tag">成約済み</span>
@@ -162,9 +128,44 @@
     </article>
   </div>
 
+  <details class="sponsor__model" open>
+    <summary>シャツのロゴ掲載位置 <span aria-hidden="true">＋</span></summary>
+    <!-- ===== 掲載枠の3Dビュー ===== -->
+  <div class="jersey" data-reveal>
+    <div class="jersey__stage">
+      <model-viewer
+        id="jerseyView"
+        src="assets/models/tee.glb"
+        alt="スポンサーロゴの掲載位置を示すチームTシャツの3Dモデル"
+        camera-controls touch-action="pan-y"
+        interaction-prompt="none"
+        shadow-intensity="0" exposure="1.0" interpolation-decay="120"
+        camera-orbit="-58deg 84deg auto" field-of-view="30deg"
+        min-camera-orbit="auto 25deg auto" max-camera-orbit="auto 150deg auto"
+        disable-tap>
+        <button type="button" class="jersey__hot" slot="hotspot-1"
+          data-position="0.53 -0.08 0.135" data-normal="0 0 1"
+          data-plan="platina" aria-label="掲載枠1 前面 大 プラチナ">1</button>
+        <button type="button" class="jersey__hot" slot="hotspot-2"
+          data-position="-0.60 0.71 -0.135" data-normal="0 0 -1"
+          data-plan="gold" aria-label="掲載枠2 背面上部 中 ゴールド">2</button>
+        <button type="button" class="jersey__hot" slot="hotspot-3"
+          data-position="-0.43 -0.26 -0.135" data-normal="0 0 -1"
+          data-plan="silver" aria-label="掲載枠3 背面 小 シルバー">3</button>
+      </model-viewer>
+      <p class="jersey__hint">ドラッグで回せます。番号を押すと、その枠のプランが光ります。</p>
+    </div>
+    <div class="jersey__ctrl">
+      <button type="button" class="jersey__btn is-on" data-view="front" aria-pressed="true">前面</button>
+      <button type="button" class="jersey__btn" data-view="back" aria-pressed="false">背面</button>
+    </div>
+  </div>
+  </details>
+  </div>
+
   <div class="page-cta" data-reveal>
-    <a href="index.html?topic=スポンサー#contact" class="btn btn--gold magnetic">スポンサーのお問い合わせ <i>→</i></a>
-    <a href="index.html" class="btn btn--ghost magnetic">← HOME に戻る</a>
+    <a href="index.html?topic=スポンサー#contact" class="btn btn--gold">スポンサーのお問い合わせ <i>→</i></a>
+    <a href="index.html" class="btn btn--ghost">← HOME に戻る</a>
   </div>
 </section>
 
@@ -173,31 +174,28 @@
 <!-- ===== Footer ===== -->
 <footer class="footer">
   <div class="footer__top">
-    <div class="footer__brand">
-      <img src="assets/img/logo.webp" alt="FC VALIANT" />
-      <p>FC VALIANT</p>
-      <span>まちと、仲間と。</span>
-    </div>
-    <nav class="footer__nav">
+    <a class="footer__brand" href="index.html">
+      <img src="assets/img/logo.webp" alt="" width="230" height="289" />
+      <p>FC VALIANT<span>まちと、仲間と。</span></p>
+    </a>
+    <nav class="footer__nav" aria-label="フッターナビゲーション">
       <a href="index.html#team">TEAM</a>
       <a href="index.html#activity">ACTIVITY</a>
+      <a href="schedule.html">SCHEDULE</a>
       <a href="member.html">MEMBER</a>
-    <a href="schedule.html">SCHEDULE</a>
       <a href="recruit.html">RECRUIT</a>
       <a href="sponsor.html">SPONSOR</a>
       <a href="index.html#contact">CONTACT</a>
     </nav>
   </div>
-  <div class="footer__big" aria-hidden="true" data-marquee-line>VALIANT — VALIANT — VALIANT — </div>
   <div class="footer__bottom">
     <span>© 2021–2026 FC VALIANT. KUMAMOTO, JAPAN.</span>
-    <a href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener">INSTAGRAM</a>
+    <a href="https://www.instagram.com/fcv.official/" data-ig="profile" target="_blank" rel="noopener">INSTAGRAM ↗</a>
   </div>
 </footer>
 
 <a href="#top" class="totop" id="totop" data-scroll aria-label="ページトップへ">↑</a>
 
-<script src="assets/js/lenis.min.js"></script>
-<script src="assets/js/main.js?v=5a88b37d"></script>
+<script src="assets/js/main.js?v=425f0a3c"></script>
 </body>
 </html>

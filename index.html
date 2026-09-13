@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/style.css?v=daff34fb" />
+<link rel="stylesheet" href="assets/css/style.css?v=9e48e2cd" />
 <!-- GA4 start -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-N5YR1ZRBVX"></script>
 <script>
@@ -29,218 +29,115 @@
 </script>
 <!-- GA4 end -->
 </head>
-<body>
+<body class="page-index">
 
 <a class="skip-link" href="#main">本文へスキップ</a>
 
-<!-- ===== Preloader ===== -->
-<div class="preloader" id="preloader">
-  <div class="preloader__inner">
-    <span class="preloader__mark">FCV</span>
-    <span class="preloader__bar"><i></i></span>
-  </div>
-</div>
-
 <!-- ===== Header ===== -->
 <header class="header" id="header">
-  <a href="#top" class="header__brand" data-scroll>
-    <img src="assets/img/logo.webp" alt="FC VALIANT" class="header__logo" />
+  <a href="index.html" class="header__brand" aria-label="FC VALIANT ホーム">
+    <img src="assets/img/logo.webp" alt="" class="header__logo" width="230" height="289" />
     <span class="header__name">FC VALIANT</span>
   </a>
   <nav class="nav" id="nav" aria-label="メインナビゲーション">
-    <a href="member.html">MEMBER</a>
-    <a href="schedule.html">SCHEDULE</a>
-    <a href="recruit.html">RECRUIT</a>
-    <a href="sponsor.html">SPONSOR</a>
-    <a href="#contact" data-scroll>CONTACT</a>
-    <a href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener" class="nav__cta magnetic">INSTAGRAM</a>
+    <a href="schedule.html"><span>SCHEDULE</span><small>試合日程</small></a>
+    <a href="member.html"><span>MEMBER</span><small>メンバー</small></a>
+    <a href="recruit.html"><span>RECRUIT</span><small>メンバー募集</small></a>
+    <a href="sponsor.html"><span>SPONSOR</span><small>スポンサー</small></a>
+    <a href="#contact" data-scroll class="nav__cta"><span>CONTACT</span><small>お問い合わせ</small></a>
   </nav>
-  <button class="burger" id="burger" aria-label="メニューを開閉" aria-expanded="false" aria-controls="nav">
+  <button type="button" class="burger" id="burger" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav">
     <span></span><span></span><span></span>
   </button>
 </header>
 
 <main id="main" tabindex="-1">
 
-<!-- ===== Hero ===== -->
-<section class="hero" id="top">
+<!-- 1. 写真・次戦・参加方法。次戦の手動更新箇所はここ1か所 -->
+<section class="hero poster-paper" id="top" aria-labelledby="home-title">
   <div class="hero__media">
-    <img src="assets/img/hero.webp" alt="FC VALIANT" class="hero__img" id="heroImg" />
-    <div class="hero__overlay"></div>
+    <img src="assets/img/act-01.webp" alt="試合中、ボールを運ぶFC VALIANTの選手" class="hero__img" width="1200" height="800" fetchpriority="high" />
   </div>
   <div class="hero__content" id="heroContent">
-    <h1 class="hero__lead" data-anim="lines">まちと、仲間と。<br><em>Be VALIANT.</em></h1>
+    <h1 class="hero__lead" id="home-title">まちと、仲間と。<br><em>Be VALIANT.</em></h1>
+    <a href="#join" class="hero__join" data-scroll>入団・応援について <i aria-hidden="true">↗</i></a>
   </div>
   <!-- ▼ 次戦：schedule.html の直近試合に手で合わせる（自動同期ではありません）▼ -->
   <a class="hero__next" href="schedule.html">
-    <span class="hero__next-kicker">NEXT MATCH</span>
-    <span class="hero__next-date">10<i>/</i>04<em>SUN</em></span>
-    <span class="hero__next-comp">熊本県社会人サッカーリーグ（C-4） 第1節</span>
-    <span class="hero__next-match">vs <b>5150</b></span>
-    <span class="hero__next-meta">益城町運動公園　19:00 キックオフ</span>
-  </a>
-
-  <a href="#team" class="hero__scroll" data-scroll>
-    <span>SCROLL</span>
-    <i></i>
+    <span class="hero__next-kicker">NEXT MATCH<span>次の試合</span></span>
+    <span class="hero__next-date"><time datetime="2026-10-04">10<i>/</i>04</time><em>SUN</em></span>
+    <span class="hero__next-info">
+      <span class="hero__next-comp">熊本県社会人サッカーリーグ（C-4） 第1節</span>
+      <span class="hero__next-match">vs <b>5150</b></span>
+      <span class="hero__next-meta">益城町運動公園　19:00 キックオフ</span>
+    </span>
+    <span class="hero__next-arrow" aria-hidden="true">↗</span>
   </a>
   <div class="hero__bar">
-    <span class="hero__bar-tag"><i aria-hidden="true"></i>SPONSORS</span>
-    <div class="hero__bar-ticker">
+    <a class="hero__bar-tag" href="sponsor.html">SPONSORS</a>
+    <div class="hero__bar-ticker" aria-label="クラブスポンサー">
       <!-- 1組だけ置く。画面幅を埋める複製は main.js の initSponsorMarquee が行う -->
       <div class="hero__bar-track" id="sponsorTrack">
-        <span class="sponsor-run"><a class="sponsor-link" href="https://hakosauna.com" target="_blank" rel="noopener" aria-label="ハコサウナ（別タブで開きます）"><img src="assets/img/sponsors/hako-sauna.webp" alt="ハコサウナ" class="sponsor-logo" decoding="async" /></a><a class="sponsor-link" href="https://www.instagram.com/uekitto__310" target="_blank" rel="noopener" aria-label="株式会社ミチル UEKITTO（別タブで開きます）"><img src="assets/img/sponsors/uekitto.webp" alt="株式会社ミチル UEKITTO" class="sponsor-logo" decoding="async" /></a><a class="sponsor-link" href="https://j-hirano.co.jp" target="_blank" rel="noopener" aria-label="平野設計室（別タブで開きます）"><img src="assets/img/sponsors/hirano-sekkeishitsu.webp" alt="平野設計室" class="sponsor-logo" decoding="async" /></a><a class="sponsor-link" href="https://tra-sure.com" target="_blank" rel="noopener" aria-label="TRA-SURE（別タブで開きます）"><img src="assets/img/sponsors/tra-sure.webp" alt="TRA-SURE" class="sponsor-logo" decoding="async" /></a><a class="sponsor-link" href="https://www.instagram.com/bar_babel2026" target="_blank" rel="noopener" aria-label="BAR BABEL（別タブで開きます）"><img src="assets/img/sponsors/bar-babel.webp" alt="BAR BABEL" class="sponsor-logo" decoding="async" /></a><a class="sponsor-link" href="https://hizerowa.studio.site" target="_blank" rel="noopener" aria-label="HIZEROWA（別タブで開きます）"><img src="assets/img/sponsors/hizerowa.webp" alt="HIZEROWA" class="sponsor-logo" decoding="async" /></a></span>
+        <span class="sponsor-run"><a class="sponsor-link" href="https://hakosauna.com" target="_blank" rel="noopener" aria-label="ハコサウナ（別タブで開きます）"><img src="assets/img/sponsors/hako-sauna.webp" alt="ハコサウナ" class="sponsor-logo" width="320" height="120" decoding="async" /></a><a class="sponsor-link" href="https://www.instagram.com/uekitto__310" target="_blank" rel="noopener" aria-label="株式会社ミチル UEKITTO（別タブで開きます）"><img src="assets/img/sponsors/uekitto.webp" alt="株式会社ミチル UEKITTO" class="sponsor-logo" width="320" height="120" decoding="async" /></a><a class="sponsor-link" href="https://j-hirano.co.jp" target="_blank" rel="noopener" aria-label="平野設計室（別タブで開きます）"><img src="assets/img/sponsors/hirano-sekkeishitsu.webp" alt="平野設計室" class="sponsor-logo" width="320" height="120" decoding="async" /></a><a class="sponsor-link" href="https://tra-sure.com" target="_blank" rel="noopener" aria-label="TRA-SURE（別タブで開きます）"><img src="assets/img/sponsors/tra-sure.webp" alt="TRA-SURE" class="sponsor-logo" width="320" height="120" decoding="async" /></a><a class="sponsor-link" href="https://www.instagram.com/bar_babel2026" target="_blank" rel="noopener" aria-label="BAR BABEL（別タブで開きます）"><img src="assets/img/sponsors/bar-babel.webp" alt="BAR BABEL" class="sponsor-logo" width="320" height="120" decoding="async" /></a><a class="sponsor-link" href="https://hizerowa.studio.site" target="_blank" rel="noopener" aria-label="HIZEROWA（別タブで開きます）"><img src="assets/img/sponsors/hizerowa.webp" alt="HIZEROWA" class="sponsor-logo" width="320" height="120" decoding="async" /></a></span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== Team ===== -->
-<section class="team" id="team">
-  <div class="team__photo" data-img>
-    <img src="assets/img/team-group.webp" alt="FC VALIANT チーム集合写真" loading="lazy" />
-  </div>
-  <div class="team__info">
-    <div class="sec-head">
-      <span class="sec-head__no" data-reveal>01</span>
-      <h2 class="sec-head__en" data-anim="chars">TEAM</h2>
-      <p class="sec-head__ja" data-anim="wave">チーム</p>
-    </div>
-    <p class="team__lead" data-anim="lines">熊本県社会人サッカーチーム。<br>20〜30代を中心に活動中。所属メンバー30名程度。</p>
-    <dl class="team__meta">
-      <div data-reveal><dt>CLUB</dt><dd>FC VALIANT</dd></div>
-      <div data-reveal><dt>BASE</dt><dd>熊本県</dd></div>
-      <div data-reveal><dt>FOUNDED</dt><dd>2021年1月</dd></div>
-      <div data-reveal><dt>ACTIVITY</dt><dd>週1回　土または日　20:00〜22:00</dd></div>
-      <div data-reveal><dt>AREA</dt><dd>熊本市・嘉島町・益城町</dd></div>
-      <div data-reveal>
+<!-- 2. チームの顔。実績・概要は開いて読める -->
+<section class="club" id="team" aria-labelledby="team-title">
+  <div class="club__intro">
+    <div class="section-title"><h2 id="team-title">TEAM</h2><p>チーム</p></div>
+    <p class="club__lead" data-reveal>熊本県社会人サッカーチーム。<br>20〜30代を中心に活動中。<br>所属メンバー30名程度。</p>
+    <a href="member.html" class="text-link">メンバー紹介を見る <i aria-hidden="true">↗</i></a>
+    <details class="club__details">
+      <summary>チーム概要・これまでの成績 <span aria-hidden="true">＋</span></summary>
+      <dl class="team__meta">
+      <div><dt>CLUB</dt><dd>FC VALIANT</dd></div>
+      <div><dt>BASE</dt><dd>熊本県</dd></div>
+      <div><dt>FOUNDED</dt><dd>2021年1月</dd></div>
+      <div><dt>ACTIVITY</dt><dd>週1回　土または日　20:00〜22:00</dd></div>
+      <div><dt>AREA</dt><dd>熊本市・嘉島町・益城町</dd></div>
+      <div>
         <dt>RECORD</dt>
         <dd>2022 フットボールパーク御代志 ソサイチお試しリーグ 優勝<br>2023 熊本県社会人リーグ（CL） 2位<br>2024 熊本県社会人リーグ（CL） 3位<br>2025 熊本県社会人リーグ（CL） 3位</dd>
       </div>
     </dl>
-    <p class="team__cta" data-reveal>
-      <a href="member.html" class="btn btn--ghost magnetic">メンバー紹介を見る <i>→</i></a>
-    </p>
+    </details>
   </div>
-</section>
-
-<!-- ===== Stats ===== -->
-<section class="stats">
-  <div class="stats__item" data-reveal>
-    <span class="stats__cap">SINCE</span>
-    <span class="stats__num" data-count="2021">2021</span>
-    <span class="stats__label">創設年</span>
-  </div>
-  <!-- 創設から、これから先へ。2つの数字を線でつなぐ -->
-  <div class="stats__line" aria-hidden="true"><i></i></div>
-  <div class="stats__item stats__item--end" data-reveal>
-    <span class="stats__cap">POSSIBILITY</span>
-    <span class="stats__num">∞</span>
-    <span class="stats__label">可能性</span>
-  </div>
-</section>
-
-<!-- ===== Activity ===== -->
-<section class="activity" id="activity">
-  <div class="sec-head sec-head--center">
-    <span class="sec-head__no" data-reveal>02</span>
-    <h2 class="sec-head__en" data-anim="chars">ACTIVITY</h2>
-    <p class="sec-head__ja" data-anim="wave">活動内容</p>
-  </div>
-  <p class="activity__lead" data-anim="lines">日々の活動は Instagram にて発信中。<br>サッカーを楽しめるようなコンテンツ多数あり。</p>
-  <div class="activity__grid">
-    <a class="act-card act-card--lg" href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener" data-img>
-      <img src="assets/img/act-01.webp" alt="試合中のドリブル" loading="lazy" />
-      <span class="act-card__tag">MATCH</span>
-    </a>
-    <a class="act-card" href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener" data-img>
-      <img src="assets/img/act-02.webp" alt="シュートの場面" loading="lazy" />
-    </a>
-    <a class="act-card" href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener" data-img>
-      <img src="assets/img/act-03.webp" alt="得点後のチーム" loading="lazy" />
-    </a>
-    <a class="act-card" href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener" data-img>
-      <img src="assets/img/act-04.webp" alt="試合中の走り出し" loading="lazy" />
-    </a>
-    <a class="act-card act-card--insta" href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener" data-reveal>
-      <span class="ig-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="3" width="18" height="18" rx="5" />
-          <circle cx="12" cy="12" r="4.1" />
-          <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor" stroke="none" />
-        </svg>
-      </span>
-      <span class="act-card__follow"><span data-ig-handle>公式アカウント</span><br><b>FOLLOW US →</b></span>
-    </a>
-  </div>
-</section>
-
-<!-- ===== Section teasers（詳細は各専用ページ：schedule.html / recruit.html / sponsor.html）===== -->
-
-<!-- SCHEDULE teaser -->
-<section class="teaser teaser--dark" id="schedule">
-  <div class="teaser__grid">
-    <div class="teaser__intro">
-      <span class="teaser__no" data-reveal>03</span>
-      <h2 class="teaser__en" data-anim="chars">SCHEDULE</h2>
-      <p class="teaser__ja" data-anim="wave">年間試合スケジュール</p>
-    </div>
-    <div class="teaser__main">
-      <!-- ▼ 次節：schedule.html の直近の試合と内容を揃えてください（ここは自動同期ではありません）▼ -->
-      <p class="teaser__kicker" data-reveal>NEXT MATCH</p>
-      <p class="teaser__lead" data-reveal>10/4 (日) 19:00　熊本県社会人サッカーリーグ（C-4） 第1節<br>vs <b>5150</b></p>
-      <p class="teaser__sub is-venue" data-reveal>益城町運動公園</p>
-      <a href="schedule.html" class="btn btn--gold magnetic" data-reveal>全日程・結果を見る <i>→</i></a>
+  <div class="club__visual">
+    <figure class="club__photo" data-reveal>
+      <img src="assets/img/team-group.webp" alt="FC VALIANT チーム集合写真" width="1567" height="1045" loading="lazy" />
+    </figure>
+    <div class="club__activity" id="activity">
+      <p>日々の活動は Instagram にて発信中。<br>サッカーを楽しめるようなコンテンツ多数あり。</p>
+      <a href="https://www.instagram.com/fcv.official/" data-ig="profile" target="_blank" rel="noopener" class="text-link"><span data-ig-handle>公式アカウント</span> <i aria-hidden="true">↗</i></a>
     </div>
   </div>
 </section>
 
-<!-- RECRUIT teaser -->
-<section class="teaser teaser--light" id="recruit">
-  <div class="teaser__grid">
-    <div class="teaser__intro">
-      <span class="teaser__no" data-reveal>04</span>
-      <h2 class="teaser__en" data-anim="chars">RECRUIT</h2>
-      <p class="teaser__ja" data-anim="wave">メンバー募集</p>
-    </div>
-    <div class="teaser__main">
-      <p class="teaser__lead" data-reveal>共に高みを目指す<b>仲間を募集中</b>。<br>未経験やブランクも大歓迎。マネージャー志望の方も募集してます。</p>
-      <ul class="teaser__chips" data-reveal>
-        <li>体験無料</li><li>全ポジション</li><li>見学可</li><li>週1ペース</li>
-      </ul>
-      <div class="teaser__actions" data-reveal>
-        <a href="recruit.html" class="btn btn--gold magnetic">募集要項を見る <i>→</i></a>
-        <a href="#contact" class="btn btn--ghost magnetic" data-scroll data-topic="体験参加・見学">体験参加を申し込む <i>→</i></a>
-      </div>
-    </div>
-  </div>
+<!-- 3. 二つの関わり方。詳細は各ページへ -->
+<section class="join" id="join" aria-label="入団・応援について">
+  <a class="join__recruit poster-paper" id="recruit" href="recruit.html">
+    <h2>RECRUIT</h2><p class="join__label">メンバー募集</p>
+    <p class="join__lead">共に高みを目指す仲間を募集中。</p>
+    <p class="join__meta">体験無料 ／ 全ポジション ／ 見学可</p>
+    <span class="join__action">募集要項を見る <i aria-hidden="true">↗</i></span>
+  </a>
+  <a class="join__sponsor" id="sponsor" href="sponsor.html">
+    <h2>SPONSOR</h2><p class="join__label">スポンサー募集</p>
+    <p class="join__lead">FC VALIANT を応援してくださる<br>企業・個人サポーターを募集しています。</p>
+    <p class="join__meta">4つの支援プラン ／ ¥10,000〜（年）</p>
+    <span class="join__action">スポンサープランを見る <i aria-hidden="true">↗</i></span>
+  </a>
 </section>
 
-<!-- SPONSOR teaser -->
-<section class="teaser teaser--navy" id="sponsor">
-  <div class="teaser__grid">
-    <div class="teaser__intro">
-      <span class="teaser__no" data-reveal>05</span>
-      <h2 class="teaser__en" data-anim="chars">SPONSOR</h2>
-      <p class="teaser__ja" data-anim="wave">スポンサー募集</p>
-    </div>
-    <div class="teaser__main">
-      <p class="teaser__lead" data-reveal>FC VALIANT を応援してくださる<br><b>企業・個人サポーター</b>を募集しています。</p>
-      <p class="teaser__sub" data-reveal>4つの支援プラン ／ ¥10,000〜（年）</p>
-      <a href="sponsor.html" class="btn btn--gold magnetic" data-reveal>スポンサープランを見る <i>→</i></a>
-    </div>
+<!-- 4. 用件を選ぶ → 文面をコピー → DMを開く -->
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="contact__intro">
+    <div class="section-title"><h2 id="contact-title">CONTACT</h2><p>お問い合わせ</p></div>
+    <p class="contact__lead">体験参加・見学、対戦、スポンサーなどのご相談は、Instagram の DM にて受け付けています。</p>
   </div>
-</section>
-
-<!-- ===== Contact ===== -->
-<section class="contact contact--photo" id="contact">
-  <div class="contact__head sec-head--center">
-    <span class="sec-head__no" data-reveal>06</span>
-    <h2 class="sec-head__en" data-anim="chars">CONTACT</h2>
-    <p class="sec-head__ja" data-anim="wave">お問い合わせ</p>
-  </div>
-  <p class="contact__lead" data-anim="lines">体験参加・見学、対戦、スポンサーなどのご相談は、<br>Instagram の DM にて受け付けています。</p>
-
   <div class="dm" data-reveal>
     <ol class="dm__steps">
       <li class="dm__step">
@@ -277,13 +174,13 @@
         <span class="dm__no" aria-hidden="true">3</span>
         <div class="dm__body">
           <h3 class="dm__h">DM を送る</h3>
-          <a href="https://www.instagram.com/" data-ig="dm" target="_blank" rel="noopener" class="btn btn--gold dm__send magnetic">Instagram の DM を開く <i>→</i></a>
+          <a href="https://ig.me/m/fcv.official" data-ig="dm" target="_blank" rel="noopener" class="btn btn--gold dm__send">Instagram の DM を開く <i>→</i></a>
           <p class="dm__hint">アプリが入っていない端末では、ブラウザの Instagram が開きます。</p>
         </div>
       </li>
     </ol>
 
-    <a href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener" class="contact__insta magnetic">
+    <a href="https://www.instagram.com/fcv.official/" data-ig="profile" target="_blank" rel="noopener" class="contact__insta">
       <span>公式アカウントを見る</span><i>→</i>
     </a>
   </div>
@@ -294,31 +191,28 @@
 <!-- ===== Footer ===== -->
 <footer class="footer">
   <div class="footer__top">
-    <div class="footer__brand">
-      <img src="assets/img/logo.webp" alt="FC VALIANT" />
-      <p>FC VALIANT</p>
-      <span>まちと、仲間と。</span>
-    </div>
-    <nav class="footer__nav">
-      <a href="#team" data-scroll>TEAM</a>
-      <a href="#activity" data-scroll>ACTIVITY</a>
+    <a class="footer__brand" href="index.html">
+      <img src="assets/img/logo.webp" alt="" width="230" height="289" />
+      <p>FC VALIANT<span>まちと、仲間と。</span></p>
+    </a>
+    <nav class="footer__nav" aria-label="フッターナビゲーション">
+      <a href="index.html#team">TEAM</a>
+      <a href="index.html#activity">ACTIVITY</a>
+      <a href="schedule.html">SCHEDULE</a>
       <a href="member.html">MEMBER</a>
-    <a href="schedule.html">SCHEDULE</a>
       <a href="recruit.html">RECRUIT</a>
       <a href="sponsor.html">SPONSOR</a>
-      <a href="#contact" data-scroll>CONTACT</a>
+      <a href="index.html#contact">CONTACT</a>
     </nav>
   </div>
-  <div class="footer__big" aria-hidden="true" data-marquee-line>VALIANT — VALIANT — VALIANT — </div>
   <div class="footer__bottom">
     <span>© 2021–2026 FC VALIANT. KUMAMOTO, JAPAN.</span>
-    <a href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener">INSTAGRAM</a>
+    <a href="https://www.instagram.com/fcv.official/" data-ig="profile" target="_blank" rel="noopener">INSTAGRAM ↗</a>
   </div>
 </footer>
 
 <a href="#top" class="totop" id="totop" data-scroll aria-label="ページトップへ">↑</a>
 
-<script src="assets/js/lenis.min.js"></script>
-<script src="assets/js/main.js?v=5a88b37d"></script>
+<script src="assets/js/main.js?v=425f0a3c"></script>
 </body>
 </html>

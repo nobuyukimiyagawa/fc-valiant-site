@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/style.css?v=daff34fb" />
+<link rel="stylesheet" href="assets/css/style.css?v=9e48e2cd" />
 <!-- GA4 start -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-N5YR1ZRBVX"></script>
 <script>
@@ -29,33 +29,24 @@
 </script>
 <!-- GA4 end -->
 </head>
-<body>
+<body class="page-recruit">
 
 <a class="skip-link" href="#main">本文へスキップ</a>
 
-<!-- ===== Preloader ===== -->
-<div class="preloader" id="preloader">
-  <div class="preloader__inner">
-    <span class="preloader__mark">FCV</span>
-    <span class="preloader__bar"><i></i></span>
-  </div>
-</div>
-
 <!-- ===== Header ===== -->
 <header class="header" id="header">
-  <a href="index.html" class="header__brand">
-    <img src="assets/img/logo.webp" alt="FC VALIANT" class="header__logo" />
+  <a href="index.html" class="header__brand" aria-label="FC VALIANT ホーム">
+    <img src="assets/img/logo.webp" alt="" class="header__logo" width="230" height="289" />
     <span class="header__name">FC VALIANT</span>
   </a>
   <nav class="nav" id="nav" aria-label="メインナビゲーション">
-    <a href="member.html">MEMBER</a>
-    <a href="schedule.html">SCHEDULE</a>
-    <a href="recruit.html" class="is-active" aria-current="page">RECRUIT</a>
-    <a href="sponsor.html">SPONSOR</a>
-    <a href="index.html#contact">CONTACT</a>
-    <a href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener" class="nav__cta magnetic">INSTAGRAM</a>
+    <a href="schedule.html"><span>SCHEDULE</span><small>試合日程</small></a>
+    <a href="member.html"><span>MEMBER</span><small>メンバー</small></a>
+    <a href="recruit.html" class="is-active" aria-current="page"><span>RECRUIT</span><small>メンバー募集</small></a>
+    <a href="sponsor.html"><span>SPONSOR</span><small>スポンサー</small></a>
+    <a href="index.html#contact" class="nav__cta"><span>CONTACT</span><small>お問い合わせ</small></a>
   </nav>
-  <button class="burger" id="burger" aria-label="メニューを開閉" aria-expanded="false" aria-controls="nav">
+  <button type="button" class="burger" id="burger" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav">
     <span></span><span></span><span></span>
   </button>
 </header>
@@ -63,17 +54,22 @@
 <main id="main" tabindex="-1">
 
 <!-- ===== Sub hero ===== -->
-<section class="subhero" id="top">
+<section class="subhero subhero--recruit poster-paper" id="top">
+  <div class="subhero__copy">
   <p class="subhero__crumb"><a href="index.html">HOME</a> <span aria-hidden="true">/</span> RECRUIT</p>
   <h1 class="subhero__en">RECRUIT</h1>
   <p class="subhero__ja">メンバー募集要項</p>
+  <p class="subhero__lead">共に高みを目指す仲間を募集中。<br>未経験やブランクも歓迎します。<br>マネージャー志望の方も募集しています。</p>
+  <a href="index.html?topic=体験参加・見学#contact" class="btn btn--gold">体験参加を申し込む（無料） <i aria-hidden="true">↗</i></a>
+  </div>
+  <figure class="subhero__photo"><img src="assets/img/act-04.webp" alt="試合中に走り出すFC VALIANTの選手たち" width="1200" height="800" fetchpriority="high" /></figure>
 </section>
 
 <!-- ===== Recruit =====
      ▼▼▼ プレースホルダー：募集対象・ポジション・練習日時・会費（月額◯,◯◯◯円）・持ち物・FAQの回答は
      仮の内容です。実際の運用に合わせて差し替えてください。 ▼▼▼ -->
-<section class="recruit recruit--page">
-  <p class="recruit__lead" data-anim="lines">共に高みを目指す仲間を募集中。<br>未経験やブランクも大歓迎。マネージャー志望の方も募集してます。</p>
+<section class="recruit recruit--page" aria-labelledby="recruit-spec-title">
+  <h2 class="compact-title" id="recruit-spec-title">募集要項</h2>
 
   <ul class="recruit__badges" data-reveal aria-label="参加しやすいポイント">
     <li>体験参加 無料</li>
@@ -85,11 +81,11 @@
   <div class="recruit__grid">
     <dl class="recruit__spec">
       <div data-reveal>
-        <dt>募集対象<small>WHO</small></dt>
+        <dt>募集対象</dt>
         <dd>18歳以上の男性。<br>※ マネージャーは性別を問いません。</dd>
       </div>
       <div data-reveal>
-        <dt>募集ポジション<small>POSITION</small></dt>
+        <dt>募集ポジション</dt>
         <dd>全ポジション募集中。
           <span class="recruit__pos">
             <span>GK</span><span>DF</span><span>MF</span><span>FW</span><span>MANAGER</span>
@@ -97,19 +93,19 @@
         </dd>
       </div>
       <div data-reveal>
-        <dt>活動エリア<small>AREA</small></dt>
+        <dt>活動エリア</dt>
         <dd>主に熊本市・嘉島町・益城町</dd>
       </div>
       <div data-reveal>
-        <dt>活動日<small>SCHEDULE</small></dt>
+        <dt>活動日</dt>
         <dd>週1回　土または日　20:00〜22:00</dd>
       </div>
       <div data-reveal>
-        <dt>費用<small>FEE</small></dt>
+        <dt>費用</dt>
         <dd>練習費　1回 ¥350<br>※ 練習試合はグラウンド利用料に応じて、参加人数で割り勘精算します。<br>※ 体験参加は無料です。<br><br>リーグ登録費　年間 ¥15,000<br>※ 初年度割・学生割など各種割引あり。</dd>
       </div>
       <div data-reveal>
-        <dt>備品<small>ITEMS</small></dt>
+        <dt>備品</dt>
         <dd>ユニホームはチーム貸与のため、購入は不要です。</dd>
       </div>
     </dl>
@@ -122,8 +118,8 @@
         <li>当日、体験に参加（見学のみでも構いません）</li>
         <li>雰囲気が合えば、正式メンバーとして加入</li>
       </ol>
-      <a href="index.html?topic=体験参加・見学#contact" class="btn btn--gold btn--block magnetic">体験参加を申し込む（無料） <i>→</i></a>
-      <a href="https://www.instagram.com/" data-ig="dm" target="_blank" rel="noopener" class="btn btn--ghost btn--block recruit__dm">Instagram の DM で質問する <i>→</i></a>
+      <a href="index.html?topic=体験参加・見学#contact" class="btn btn--gold btn--block">体験参加を申し込む（無料） <i>→</i></a>
+      <a href="https://ig.me/m/fcv.official" data-ig="dm" target="_blank" rel="noopener" class="btn btn--ghost btn--block recruit__dm">Instagram の DM で質問する <i>→</i></a>
       <p class="recruit__assure">無理な勧誘は一切ありません。<br>まずは見学だけでも構いません。</p>
     </aside>
   </div>
@@ -146,37 +142,15 @@
   </div>
 </section>
 
-<!-- ===== Vision（大切にしていること）===== -->
-<section class="vision" id="vision">
-  <div class="vision__big" aria-hidden="true">
-    <div class="vision__track" data-marquee>
-      <span>FCV</span><span>FCV</span>
-    </div>
-  </div>
-  <div class="vision__head sec-head--center">
-    <h2 class="sec-head__en" data-anim="chars">VISION</h2>
-    <p class="sec-head__ja" data-anim="wave">大切にしていること</p>
-  </div>
-  <div class="vision__cards">
-    <article class="vcard" data-reveal>
-      <span class="vcard__no">01</span>
-      <h3 data-anim="lines">熊本への創生・<br>復興の貢献</h3>
-      <p>私たちは、熊本県で最も知名度と影響力のあるチームを目指し、SNSを通じて地域との繋がりを築いていきます。チームの発信力を地元企業のPRや地域の魅力発信にも活用し、熊本から全国へ届けることで、地域経済とコミュニティの活性化に貢献します。スポーツの枠を超え、熊本の未来を共に創るチームを目指します。</p>
-    </article>
-    <article class="vcard" data-reveal>
-      <span class="vcard__no">02</span>
-      <h3 data-anim="lines">メンバーの<br>キャリア形成サポート</h3>
-      <p>私たちは、メンバーのキャリア形成を支援し、サッカーチームの枠を超えた地方創生の一翼を担います。新たな雇用機会の創出や地域企業との橋渡しを通じて、メンバーが熊本で活躍できる環境を整え、キャリアの基盤づくりをサポートします。</p>
-    </article>
-  </div>
+<!-- ===== Vision：READMEで確定した2つの見出し ===== -->
+<section class="club-values" id="vision" aria-labelledby="vision-title">
+  <h2 id="vision-title">大切にしていること</h2>
+  <div><h3>まちの一部であること</h3><h3>仲間の支えであること</h3></div>
 </section>
 
 <!-- ===== Staff（代表）===== -->
 <section class="staff" id="staff">
-  <div class="staff__head sec-head--center">
-    <h2 class="sec-head__en" data-anim="chars">STAFF</h2>
-    <p class="sec-head__ja" data-anim="wave">運営</p>
-  </div>
+  <h2 class="compact-title">運営</h2>
   <div class="staff__card" data-reveal>
     <div class="staff__role">代表 / REPRESENTATIVE</div>
     <h3 class="staff__name" data-anim="chars">仲地 祐人</h3>
@@ -184,14 +158,14 @@
     <ul class="staff__career">
       
       <li><span>2021</span>FC VALIANT 創設</li>
-      <li><span>2024</span>地方創生事業「HIZEROWA」設立</li>
+      <li><span>2024</span>「HIZEROWA」設立</li>
     </ul>
     <p class="staff__quote">「サッカークラブとしての飛躍だけでなく、地元への還元をもたらすことができる組織を目指します。」</p>
   </div>
 
   <div class="page-cta" data-reveal>
-    <a href="index.html?topic=体験参加・見学#contact" class="btn btn--gold magnetic">体験参加を申し込む（無料） <i>→</i></a>
-    <a href="index.html" class="btn btn--ghost magnetic">← HOME に戻る</a>
+    <a href="index.html?topic=体験参加・見学#contact" class="btn btn--gold">体験参加を申し込む（無料） <i>→</i></a>
+    <a href="index.html" class="btn btn--ghost">← HOME に戻る</a>
   </div>
 </section>
 
@@ -200,31 +174,28 @@
 <!-- ===== Footer ===== -->
 <footer class="footer">
   <div class="footer__top">
-    <div class="footer__brand">
-      <img src="assets/img/logo.webp" alt="FC VALIANT" />
-      <p>FC VALIANT</p>
-      <span>まちと、仲間と。</span>
-    </div>
-    <nav class="footer__nav">
+    <a class="footer__brand" href="index.html">
+      <img src="assets/img/logo.webp" alt="" width="230" height="289" />
+      <p>FC VALIANT<span>まちと、仲間と。</span></p>
+    </a>
+    <nav class="footer__nav" aria-label="フッターナビゲーション">
       <a href="index.html#team">TEAM</a>
       <a href="index.html#activity">ACTIVITY</a>
+      <a href="schedule.html">SCHEDULE</a>
       <a href="member.html">MEMBER</a>
-    <a href="schedule.html">SCHEDULE</a>
       <a href="recruit.html">RECRUIT</a>
       <a href="sponsor.html">SPONSOR</a>
       <a href="index.html#contact">CONTACT</a>
     </nav>
   </div>
-  <div class="footer__big" aria-hidden="true" data-marquee-line>VALIANT — VALIANT — VALIANT — </div>
   <div class="footer__bottom">
     <span>© 2021–2026 FC VALIANT. KUMAMOTO, JAPAN.</span>
-    <a href="https://www.instagram.com/" data-ig="profile" target="_blank" rel="noopener">INSTAGRAM</a>
+    <a href="https://www.instagram.com/fcv.official/" data-ig="profile" target="_blank" rel="noopener">INSTAGRAM ↗</a>
   </div>
 </footer>
 
 <a href="#top" class="totop" id="totop" data-scroll aria-label="ページトップへ">↑</a>
 
-<script src="assets/js/lenis.min.js"></script>
-<script src="assets/js/main.js?v=5a88b37d"></script>
+<script src="assets/js/main.js?v=425f0a3c"></script>
 </body>
 </html>
