@@ -609,7 +609,10 @@
       soon.className = "mcard__soon"; soon.textContent = "PHOTO SOON";
       const plate = document.createElement("div");
       plate.className = "mcard__plate";
-      plate.append(c.querySelector(".mcard__name"), c.querySelector(".mcard__kana"));
+      const meta = document.createElement("div");
+      meta.className = "mcard__meta";
+      meta.append(c.querySelector(".mcard__kana"), c.querySelector(".mcard__dob"));
+      plate.append(c.querySelector(".mcard__name"), meta);
       c.prepend(bigEl, img, crest, soon);
       c.append(plate);
     });
