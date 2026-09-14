@@ -589,14 +589,15 @@ html.intro .hero.intro-ui ~ .header,html.intro.intro-ui .header{opacity:1;transf
   .season__stat dt{display:flex;gap:4px}
   .season__stat dd{font-size:1.6rem}
   .season__stat dt i{display:inline}
-  .fixture{grid-template-columns:70px 1fr;gap:10px 14px;padding:16px;min-height:0}
-  .fixture__date{align-self:start;padding-top:3px}
+  .fixture{grid-template-columns:78px 1fr;grid-template-rows:auto auto;gap:8px 14px;padding:16px;min-height:0}
+  .fixture__date{grid-column:1;grid-row:1;align-self:start;padding-top:3px}
+  .fixture__body{grid-column:2;grid-row:1/3}
   .fixture__date b{font-size:1.75rem}
   .fixture__body{gap:4px}
   .fixture__comp{font-size:.62rem;line-height:1.75}
   .fixture__match{font-size:1rem;margin-bottom:3px}
   .fixture__venue,.fixture__ko{font-size:.69rem}
-  .fixture__status{grid-column:1;grid-row:1;align-self:start;justify-self:start;margin-top:60px;min-width:70px;font-size:.57rem;padding:6px 3px}
+  .fixture__status{grid-column:1;grid-row:2;align-self:start;justify-self:start;margin-top:0;min-width:70px;font-size:.57rem;padding:6px 3px}
   .fixture.is-next{grid-template-columns:1fr;gap:16px;padding:24px 20px 20px;min-height:0}
   .fixture.is-next .fixture__date{border-right:0;border-bottom:1px solid var(--line);padding:0 0 16px;display:flex;align-items:baseline;gap:14px}
   .fixture.is-next .fixture__date b{font-size:4.7rem}
@@ -796,7 +797,10 @@ html:not(.js) .burger{display:none}
   .stage__scene{border-radius:6px;aspect-ratio:4/5;min-height:0}
   .stage__big{font-size:clamp(4.2rem,26vw,7rem)}
   .stage__slab{right:-14%;bottom:-8%;width:78%;height:60%}
-  .stage__figure{right:50%;transform:translateX(50%);height:78%}
+  .stage__figure,.stage__figure.is-empty{right:50%;transform:translateX(50%);height:78%}
+  .stage__figure.is-empty{gap:1rem}
+  .stage__crest{height:36%}
+  .stage__soon{font-size:.56rem;white-space:nowrap}
   .stage__figure.is-in{animation:fade-in 240ms linear both}
   .stage__figure.is-out{animation:fade-out 120ms linear both}
   .stage__plate{position:static;max-width:none;padding:1.1rem 0 0;margin:1.2rem 0 0;border-top:1px solid var(--line);text-align:center}
@@ -887,7 +891,8 @@ html:not(.js) .burger{display:none}
   .mcard__name{font-size:1.08rem}
   .mcard__kana{font-size:.5rem;letter-spacing:.1em}
   .mcard__plate{padding:.75rem .7rem 0}
-  .mcard__meta{margin:.5rem -.7rem 0;padding:.42rem .7rem .45rem}
+  .mcard__meta{margin:.5rem -.7rem 0;padding:.42rem .7rem .45rem;flex-direction:column;align-items:flex-start;gap:.3rem}
+  .mcard__kana{white-space:normal;overflow:visible;text-overflow:clip}
   .mcard__dob{font-size:.62rem}
   .mcard__pos span,.mcard__pos b{font-size:.54rem}
 }

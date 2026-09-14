@@ -142,6 +142,8 @@ index.html だけ、`<head>` の先頭で `html.intro` を付け、`main.js` の
 - 動きを止める設定（prefers-reduced-motion）では付けない＝最初から完成形
 - 文字は JS が `<span class="ch">` に分け、`--i` で遅延を付ける。h1 には aria-label で元の文を渡す
 - ⚠️ 非アクティブなタブでは CSS アニメーションが進まないので、検証は表示中のタブか headless の `--virtual-time-budget` で
+- ⚠️ **ヘッドレスChromeは幅500px未満にならない。** スマホ幅（390px）の確認は、`<iframe width=390>` で
+  ページを読み込む小さなHTMLを別ポートで配信して撮る（2026-09-14 に SCHEDULE のSP崩れを見逃した原因）
 
 ## ヒーロー
 
