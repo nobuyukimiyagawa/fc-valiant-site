@@ -18,7 +18,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/style.css?v=bf7056ef" />
+<script>/* トップの入場アニメーション：1セッションに1回だけ（?intro=1 で強制）。動きを止める設定では出さない */
+try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&(location.search.indexOf("intro=1")>-1||!sessionStorage.getItem("fcv-intro"))){document.documentElement.classList.add("intro");sessionStorage.setItem("fcv-intro","1")}}catch(e){}</script>
+<link rel="stylesheet" href="assets/css/style.css?v=8fa291a4" />
 <!-- GA4 start -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-N5YR1ZRBVX"></script>
 <script>
@@ -213,6 +215,6 @@
 
 <a href="#top" class="totop" id="totop" data-scroll aria-label="ページトップへ">↑</a>
 
-<script src="assets/js/main.js?v=32533538"></script>
+<script src="assets/js/main.js?v=aa615cbc"></script>
 </body>
 </html>

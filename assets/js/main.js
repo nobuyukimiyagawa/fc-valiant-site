@@ -155,6 +155,49 @@
       .querySelectorAll("#heroContent [data-anim], .hero [data-reveal]")
       .forEach((el) => el.classList.add("is-in"));
     initObservers();
+    initHeroIntro();
+  }
+
+  /* ============================================================
+     2b. トップの入場アニメーション
+     写真 → 紺の板が左から → 文字が1字ずつ → 金の板と Be VALIANT. → ヘッダー・導線・次戦・スポンサー
+     html.intro は index.html の先頭で付けている（動きを止める設定では付かない）
+     ============================================================ */
+  function initHeroIntro() {
+    const root = document.documentElement;
+    const hero = document.querySelector(".hero");
+    const lead = hero && hero.querySelector(".hero__lead");
+    if (!hero || !lead || !root.classList.contains("intro")) return;
+
+    // 1文字ずつ span に分ける（読み上げは h1 の aria-label で元の文を渡す）
+    lead.setAttribute("aria-label", lead.textContent.replace(/\s+/g, " ").trim());
+    let i = 0;
+    const split = (node) => {
+      Array.from(node.childNodes).forEach((n) => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          Array.from(n.textContent).forEach((ch) => {
+            if (!ch.trim()) { frag.appendChild(document.createTextNode(ch)); return; }
+            const s = document.createElement("span");
+            s.className = "ch"; s.textContent = ch; s.style.setProperty("--i", i++); s.setAttribute("aria-hidden", "true");
+            frag.appendChild(s);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1 && n.tagName !== "BR") {
+          if (n.tagName === "EM") i = 0;   // Be VALIANT. は板が伸びてから 0 から数え直す
+          split(n);
+        }
+      });
+    };
+    split(lead);
+
+    const step = (cls, ms) => setTimeout(() => hero.classList.add(cls), ms);
+    step("intro-panel", 1400);   // 紺の板が左から
+    step("intro-text",  2050);   // まちと、仲間と。
+    step("intro-slab",  2650);   // 金の板 → Be VALIANT.
+    step("intro-ui",    3500);   // ヘッダー・導線・次戦・スポンサー
+    setTimeout(() => { root.classList.add("intro-ui"); }, 3500);
+    setTimeout(() => { root.classList.remove("intro", "intro-ui"); hero.classList.remove("intro-panel", "intro-text", "intro-slab", "intro-ui"); }, 4400);
   }
 
   // 写真・外部フォントの読み込みで、案内やリンクを待たせない。

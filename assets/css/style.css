@@ -433,6 +433,36 @@ button.btn{font:inherit;font-size:.88rem;font-weight:700}
 .jersey__btn{min-height:44px;padding:8px 26px;border:1px solid var(--grey);background:var(--navy);color:var(--paper);font-size:.8rem}
 .jersey__btn.is-on{background:var(--gold);color:var(--navy-deep);border-color:var(--gold)}
 
+
+/* ---------- トップの入場（FVのアニメーション） ----------
+   0s 写真だけが前面 → 1.4s 紺の板が左から入る → 文字が1字ずつ → 金の板が伸びて Be VALIANT.
+   → 最後にヘッダー・導線・次戦・スポンサー。html.intro が付いている間だけ効き、
+   main.js の initHeroIntro() が段階ごとに .hero に intro-* を足し、終わったら html.intro を外す。
+   動きを止める設定（prefers-reduced-motion）では html.intro を付けないので、最初から完成形。 */
+html.intro .header{opacity:0;transform:translateY(-10px)}
+html.intro .hero .hero__media{inset:76px 0 0 0;z-index:3;transition:inset .8s cubic-bezier(.22,1,.36,1)}
+html.intro .hero__content{z-index:4;transform:translateX(-108%);transition:transform .75s cubic-bezier(.22,1,.36,1)}
+html.intro .hero__lead .ch{opacity:0;transform:translateY(.35em);display:inline-block}
+html.intro .hero__lead em::before{transform:rotate(-3deg) scaleX(0);transform-origin:0 50%}
+html.intro .hero__lead em .ch{transform:translateY(.2em)}
+html.intro .hero__join{opacity:0;transform:translateY(8px)}
+html.intro .hero__next,html.intro .hero__bar{opacity:0;transform:translateY(24px)}
+/* 段階 */
+html.intro .hero.intro-panel .hero__media{inset:76px 0 196px 32%}
+html.intro .hero.intro-panel .hero__content{transform:none}
+html.intro .hero.intro-text .hero__lead .ch{animation:ch-in .42s cubic-bezier(.22,1,.36,1) both;animation-delay:calc(var(--i)*55ms)}
+html.intro .hero.intro-slab .hero__lead em::before{animation:slab-in .42s cubic-bezier(.22,1,.36,1) both}
+html.intro .hero.intro-slab .hero__lead em .ch{animation:ch-in .38s cubic-bezier(.22,1,.36,1) both;animation-delay:calc(.3s + var(--i)*45ms)}
+html.intro .hero.intro-ui .hero__join{opacity:1;transform:none;transition:opacity .5s ease,transform .5s cubic-bezier(.22,1,.36,1)}
+html.intro .hero.intro-ui .hero__next,html.intro .hero.intro-ui .hero__bar{opacity:1;transform:none;transition:opacity .5s ease,transform .6s cubic-bezier(.22,1,.36,1)}
+html.intro .hero.intro-ui ~ .header,html.intro.intro-ui .header{opacity:1;transform:none;transition:opacity .5s ease,transform .5s cubic-bezier(.22,1,.36,1)}
+@keyframes ch-in{from{opacity:0;transform:translateY(.35em)}to{opacity:1;transform:none}}
+@keyframes slab-in{from{transform:rotate(-3deg) scaleX(0)}to{transform:rotate(-3deg) scaleX(1)}}
+@media(max-width:760px){
+  html.intro .hero .hero__media{inset:auto}
+  html.intro .hero__content{transform:translateX(-108%)}
+}
+
 /* ---------- Responsive ---------- */
 @media(min-width:1600px){
   .hero .hero__media{left:35%}
