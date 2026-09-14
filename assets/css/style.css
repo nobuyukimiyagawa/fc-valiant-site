@@ -136,7 +136,6 @@ button.btn{font:inherit;font-size:.88rem;font-weight:700}
 .club__intro{padding-top:12px}
 .club__lead{font-size:clamp(1rem,1.6vw,1.25rem);font-weight:700;line-height:1.85;margin:18px 0}
 .club__photo{position:relative;margin-top:12px;isolation:isolate}
-.club__photo::before{content:"";position:absolute;inset:-12px 24px 12px -12px;z-index:-1;background:var(--gold-ink);transform:rotate(2deg)}
 .club__photo img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
 .club__activity{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding-top:20px}
 .club__activity p{font-size:.76rem;color:var(--grey-ink);line-height:1.8}
