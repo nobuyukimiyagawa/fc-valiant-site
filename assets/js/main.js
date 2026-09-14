@@ -513,7 +513,7 @@
       const control = document.createElement("button");
       control.type = "button";
       control.className = "plan__view";
-      control.textContent = "掲載位置を見る ↗";
+      control.textContent = "掲載位置を見る →";
       control.setAttribute("aria-label", p.querySelector(".plan__rank").textContent + "の掲載位置を見る");
       control.addEventListener("click", (e) => {
         e.stopPropagation();

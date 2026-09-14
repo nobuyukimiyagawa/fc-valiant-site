@@ -116,7 +116,7 @@ button.btn{font:inherit;font-size:.88rem;font-weight:700}
 .hero__next-match b{font-weight:500}
 .hero__next-meta{font-size:.8rem}
 .hero__next-arrow{font-size:2rem;color:var(--gold);justify-self:end;transition:transform .18s ease-out}
-.hero__next:hover .hero__next-arrow{transform:translate(3px,-3px)}
+.hero__next:hover .hero__next-arrow{transform:translateX(4px)}
 /* Logo ordering, scrollLeft and 50px tiles remain unchanged. */
 .hero__bar{grid-row:3;display:flex;align-items:stretch;min-height:74px;background:var(--navy-deep);color:var(--paper)}
 .hero__bar-tag{flex-shrink:0;display:flex;align-items:center;padding:0 clamp(20px,4vw,56px);font-family:var(--font-en);font-size:.8rem;letter-spacing:.08em;color:var(--gold);border-right:1px solid var(--line)}
