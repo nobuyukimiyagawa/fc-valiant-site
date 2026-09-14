@@ -20,11 +20,11 @@
 
 | ファイル | 実際の内容 | 変更後の役割 |
 |---|---|---|
-| act-01.webp | ボールを運ぶ選手 | index ヒーロー。選手とボールを一枚で大きく見せる |
+| hero.webp | ボールを抱えて立つ選手（元のヒーロー写真） | index ヒーロー（クライアント指定 2026-09-14） |
 | team-group.webp | ナイター照明下の集合写真 | index TEAM。写真上には情報を載せない |
 | act-04.webp | 試合中の走り出し | recruit ヒーロー。文字は紺の紙面、写真は右・スマホは下 |
 | stats-bg.webp | ピッチへ歩く選手の後ろ姿 | sponsor ヒーローの大判写真。文字は別の紺の面に置く |
-| hero.webp | ボールを持つ人物 | 予備として保持（旧READMEの「円陣」は現ファイルと異なる） |
+| act-01.webp | ボールを運ぶ選手 | 予備として保持 |
 | act-02.webp / act-03.webp | シュート / 得点後 | 予備として保持 |
 | contact-bg.webp | 歩く選手たち | 予備。CONTACT は写真を敷かず操作に集中 |
 | teaser-recruit.webp / teaser-schedule.webp / teaser-sponsor.webp | 走り出し / 選手 / 歩く選手たち | 予備として保持 |
