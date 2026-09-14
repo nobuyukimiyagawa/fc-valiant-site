@@ -765,6 +765,114 @@
   })();
 
   /* ============================================================
+     4b-2. SCHEDULE: カレンダー表示と表示切替
+     - #fixtures の各 .fixture からデータを読んで、月ごとの格子を描く
+     - 試合日のマスを押すと、その試合の詳細を下に出す
+     - 選んだ表示は localStorage に覚える。?view=calendar でも開ける
+     ============================================================ */
+  (function initCalendar() {
+    const cal   = document.getElementById("calendar");
+    const list  = document.getElementById("fixtures");
+    const sw    = document.getElementById("schedView");
+    if (!cal || !list || !sw) return;
+
+    const fx = Array.from(list.querySelectorAll(".fixture")).map((f) => {
+      const t = f.querySelector("time[datetime]");
+      const st = f.querySelector(".fixture__status");
+      const cls = st ? st.className : "";
+      return {
+        date: t.getAttribute("datetime"),
+        comp: (f.querySelector(".fixture__comp") || {}).textContent || "",
+        match: (f.querySelector(".fixture__match") || {}).textContent || "",
+        venue: (f.querySelector(".fixture__venue") || {}).textContent || "",
+        ko: (f.querySelector(".fixture__ko") || {}).textContent || "",
+        status: st ? st.textContent.trim() : "",
+        result: /--win/.test(cls) ? "win" : /--draw/.test(cls) ? "draw" : /--lose/.test(cls) ? "lose" : "",
+        past: f.classList.contains("is-past"),
+        next: f.classList.contains("is-next"),
+      };
+    });
+    if (!fx.length) return;
+    const byDate = Object.fromEntries(fx.map((x) => [x.date, x]));
+
+    const pad = (n) => String(n).padStart(2, "0");
+    const first = fx[0].date.slice(0, 7), last = fx[fx.length - 1].date.slice(0, 7);
+    const months = [];
+    for (let [y, m] = first.split("-").map(Number); `${y}-${pad(m)}` <= last; ) {
+      months.push([y, m]); m++; if (m > 12) { m = 1; y++; }
+    }
+    const EN = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
+    const WD = ["日","月","火","水","木","金","土"];
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const todayKey = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
+
+    let html = `<div class="calendar__months">`;
+    months.forEach(([y, m]) => {
+      const firstDow = new Date(y, m - 1, 1).getDay();
+      const days = new Date(y, m, 0).getDate();
+      html += `<section class="cal" aria-label="${y}年${m}月">
+        <h3 class="cal__head"><b>${pad(m)}</b><span>${EN[m - 1]}<i>${y}</i></span></h3>
+        <div class="cal__grid" role="grid">`;
+      WD.forEach((w, i) => { html += `<span class="cal__wd${i === 0 ? " is-sun" : i === 6 ? " is-sat" : ""}" role="columnheader">${w}</span>`; });
+      for (let i = 0; i < firstDow; i++) html += `<span class="cal__cell is-blank" aria-hidden="true"></span>`;
+      for (let d = 1; d <= days; d++) {
+        const key = `${y}-${pad(m)}-${pad(d)}`;
+        const x = byDate[key];
+        const dow = (firstDow + d - 1) % 7;
+        let c = "cal__cell" + (dow === 0 ? " is-sun" : dow === 6 ? " is-sat" : "") + (key === todayKey ? " is-today" : "");
+        if (x) {
+          c += " is-match" + (x.past ? " is-past" : "") + (x.next ? " is-next" : "") + (x.result ? " is-" + x.result : "");
+          const opp = x.match.replace(/^vs\s*/, "");
+          html += `<button type="button" class="${c}" role="gridcell" data-date="${key}" aria-label="${m}月${d}日 ${x.match}${x.next ? "（次の試合）" : ""}">
+            <span class="cal__day">${d}</span><span class="cal__opp">${opp}</span>${x.next ? `<span class="cal__next">NEXT</span>` : ""}</button>`;
+        } else {
+          html += `<span class="${c}" role="gridcell"><span class="cal__day">${d}</span></span>`;
+        }
+      }
+      html += `</div></section>`;
+    });
+    html += `</div><div class="cal__detail" id="calDetail" aria-live="polite"></div>`;
+    cal.innerHTML = html;
+
+    const detail = document.getElementById("calDetail");
+    function select(key) {
+      const x = byDate[key]; if (!x) return;
+      cal.querySelectorAll(".cal__cell.is-on").forEach((c) => c.classList.remove("is-on"));
+      const cell = cal.querySelector(`.cal__cell[data-date="${key}"]`);
+      if (cell) cell.classList.add("is-on");
+      const [y, m, d] = key.split("-");
+      const dow = WD[new Date(+y, +m - 1, +d).getDay()];
+      detail.innerHTML = `<div class="cal__card${x.next ? " is-next" : ""}${x.past ? " is-past" : ""}">
+        <p class="cal__card-date"><b>${m}.${d}</b><span>${dow}曜日 ${y}</span></p>
+        <div class="cal__card-body">
+          <span class="cal__card-comp">${x.comp}</span>
+          <span class="cal__card-match">${x.match}</span>
+          <span class="cal__card-meta">${x.venue}　${x.ko}</span>
+        </div>
+        <span class="cal__card-status${x.result ? " is-" + x.result : ""}">${x.next ? "NEXT MATCH" : x.status}</span>
+      </div>`;
+    }
+    cal.addEventListener("click", (e) => {
+      const b = e.target.closest(".cal__cell.is-match"); if (b) select(b.dataset.date);
+    });
+    // 最初は次の試合（無ければ最初の試合）を選んでおく
+    select((fx.find((x) => x.next) || fx[0]).date);
+
+    // ---- 表示切替 ----
+    const btns = Array.from(sw.querySelectorAll(".sview__btn"));
+    function setView(v, remember) {
+      const isCal = v === "calendar";
+      cal.hidden = !isCal; list.hidden = isCal;
+      btns.forEach((b) => { const on = b.dataset.view === v; b.classList.toggle("is-on", on); b.setAttribute("aria-pressed", String(on)); });
+      if (remember) { try { localStorage.setItem("fcv-sched-view", v); } catch (e) {} }
+    }
+    sw.addEventListener("click", (e) => { const b = e.target.closest(".sview__btn"); if (b) setView(b.dataset.view, true); });
+    let initial = new URLSearchParams(location.search).get("view");
+    if (!initial) { try { initial = localStorage.getItem("fcv-sched-view"); } catch (e) {} }
+    setView(initial === "calendar" ? "calendar" : "list", false);
+  })();
+
+  /* ============================================================
      4c. CONTACT（Instagram DM 導線）
      用件チップの選択で文面を差し替える。
      別ページの CTA からは ?topic=... / data-topic で初期選択される。

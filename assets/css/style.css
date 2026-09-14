@@ -285,6 +285,63 @@ button.btn{font:inherit;font-size:.88rem;font-weight:700}
 .fixture.is-next .fixture__status--scheduled{color:var(--gold);border-color:var(--gold);background:var(--navy-deep)}
 .fixture.is-next .fixture__status--draw,.fixture.is-next .fixture__status--lose{background:var(--navy);color:var(--paper);border-color:var(--grey)}
 .fixtures__year{font-family:var(--font-en);font-size:1rem;font-weight:600;color:var(--gold-ink);padding:10px 0 2px}
+/* 表示切替（日付順／カレンダー） */
+.sview{display:flex;gap:0;max-width:1260px;margin:0 auto 18px;border:1px solid var(--navy-deep);width:max-content;background:var(--paper-2)}
+.sview__btn{font-family:var(--font-ja);font-size:.8rem;font-weight:700;letter-spacing:.06em;padding:.7em 1.6em;cursor:pointer;
+  border:0;background:transparent;color:var(--ink);transition:background .2s var(--ease),color .2s var(--ease)}
+.sview__btn+.sview__btn{border-left:1px solid var(--navy-deep)}
+.sview__btn.is-on{background:var(--navy-deep);color:var(--gold)}
+.sview__btn:focus-visible{outline:2px solid var(--gold-ink);outline-offset:2px}
+/* カレンダー：月ごとの格子。試合日は紺のマス、次戦は金のマス */
+.calendar{max-width:1260px;margin:0 auto}
+.calendar__months{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:22px 28px}
+.cal__head{display:flex;align-items:baseline;gap:12px;margin:0 0 10px;font-family:var(--font-en);color:var(--ink)}
+.cal__head b{font-family:var(--font-display);font-weight:400;font-size:2.4rem;line-height:1}
+.cal__head span{font-size:.72rem;letter-spacing:.14em;color:var(--gold-ink)}
+.cal__head span i{display:block;font-style:normal;font-size:.62rem;color:var(--grey-ink);letter-spacing:.1em}
+.cal__grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;background:var(--paper-2);border:1px solid var(--line-dark);padding:6px}
+.cal__wd{font-family:var(--font-ja);font-size:.62rem;font-weight:700;text-align:center;color:var(--grey-ink);padding:6px 0 4px}
+.cal__wd.is-sun{color:#9a3b2f}.cal__wd.is-sat{color:#2f5d9a}
+.cal__cell{position:relative;aspect-ratio:1/1.08;min-height:44px;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;
+  padding:5px 6px;font-family:var(--font-en);font-size:.78rem;color:var(--ink);background:var(--paper);border-radius:2px}
+.cal__cell.is-blank{background:transparent}
+.cal__cell.is-sun .cal__day{color:#9a3b2f}.cal__cell.is-sat .cal__day{color:#2f5d9a}
+.cal__cell.is-today .cal__day{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--gold-ink)}
+.cal__cell.is-match{cursor:pointer;background:var(--navy-deep);color:var(--paper);border:0;text-align:left;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.cal__cell.is-match .cal__day{color:var(--gold);font-weight:600}
+.cal__cell.is-match:hover{transform:translateY(-2px)}
+.cal__cell.is-match:focus-visible{outline:2px solid var(--gold-ink);outline-offset:2px}
+.cal__cell.is-match.is-past{background:var(--paper);color:var(--grey-ink);border:1px dashed var(--line-dark)}
+.cal__cell.is-match.is-past .cal__day{color:var(--grey-ink)}
+.cal__cell.is-match.is-next{background:var(--gold);color:var(--navy-deep)}
+.cal__cell.is-match.is-next .cal__day{color:var(--navy-deep)}
+.cal__cell.is-match.is-on{box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--navy-deep)}
+.cal__opp{margin-top:auto;font-family:var(--font-ja);font-size:.54rem;font-weight:700;line-height:1.25;letter-spacing:0;word-break:break-all;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cal__next{position:absolute;right:-4px;top:-7px;font-size:.5rem;font-weight:600;letter-spacing:.12em;padding:2px 5px;
+  background:var(--navy-deep);color:var(--gold);transform:rotate(-4deg)}
+/* 選んだ試合の詳細 */
+.cal__detail{margin-top:22px}
+.cal__card{display:grid;grid-template-columns:150px 1fr 110px;align-items:center;gap:24px;min-height:104px;
+  padding:18px 24px;background:var(--paper-2);border:1px solid var(--line-dark)}
+.cal__card.is-next{background:var(--navy-deep);color:var(--paper);border:0}
+.cal__card.is-past{border-style:dashed}
+.cal__card-date{font-family:var(--font-en);line-height:1.1;margin:0}
+.cal__card-date b{display:block;font-family:var(--font-display);font-weight:400;font-size:2.65rem;color:var(--ink)}
+.cal__card-date span{font-size:.7rem;color:var(--grey-ink)}
+.cal__card.is-next .cal__card-date b{color:var(--gold)}
+.cal__card.is-next .cal__card-date span,.cal__card.is-next .cal__card-meta{color:var(--grey)}
+.cal__card.is-next .cal__card-comp{color:var(--gold)}
+.cal__card-body{display:flex;flex-direction:column;gap:2px;min-width:0}
+.cal__card-comp{font-size:.68rem;color:var(--gold-ink)}
+.cal__card-match{font-size:1.12rem;font-weight:700;line-height:1.5}
+.cal__card-meta{font-size:.75rem;color:var(--grey-ink)}
+.cal__card-status{justify-self:end;min-width:104px;padding:9px 8px;text-align:center;font-family:var(--font-en);font-size:.7rem;font-weight:600;letter-spacing:.1em;
+  background:var(--paper);color:var(--grey-ink);border:1px solid var(--line-dark)}
+.cal__card.is-next .cal__card-status{background:var(--gold);color:var(--navy-deep);border-color:var(--gold)}
+.cal__card-status.is-win{background:var(--navy-deep);color:var(--gold);border-color:var(--navy-deep)}
+.cal__card-status.is-draw{border-style:dashed;color:var(--ink)}
 .schedule__note{max-width:1260px;margin:20px auto 0;font-size:.75rem;color:var(--grey-ink)}
 .schedule__note a{text-decoration:underline;text-underline-offset:3px}
 
@@ -518,6 +575,13 @@ button.btn{font:inherit;font-size:.88rem;font-weight:700}
   .fixture.is-next .fixture__status{grid-row:auto;grid-column:auto;margin:0;justify-self:start;font-size:.66rem;padding:7px 10px}
   .fixture.is-next .fixture__venue,.fixture.is-next .fixture__ko{font-size:.76rem}
   .schedule__note{font-size:.7rem;padding:0 4px}
+  .sview{width:100%}
+  .sview__btn{flex:1;padding:.75em 0}
+  .calendar__months{grid-template-columns:1fr;gap:18px}
+  .cal__cell{min-height:44px;padding:4px 4px;font-size:.72rem}
+  .cal__opp{font-size:.5rem;-webkit-line-clamp:2}
+  .cal__card{grid-template-columns:1fr;gap:10px;padding:16px 18px}
+  .cal__card-status{justify-self:start}
   .page-cta{flex-direction:column;gap:12px;margin-top:28px}
   .page-cta .btn{justify-content:center;text-align:center}
   .recruit{padding:32px 24px 40px}

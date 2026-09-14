@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/style.css?v=9e48e2cd" />
+<link rel="stylesheet" href="assets/css/style.css?v=09bd8d65" />
 <!-- GA4 start -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-N5YR1ZRBVX"></script>
 <script>
@@ -78,6 +78,14 @@
   </div>
 
   </div>
+
+  <!-- 表示切替：日付順のリスト／月ごとのカレンダー（中身はどちらも #fixtures から JS が作る） -->
+  <div class="sview" id="schedView" role="group" aria-label="表示の切り替え" data-reveal>
+    <button type="button" class="sview__btn is-on" data-view="list" aria-pressed="true">日付順</button>
+    <button type="button" class="sview__btn" data-view="calendar" aria-pressed="false">カレンダー</button>
+  </div>
+
+  <div class="calendar" id="calendar" hidden></div>
 
   <div class="fixtures" id="fixtures">
 
@@ -184,6 +192,6 @@
 
 <a href="#top" class="totop" id="totop" data-scroll aria-label="ページトップへ">↑</a>
 
-<script src="assets/js/main.js?v=425f0a3c"></script>
+<script src="assets/js/main.js?v=c5448f81"></script>
 </body>
 </html>
