@@ -138,6 +138,8 @@ SCHEDULE は「日付順」と「カレンダー」を切り替えられる（`#
 index.html だけ、`<head>` の先頭で `html.intro` を付け、`main.js` の `initHeroIntro()` が段階を進める。
 0s 写真だけ → 1.4s 紺の板が左から → 2.05s 「まちと、仲間と。」が1字ずつ → 2.65s 金の板が伸びて Be VALIANT. が1字ずつ
 → 3.5s ヘッダー・導線・次戦・スポンサー → 4.4s で `html.intro` を外して完成形（CSSの intro 系は全部効かなくなる）。
+- **スマホ（760px以下）は別の振り付け**：紺の幕で全面を覆い、文字を画面中央に出す（0.4s〜）→ 2.2s で文字が定位置へスライドしながら幕が消えて写真が出る → 2.95s でUI → 3.8s 完了。
+  中央への移動量は `initHeroIntro()` が h1 の位置を実測して `--cx/--cy` に入れる。幕（`.hero::after`）を後続セクションより手前に出すため `html.intro .hero{z-index:151}`
 - **1セッションに1回だけ**（sessionStorage `fcv-intro`）。`index.html?intro=1` で強制再生
 - 動きを止める設定（prefers-reduced-motion）では付けない＝最初から完成形
 - 文字は JS が `<span class="ch">` に分け、`--i` で遅延を付ける。h1 には aria-label で元の文を渡す

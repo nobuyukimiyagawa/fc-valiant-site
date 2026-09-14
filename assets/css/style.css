@@ -458,10 +458,15 @@ html.intro .hero.intro-ui ~ .header,html.intro.intro-ui .header{opacity:1;transf
 @keyframes ch-in{from{opacity:0;transform:translateY(.35em)}to{opacity:1;transform:none}}
 @keyframes slab-in{from{transform:rotate(-3deg) scaleX(0)}to{transform:rotate(-3deg) scaleX(1)}}
 @media(max-width:760px){
-  /* スマホは写真が板の下に積まれる構成なので、写真は最初から定位置に置き、
-     板のスライド・文字・UIの順だけを再生する（absoluteの写真を後から戻すと跳ねる） */
+  /* スマホは別の振り付け：紺の幕で全面を覆い、文字を画面中央に出す → 文字が定位置へスライド
+     しながら幕が消える → 写真・導線・次戦・スポンサー・ヘッダー。
+     中央への移動量（--cx/--cy）は main.js が実測して入れる */
   html.intro .hero .hero__media,html.intro .hero.intro-panel .hero__media{position:relative;inset:auto;z-index:0;transition:none}
-  html.intro .hero__content{transform:translateX(-108%)}
+  html.intro .hero{z-index:151}   /* 幕と文字を、後続セクションより手前に */
+  html.intro .hero::after{content:"";position:fixed;inset:0;z-index:150;background:var(--navy-deep);transition:opacity .6s ease}
+  html.intro .hero__content{position:relative;z-index:160;transform:translate(var(--cx,0px),var(--cy,0px));transition:transform .75s cubic-bezier(.22,1,.36,1)}
+  html.intro .hero.intro-move::after{opacity:0}
+  html.intro .hero.intro-move .hero__content{transform:none}
 }
 
 /* ---------- Responsive ---------- */

@@ -192,12 +192,34 @@
     split(lead);
 
     const step = (cls, ms) => setTimeout(() => hero.classList.add(cls), ms);
+    const done = (ms) => setTimeout(() => {
+      root.classList.remove("intro", "intro-ui");
+      hero.classList.remove("intro-panel", "intro-text", "intro-slab", "intro-move", "intro-ui");
+      hero.style.removeProperty("--cx"); hero.style.removeProperty("--cy");
+    }, ms);
+
+    if (matchMedia("(max-width:760px)").matches) {
+      // スマホ：文字を画面の中央に出してから、定位置へスライドさせる
+      const content = hero.querySelector(".hero__content");
+      const r = lead.getBoundingClientRect();
+      hero.style.setProperty("--cx", `${Math.round(innerWidth / 2 - (r.left + r.width / 2))}px`);
+      hero.style.setProperty("--cy", `${Math.round(innerHeight / 2 - (r.top + r.height / 2))}px`);
+      void content.offsetWidth;
+      step("intro-text",  400);    // まちと、仲間と。
+      step("intro-slab",  1000);   // 金の板 → Be VALIANT.
+      step("intro-move",  2200);   // 定位置へスライド。幕が消えて写真が出る
+      step("intro-ui",    2950);   // ヘッダー・導線・次戦・スポンサー
+      setTimeout(() => { root.classList.add("intro-ui"); }, 2950);
+      done(3800);
+      return;
+    }
+
     step("intro-panel", 1400);   // 紺の板が左から
     step("intro-text",  2050);   // まちと、仲間と。
     step("intro-slab",  2650);   // 金の板 → Be VALIANT.
     step("intro-ui",    3500);   // ヘッダー・導線・次戦・スポンサー
     setTimeout(() => { root.classList.add("intro-ui"); }, 3500);
-    setTimeout(() => { root.classList.remove("intro", "intro-ui"); hero.classList.remove("intro-panel", "intro-text", "intro-slab", "intro-ui"); }, 4400);
+    done(4400);
   }
 
   // 写真・外部フォントの読み込みで、案内やリンクを待たせない。
